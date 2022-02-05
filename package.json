@@ -1,0 +1,27 @@
+{
+  "name": "@wishlez/core",
+  "version": "0.0.0",
+  "description": "Spending analyzer and budgeteer",
+  "main": "index.js",
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/wishlez/wishlez.git"
+  },
+  "author": "Gopikrishna Sathyamurthy",
+  "license": "AGPL-3.0-or-later",
+  "bugs": {
+    "url": "https://github.com/wishlez/wishlez/issues"
+  },
+  "homepage": "https://github.com/wishlez/wishlez#readme",
+  "dependencies": {
+    "next": "^12.0.10",
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2"
+  }
+}
