@@ -1,4 +1,6 @@
 *.logs
 .idea
+.next
+.env
 node_modules
 dist
