@@ -1,8 +1,9 @@
 import {signOut} from 'next-auth/react';
+import {FunctionComponent} from 'react';
 import {authenticated} from '../lib/auth/ss-auth';
 import {useUser} from '../lib/contexts/user';
 
-export default () => {
+const Dashboard: FunctionComponent = () => {
     const user = useUser();
 
     return (
@@ -12,5 +13,7 @@ export default () => {
         </>
     );
 };
+
+export default Dashboard;
 
 export const getServerSideProps = authenticated();

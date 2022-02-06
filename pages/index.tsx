@@ -1,10 +1,10 @@
 import {signIn} from 'next-auth/react';
 import {useRouter} from 'next/router';
-import {useEffect} from 'react';
+import {FunctionComponent, useEffect} from 'react';
 import {useAuth} from '../lib/auth/auth';
 import {unauthenticated} from '../lib/auth/ss-auth';
 
-export default () => {
+const Home: FunctionComponent = () => {
     const {status} = useAuth();
     const router = useRouter();
 
@@ -12,7 +12,7 @@ export default () => {
         if (status === 'authenticated') {
             router.push('/dashboard');
         }
-    }, [status]);
+    }, [status, router]);
 
     return (
         <>
@@ -23,5 +23,7 @@ export default () => {
         </>
     );
 };
+
+export default Home;
 
 export const getServerSideProps = unauthenticated();

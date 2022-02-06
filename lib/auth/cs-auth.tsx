@@ -11,7 +11,7 @@ export const CsAuth: FunctionComponent = ({children}) => {
         if (status === 'unauthenticated') {
             router.push(`/auth/sign-in`);
         }
-    }, [user, status]);
+    }, [user, status, router]);
 
     if (user) {
         return (
