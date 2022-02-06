@@ -32,7 +32,7 @@ const SignIn: SignIn = ({csrfToken}) => {
                         <input type="password" name="password" required/>
                     </label>
                     <button type="submit" value="sign-in" name="action">Sign In</button>
-                    <Link href={'/auth/register'}>
+                    <Link href={'/auth/sign-up'}>
                         Sign Up
                     </Link>
                     <Link href={'/'}>

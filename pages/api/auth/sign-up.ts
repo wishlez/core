@@ -16,7 +16,7 @@ const handler: NextApiHandler = async (req, res) => {
         res.redirect('/auth/sign-in');
     } catch (error) {
         console.error(error.message);
-        res.redirect('/auth/register?error=CreateAccount');
+        res.redirect('/auth/sign-up?error=CreateAccount');
     }
 };
 

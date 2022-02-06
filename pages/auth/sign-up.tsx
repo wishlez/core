@@ -27,7 +27,7 @@ const SignUp: SignUp = () => {
                 <title>Wishlez | Sign Up</title>
             </Head>
             <div>
-                <form action="/api/auth/register" method="post">
+                <form action="/api/auth/sign-up" method="post">
                     <label className={styles.label}>
                         Name:
                         <input type="text" name="name" autoFocus required/></label>
