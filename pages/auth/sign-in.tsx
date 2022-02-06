@@ -4,14 +4,13 @@ import Link from 'next/link';
 import {FunctionComponent} from 'react';
 import {useAuthError} from '../../lib/auth/auth-error';
 import {unauthenticated} from '../../lib/auth/ss-auth';
-import {UnAuthPageFlag} from '../../types/auth';
 import styles from './auth.module.css';
 
 type Props = {
     csrfToken: string
 }
 
-type SignIn = FunctionComponent<Props> & UnAuthPageFlag;
+type SignIn = FunctionComponent<Props>;
 
 const SignIn: SignIn = ({csrfToken}) => {
     const authError = useAuthError();
@@ -46,8 +45,6 @@ const SignIn: SignIn = ({csrfToken}) => {
         </>
     );
 };
-
-SignIn.auth = false;
 
 export default SignIn;
 

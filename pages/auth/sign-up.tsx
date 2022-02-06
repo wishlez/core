@@ -3,10 +3,9 @@ import Link from 'next/link';
 import {FunctionComponent, useRef} from 'react';
 import {useAuthError} from '../../lib/auth/auth-error';
 import {unauthenticated} from '../../lib/auth/ss-auth';
-import {UnAuthPageFlag} from '../../types/auth';
 import styles from './auth.module.css';
 
-type SignUp = FunctionComponent & UnAuthPageFlag;
+type SignUp = FunctionComponent;
 
 const SignUp: SignUp = () => {
     const authError = useAuthError();
@@ -58,8 +57,6 @@ const SignUp: SignUp = () => {
         </>
     );
 };
-
-SignUp.auth = false;
 
 export default SignUp;
 

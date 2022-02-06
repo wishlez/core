@@ -11,7 +11,3 @@ type GetRedirect = (context: GetServerSidePropsContext) => Redirect
 export type Auth = (checkSession: CheckSession, getRedirect: GetRedirect, auth: boolean) =>
     <P extends Object = Object, Q extends ParsedUrlQuery = ParsedUrlQuery, D extends PreviewData = PreviewData>(getServerSideProps?: GetServerSideProps<P, Q, D>) =>
         GetServerSideProps<P, Q, D>
-
-export type UnAuthPageFlag = {
-    auth: false
-};

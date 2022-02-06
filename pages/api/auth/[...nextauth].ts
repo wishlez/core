@@ -50,6 +50,6 @@ export default NextAuth({
     secret: process.env.JWT_SECRET,
     pages: {
         signIn: '/auth/sign-in',
-        // signOut: '/auth/sign-out'
+        signOut: '/auth/sign-out'
     }
 });
