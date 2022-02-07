@@ -4,7 +4,9 @@ import {FunctionComponent, useEffect} from 'react';
 import {useAuth} from '../lib/auth/auth';
 import {unauthenticated} from '../lib/auth/ss-auth';
 
-const Home: FunctionComponent = () => {
+type Home = FunctionComponent;
+
+const Home: Home = () => {
     const {status} = useAuth();
     const router = useRouter();
 
