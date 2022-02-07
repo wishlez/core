@@ -18,3 +18,10 @@ export const deleteTag = async (id: number) => await prisma.categoryTag.delete({
         id
     }
 });
+
+export const updateTag = async (data: Prisma.CategoryTagUncheckedUpdateInput) => await prisma.categoryTag.update({
+    data,
+    where: {
+        id: data.id as number
+    }
+});

@@ -8,16 +8,19 @@ type Props = {
 export type CreateForm = FunctionComponent<Props>
 
 export const CreateForm: CreateForm = (props) => {
-    const tagRef = useRef<HTMLInputElement>();
+    const nameRef = useRef<HTMLInputElement>();
     const [error, setError] = useState<ResponseErrorType>();
 
-    const createTag = async (event: FormEvent<HTMLFormElement>) => {
+    const createTag = async (event: FormEvent) => {
         event.preventDefault();
 
         try {
             await doPost('/api/categories/tags', {
-                name: tagRef.current.value
+                name: nameRef.current.value
             });
+
+            nameRef.current.value = '';
+            nameRef.current.focus();
 
             props.onCreate();
         } catch (err) {
@@ -30,7 +33,7 @@ export const CreateForm: CreateForm = (props) => {
     return (
         <>
             <form onSubmit={createTag} onInput={clearError}>
-                <input ref={tagRef} type="text" placeholder="Enter category name" required/>
+                <input ref={nameRef} type="text" placeholder="Enter tag name" required/>
                 <button>Create</button>
                 <button type="reset" onClick={clearError}>Clear</button>
                 {error?.info?.error}

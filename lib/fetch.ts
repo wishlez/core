@@ -56,3 +56,11 @@ export const doPost = (url: string, payload: AnyObject) => fetcher(url, {
 export const doDelete = (url: string, query: AnyObject) => fetcher(`${url}${toParams(query)}`, {
     method: 'DELETE'
 });
+
+export const doPut = (url: string, payload: AnyObject) => fetcher(url, {
+    method: 'PUT',
+    headers: {
+        'Content-type': 'application/json'
+    },
+    body: JSON.stringify(payload)
+});

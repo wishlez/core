@@ -5,9 +5,10 @@ import {authenticated} from '../../../lib/auth/ss-auth';
 import {getUser} from '../../../lib/auth/ss-user';
 import {CreateForm} from '../../../lib/components/categories/create-form';
 import {Nav} from '../../../lib/components/categories/nav';
-import {doDelete, doGet} from '../../../lib/fetch';
+import {TagItem} from '../../../lib/components/categories/tag-item';
+import {doGet} from '../../../lib/fetch';
 import {getTags} from '../../../lib/services/categories/tags';
-import {WithTags} from '../../../types/category';
+import {WithTags} from '../../../types/categories';
 import {AnyObject} from '../../../types/object';
 
 type Props = {
@@ -16,18 +17,13 @@ type Props = {
 
 type Tags = FunctionComponent<Props>
 
-const key = '/api/categories/tags';
+const swrKey = '/api/categories/tags';
 
 const Tags: Tags = ({fallback}) => {
-    const {data, error} = useSWR<WithTags>(key, doGet);
+    const {data, error} = useSWR<WithTags>(swrKey, doGet);
     const {mutate} = useSWRConfig();
 
-    const refresh = () => mutate(key);
-
-    const deleteTag = async (id: number) => {
-        await doDelete(key, {id});
-        await refresh();
-    };
+    const refresh = () => mutate(swrKey);
 
     return (
         <SWRConfig value={{fallback}}>
@@ -35,10 +31,13 @@ const Tags: Tags = ({fallback}) => {
             <CreateForm onCreate={refresh}/>
             {error && 'Failed to load tags'}
             {data && data.tags.map((tag) => (
-                <div key={tag.id}>
-                    #{tag.name}
-                    <button onClick={() => deleteTag(tag.id)}>Delete</button>
-                </div>
+                <TagItem
+                    tag={tag}
+                    key={tag.id}
+                    onEdit={refresh}
+                    onDelete={refresh}
+                    swrKey={swrKey}
+                />
             ))}
         </SWRConfig>
     );
@@ -53,7 +52,7 @@ export const getServerSideProps: GetServerSideProps = authenticated<Props>(async
     return {
         props: {
             fallback: {
-                [key]: tags
+                [swrKey]: tags
             }
         }
     };

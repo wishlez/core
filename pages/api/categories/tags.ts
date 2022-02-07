@@ -1,6 +1,6 @@
 import {authenticatedApi} from '../../../lib/auth/ss-auth';
 import {buildApiHandler} from '../../../lib/build-api-handler';
-import {createTag, deleteTag, getTags} from '../../../lib/services/categories/tags';
+import {createTag, deleteTag, getTags, updateTag} from '../../../lib/services/categories/tags';
 
 export default authenticatedApi((user) => buildApiHandler({
     async get(req, res) {
@@ -10,17 +10,33 @@ export default authenticatedApi((user) => buildApiHandler({
     },
     async post(req, res) {
         try {
-            const category = await createTag({
+            const tag = await createTag({
                 name: req.body.name,
                 userId: user.id
             });
 
-            return res.send(category);
+            return res.send(tag);
         } catch (err) {
             console.error(err.message);
 
             return res.status(500).send({
-                error: 'Failed to create category'
+                error: 'Failed to create tag'
+            });
+        }
+    },
+    async put(req, res) {
+        try {
+            const tag = await updateTag({
+                ...req.body,
+                userId: user.id
+            });
+
+            return res.send(tag);
+        } catch (err) {
+            console.error(err.message);
+
+            return res.status(500).send({
+                error: 'Failed to update tag'
             });
         }
     },
