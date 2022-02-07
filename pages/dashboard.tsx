@@ -1,18 +1,13 @@
-import {signOut} from 'next-auth/react';
 import {FunctionComponent} from 'react';
 import {authenticated} from '../lib/auth/ss-auth';
-import {useUser} from '../lib/contexts/user';
 
-const Dashboard: FunctionComponent = () => {
-    const user = useUser();
+type Dashboard = FunctionComponent;
 
-    return (
-        <>
-            Hello, {user.name}!
-            <button onClick={() => signOut()}>Sign Out</button>
-        </>
-    );
-};
+const Dashboard: Dashboard = () => (
+    <>
+        Welcome to Wishlez!
+    </>
+);
 
 export default Dashboard;
 

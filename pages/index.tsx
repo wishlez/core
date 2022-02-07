@@ -1,7 +1,7 @@
 import {signIn} from 'next-auth/react';
 import {useRouter} from 'next/router';
 import {FunctionComponent, useEffect} from 'react';
-import {useAuth} from '../lib/auth/auth';
+import {useAuth} from '../lib/auth/cs-auth';
 import {unauthenticated} from '../lib/auth/ss-auth';
 
 type Home = FunctionComponent;

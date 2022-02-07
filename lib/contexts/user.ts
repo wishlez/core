@@ -1,10 +1,5 @@
 import {createContext, useContext} from 'react';
-
-export type User = {
-    id: number,
-    login: string,
-    name: string
-}
+import {User} from '../../types/user';
 
 const UserContext = createContext<User>(null);
 
