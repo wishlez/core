@@ -6,10 +6,10 @@ const defaultServerSideProps: GetServerSideProps<any, any, any> = async () => ({
     props: {}
 });
 
-const auth: Auth = (checkSession, getRedirect, auth) => (getServerSideProps = defaultServerSideProps) => async (context) => {
+const auth: Auth = (shouldRedirect, getRedirect, auth) => (getServerSideProps = defaultServerSideProps) => async (context) => {
     const session = await getSession({req: context.req});
 
-    if (checkSession(session)) {
+    if (shouldRedirect(session)) {
         return {
             redirect: getRedirect(context)
         };
