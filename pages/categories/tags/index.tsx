@@ -7,7 +7,7 @@ import {CreateForm} from '../../../lib/components/categories/create-form';
 import {Nav} from '../../../lib/components/categories/nav';
 import {doDelete, doGet} from '../../../lib/fetch';
 import {getTags} from '../../../lib/services/categories/tags';
-import {Categories} from '../../../types/category';
+import {WithTags} from '../../../types/category';
 import {AnyObject} from '../../../types/object';
 
 type Props = {
@@ -19,7 +19,7 @@ type Tags = FunctionComponent<Props>
 const key = '/api/categories/tags';
 
 const Tags: Tags = ({fallback}) => {
-    const {data, error} = useSWR<{ tags: Categories }>(key, doGet);
+    const {data, error} = useSWR<WithTags>(key, doGet);
     const {mutate} = useSWRConfig();
 
     const refresh = () => mutate(key);
@@ -33,7 +33,7 @@ const Tags: Tags = ({fallback}) => {
         <SWRConfig value={{fallback}}>
             <Nav/>
             <CreateForm onCreate={refresh}/>
-            {error && 'Failed to load categories'}
+            {error && 'Failed to load tags'}
             {data && data.tags.map((tag) => (
                 <div key={tag.id}>
                     #{tag.name}

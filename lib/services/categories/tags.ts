@@ -3,18 +3,18 @@ import {getPrismaClient} from '../../prisma';
 
 const prisma = getPrismaClient();
 
-export const getTags = async (user: Prisma.UserWhereInput) => await prisma.category.findMany({
+export const getTags = async (user: Prisma.UserWhereInput) => await prisma.categoryTag.findMany({
     where: {
         user
     }
 });
 
-export const createTag = async (data: Prisma.CategoryUncheckedCreateInput) => await prisma.category.create({
+export const createTag = async (data: Prisma.CategoryTagUncheckedCreateInput) => await prisma.categoryTag.create({
     data
 });
 
-export const deleteTag = async (id: number) => await prisma.category.delete({
+export const deleteTag = async (id: number) => await prisma.categoryTag.delete({
     where: {
         id
     }
-})
+});

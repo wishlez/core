@@ -8,37 +8,37 @@ datasource db {
 }
 
 model User {
-    id            Int             @id @default(autoincrement())
-    login         String          @unique @db.VarChar(64)
-    name          String          @db.VarChar(64)
-    password      String          @db.VarChar(64)
-    Category      Category[]
-    CategoryGroup CategoryGroup[]
+    id             Int             @id @default(autoincrement())
+    login          String          @unique @db.VarChar(64)
+    name           String          @db.VarChar(64)
+    password       String          @db.VarChar(64)
+    categoryTags   CategoryTag[]
+    categoryGroups CategoryGroup[]
 }
 
-model Category {
-    id     Int                 @id @default(autoincrement())
-    name   String              @unique @db.VarChar(256)
-    user   User                @relation(fields: [userId], references: [id])
-    groups CategoriesInGroup[]
+model CategoryTag {
+    id     Int                @id @default(autoincrement())
+    name   String             @unique @db.VarChar(256)
+    user   User               @relation(fields: [userId], references: [id])
+    group  CategoryTagGroup[]
     userId Int
 }
 
 model CategoryGroup {
-    id         Int                 @id @default(autoincrement())
-    name       String              @unique @db.VarChar(256)
-    budget     Float               @default(0)
-    user       User                @relation(fields: [userId], references: [id])
-    categories CategoriesInGroup[]
-    userId     Int
+    id     Int                @id @default(autoincrement())
+    name   String             @unique @db.VarChar(256)
+    budget Float              @default(0)
+    user   User               @relation(fields: [userId], references: [id])
+    group  CategoryTagGroup[]
+    userId Int
 }
 
-model CategoriesInGroup {
-    id         Int           @id @default(autoincrement())
-    category   Category      @relation(references: [id], fields: [categoryId], onDelete: Cascade, onUpdate: Cascade)
-    group      CategoryGroup @relation(references: [id], fields: [groupId], onDelete: Cascade, onUpdate: Cascade)
-    categoryId Int
-    groupId    Int
+model CategoryTagGroup {
+    id      Int           @id @default(autoincrement())
+    tag     CategoryTag   @relation(references: [id], fields: [tagId], onDelete: Cascade, onUpdate: Cascade)
+    group   CategoryGroup @relation(references: [id], fields: [groupId], onDelete: Cascade, onUpdate: Cascade)
+    tagId   Int
+    groupId Int
 
-    @@unique([categoryId, groupId])
+    @@unique([tagId, groupId])
 }

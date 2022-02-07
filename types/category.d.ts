@@ -1,5 +1,8 @@
-import type {Category as PrismaCategory} from '@prisma/client';
+import type {CategoryTag} from '@prisma/client';
+import {AnyObject} from './object';
 
-export type Category = PrismaCategory;
+export type Tag = CategoryTag;
 
-export type Categories = Category[]
+export type WithTags<P = AnyObject> = P & {
+    tags: Tag[]
+}
