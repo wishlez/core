@@ -2,6 +2,7 @@ import {GetServerSideProps, NextApiHandler} from 'next';
 import {getSession} from 'next-auth/react';
 import {Auth} from '../../types/auth';
 import {User} from '../../types/user';
+import {getUser} from './ss-user';
 
 const defaultServerSideProps: GetServerSideProps<any, any, any> = async () => ({
     props: {}
@@ -47,8 +48,7 @@ export const unauthenticated = auth(
 );
 
 export const authenticatedApi = (handler: (user: User) => NextApiHandler): NextApiHandler => async (req, res, ...rest) => {
-    const session = await getSession({req});
-    const user = session?.user as User;
+    const user = await getUser({req});
 
     if (user) {
         return handler(user)(req, res, ...rest);

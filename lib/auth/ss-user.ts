@@ -1,11 +1,11 @@
-import {GetServerSidePropsContext} from 'next';
+import {GetServerSidePropsContext, NextApiRequest} from 'next';
 import {getSession} from 'next-auth/react';
 import {User} from '../../types/user';
 
-type GetUser = (context: GetServerSidePropsContext) => Promise<User>
+type GetUser = (context: GetServerSidePropsContext | { req: NextApiRequest }) => Promise<User>
 
 export const getUser: GetUser = async (context) => {
-    const {user} = await getSession(context);
+    const session = await getSession(context);
 
-    return user as User;
+    return session?.user as User;
 };

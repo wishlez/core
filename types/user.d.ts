@@ -1,5 +1,3 @@
-export type User = {
-    id: number,
-    login: string,
-    name: string
-}
+import {User as PrismaUser} from '@prisma/client';
+
+export type User = Omit<PrismaUser, 'password'>
