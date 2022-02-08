@@ -1,15 +1,15 @@
 import {GetServerSideProps} from 'next';
 import {FunctionComponent} from 'react';
 import useSWR, {SWRConfig, useSWRConfig} from 'swr';
-import {authenticated} from '../../../lib/auth/ss-auth';
-import {getUser} from '../../../lib/auth/ss-user';
-import {CreateForm} from '../../../lib/components/categories/create-form';
-import {Nav} from '../../../lib/components/categories/nav';
-import {TagItem} from '../../../lib/components/categories/tag-item';
-import {doGet} from '../../../lib/fetch';
-import {getTags} from '../../../lib/services/categories/tags';
-import {WithTags} from '../../../types/categories';
-import {AnyObject} from '../../../types/object';
+import {authenticated} from '../../lib/auth/ss-auth';
+import {getUser} from '../../lib/auth/ss-user';
+import {CreateForm} from '../../lib/components/categories/create-form';
+import {Nav} from '../../lib/components/categories/nav';
+import {TagItem} from '../../lib/components/categories/tag-item';
+import {doGet} from '../../lib/fetch';
+import {getTags} from '../../lib/services/categories/tags';
+import {WithTags} from '../../types/categories';
+import {AnyObject} from '../../types/object';
 
 type Props = {
     fallback: AnyObject
