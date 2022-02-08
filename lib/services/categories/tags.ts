@@ -25,3 +25,9 @@ export const updateTag = async (data: Prisma.CategoryTagUncheckedUpdateInput) =>
         id: data.id as number
     }
 });
+
+export const getTagUserId = async (id: number): Promise<number> => (await prisma.categoryTag.findUnique({
+    where: {
+        id
+    }
+})).userId;

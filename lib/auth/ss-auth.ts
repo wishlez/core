@@ -1,7 +1,8 @@
-import {GetServerSideProps, NextApiHandler} from 'next';
+import {GetServerSideProps, NextApiHandler, NextApiRequest} from 'next';
 import {getSession} from 'next-auth/react';
 import {Auth} from '../../types/auth';
 import {User} from '../../types/user';
+import {unauthorized} from '../handle-error';
 import {getUser} from './ss-user';
 
 const defaultServerSideProps: GetServerSideProps<any, any, any> = async () => ({
@@ -54,7 +55,8 @@ export const authenticatedApi = (handler: (user: User) => NextApiHandler): NextA
         return handler(user)(req, res, ...rest);
     }
 
-    return res.status(401).send({
-        error: 'Unauthorized'
-    });
+    return unauthorized(res);
 };
+
+export const authorizedApi = async (req: NextApiRequest, userId: number) =>
+    userId === (await getUser({req}))?.id;

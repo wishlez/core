@@ -1,12 +1,19 @@
-import {authenticatedApi} from '../../../lib/auth/ss-auth';
+import {authenticatedApi, authorizedApi} from '../../../lib/auth/ss-auth';
 import {buildApiHandler} from '../../../lib/build-api-handler';
-import {createTag, deleteTag, getTags, updateTag} from '../../../lib/services/categories/tags';
+import {badRequest, forbidden, internalServerError} from '../../../lib/handle-error';
+import {createTag, deleteTag, getTags, getTagUserId, updateTag} from '../../../lib/services/categories/tags';
 
 export default authenticatedApi((user) => buildApiHandler({
     async get(req, res) {
-        return res.send({
-            tags: await getTags(user)
-        });
+        try {
+            const tags = await getTags(user);
+
+            return res.send({
+                tags
+            });
+        } catch (err) {
+            return internalServerError(res, err, 'Failed to retrieve tags');
+        }
     },
     async post(req, res) {
         try {
@@ -17,40 +24,42 @@ export default authenticatedApi((user) => buildApiHandler({
 
             return res.send(tag);
         } catch (err) {
-            console.error(err.message);
-
-            return res.status(500).send({
-                error: 'Failed to create tag'
-            });
+            return internalServerError(res, err, 'Failed to create tag');
         }
     },
     async put(req, res) {
+        if (!await authorizedApi(req, await getTagUserId(req.body.id))) {
+            return forbidden(res);
+        }
+
         try {
             const tag = await updateTag({
-                ...req.body,
-                userId: user.id
+                id: req.body.id,
+                name: req.body.name
             });
 
             return res.send(tag);
         } catch (err) {
-            console.error(err.message);
-
-            return res.status(500).send({
-                error: 'Failed to update tag'
-            });
+            return internalServerError(res, err, 'Failed to update tag');
         }
     },
     async delete(req, res) {
         const id = Number(req.query.id);
 
         if (isNaN(id)) {
-            return res.status(400).send({
-                error: 'Bad request'
-            });
+            return badRequest(res);
         }
 
-        await deleteTag(id);
+        if (!await authorizedApi(req, await getTagUserId(id))) {
+            return forbidden(res);
+        }
 
-        return res.send({});
+        try {
+            await deleteTag(id);
+
+            return res.send({});
+        } catch (err) {
+            return internalServerError(res, err, 'Failed to delete tag');
+        }
     }
 }));
