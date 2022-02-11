@@ -3,7 +3,7 @@ import {FunctionComponent} from 'react';
 import useSWR, {SWRConfig, useSWRConfig} from 'swr';
 import {authenticated} from '../../lib/auth/ss-auth';
 import {getUser} from '../../lib/auth/ss-user';
-import {CreateForm} from '../../lib/components/categories/create-form';
+import {TagCreateForm} from '../../lib/components/categories/tag-create-form';
 import {Nav} from '../../lib/components/categories/nav';
 import {TagItem} from '../../lib/components/categories/tag-item';
 import {doGet} from '../../lib/fetch';
@@ -28,7 +28,7 @@ const Tags: Tags = ({fallback}) => {
     return (
         <SWRConfig value={{fallback}}>
             <Nav/>
-            <CreateForm onCreate={refresh}/>
+            <TagCreateForm onCreate={refresh}/>
             {error && 'Failed to load tags'}
             {data && data.tags.map((tag) => (
                 <TagItem
