@@ -1,9 +1,7 @@
 import {GetServerSideProps} from 'next';
 import {FunctionComponent} from 'react';
 
-type Categories = FunctionComponent
-
-const Categories: Categories = () => null;
+const Categories: FunctionComponent = () => null;
 
 export default Categories;
 

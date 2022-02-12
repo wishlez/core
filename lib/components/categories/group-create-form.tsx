@@ -5,9 +5,7 @@ type Props = {
     onCreate: () => void
 }
 
-export type GroupCreateForm = FunctionComponent<Props>
-
-export const GroupCreateForm: GroupCreateForm = (props) => {
+export const GroupCreateForm: FunctionComponent<Props> = (props) => {
     const nameRef = useRef<HTMLInputElement>();
     const [error, setError] = useState<ResponseErrorType>();
 

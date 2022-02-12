@@ -5,9 +5,7 @@ type Props = {
     onCreate: () => void
 }
 
-export type TagCreateForm = FunctionComponent<Props>
-
-export const TagCreateForm: TagCreateForm = (props) => {
+export const TagCreateForm: FunctionComponent<Props> = (props) => {
     const nameRef = useRef<HTMLInputElement>();
     const [error, setError] = useState<ResponseErrorType>();
 

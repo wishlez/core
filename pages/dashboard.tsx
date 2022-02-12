@@ -1,9 +1,7 @@
 import {FunctionComponent} from 'react';
 import {authenticated} from '../lib/auth/ss-auth';
 
-type Dashboard = FunctionComponent;
-
-const Dashboard: Dashboard = () => (
+const Dashboard: FunctionComponent = () => (
     <>
         Welcome to Wishlez!
     </>

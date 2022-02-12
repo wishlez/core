@@ -4,14 +4,12 @@ import {FunctionComponent, useEffect} from 'react';
 import {User} from '../../types/user';
 import {UserProvider} from '../contexts/user';
 
-export type CsAuth = FunctionComponent;
-
 export type UseAuth = () => {
     user: User,
     status: 'loading' | 'authenticated' | 'unauthenticated'
 }
 
-export const CsAuth: CsAuth = ({children}) => {
+export const CsAuth: FunctionComponent = ({children}) => {
     const {user, status} = useAuth();
     const router = useRouter();
 

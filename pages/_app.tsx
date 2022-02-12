@@ -4,9 +4,7 @@ import {Fragment, FunctionComponent} from 'react';
 import {CsAuth} from '../lib/auth/cs-auth';
 import {AppContainer} from '../lib/components/app-container';
 
-type App = FunctionComponent<AppProps>;
-
-const App: App = ({Component, pageProps}) => {
+const App: FunctionComponent<AppProps> = ({Component, pageProps}) => {
     let AuthWrapper = CsAuth;
     let AppWrapper = AppContainer;
 

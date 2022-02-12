@@ -9,9 +9,7 @@ type Props = {
     onDelete: () => void
 }
 
-export type TagItem = FunctionComponent<Props>
-
-export const TagItem: TagItem = (props) => {
+export const TagItem: FunctionComponent<Props> = (props) => {
     const nameRef = useRef<HTMLInputElement>();
     const [editing, setEditing] = useState<boolean>(false);
 

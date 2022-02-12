@@ -10,9 +10,7 @@ type Props = {
     onDelete: () => void
 }
 
-export type GroupItem = FunctionComponent<Props>
-
-export const GroupItem: GroupItem = (props) => {
+export const GroupItem: FunctionComponent<Props> = (props) => {
     const nameRef = useRef<HTMLInputElement>();
     const [editing, setEditing] = useState<boolean>(false);
     const [tagging, setTagging] = useState<boolean>(false);

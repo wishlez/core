@@ -11,11 +11,9 @@ type Props = {
     onSave: () => void
 }
 
-export type TagGroups = FunctionComponent<Props>
-
 const swrKey = '/api/categories/tag-groups';
 
-export const TagGroups: TagGroups = (props) => {
+export const TagGroups: FunctionComponent<Props> = (props) => {
     const {data} = useSWR<WithTags>(swrKeys.categories.tags, doGet);
     const [groupedTags, setGroupedTags] = useState<Set<number>>(() => new Set(props.tags));
 

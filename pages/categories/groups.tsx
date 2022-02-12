@@ -16,9 +16,7 @@ type Props = {
     fallback: AnyObject
 }
 
-type Groups = FunctionComponent<Props>
-
-const Groups: Groups = ({fallback}) => {
+const Groups: FunctionComponent<Props> = ({fallback}) => {
     const {data, error} = useSWR<WithGroups>(swrKeys.categories.groups, doGet);
     const {mutate} = useSWRConfig();
 

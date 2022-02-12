@@ -16,9 +16,7 @@ type Props = {
     fallback: AnyObject
 }
 
-type Tags = FunctionComponent<Props>
-
-const Tags: Tags = ({fallback}) => {
+const Tags: FunctionComponent<Props> = ({fallback}) => {
     const {data, error} = useSWR<WithTags>(swrKeys.categories.tags, doGet);
     const {mutate} = useSWRConfig();
 

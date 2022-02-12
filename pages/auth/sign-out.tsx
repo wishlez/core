@@ -7,9 +7,7 @@ type Props = {
     csrfToken: string
 }
 
-type SignOut = FunctionComponent<Props>;
-
-const SignOut: SignOut = ({csrfToken}) => {
+const SignOut: FunctionComponent<Props> = ({csrfToken}) => {
     const router = useRouter();
 
     return (

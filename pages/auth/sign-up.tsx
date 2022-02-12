@@ -5,9 +5,7 @@ import {useAuthError} from '../../lib/auth/cs-auth-error';
 import {unauthenticated} from '../../lib/auth/ss-auth';
 import styles from './auth.module.css';
 
-type SignUp = FunctionComponent;
-
-const SignUp: SignUp = () => {
+const SignUp: FunctionComponent = () => {
     const authError = useAuthError();
     const passwordRef = useRef<HTMLInputElement>();
     const confirmRef = useRef<HTMLInputElement>();

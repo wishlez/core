@@ -10,9 +10,7 @@ type Props = {
     csrfToken: string
 }
 
-type SignIn = FunctionComponent<Props>;
-
-const SignIn: SignIn = ({csrfToken}) => {
+const SignIn: FunctionComponent<Props> = ({csrfToken}) => {
     const authError = useAuthError();
 
     return (

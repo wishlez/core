@@ -1,9 +1,7 @@
 import Link from 'next/link';
 import {FunctionComponent} from 'react';
 
-export type Nav = FunctionComponent;
-
-export const Nav: Nav = () => (
+export const Nav: FunctionComponent = () => (
     <nav>
         <Link href={'/accounts'}>Accounts</Link>
         <Link href={'/categories/tags'}>Categories</Link>
