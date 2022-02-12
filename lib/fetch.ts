@@ -1,5 +1,8 @@
 import {AnyObject} from '../types/object';
 
+type LoadedMethod = 'POST' | 'PUT' | 'PATCH';
+type QueriedMethod = 'GET' | 'DELETE';
+
 export interface ResponseErrorType extends Error {
     info: any,
     status: number,
@@ -19,7 +22,7 @@ class ResponseError extends Error implements ResponseErrorType {
     }
 }
 
-const toParams = (query: AnyObject<string>): string => {
+export const toParams = (query: AnyObject<string>): string => {
     const params = new URLSearchParams(query).toString();
 
     return params ? `?${params}` : '';
@@ -39,28 +42,24 @@ const fetcher = async (url: string, options?: RequestInit) => {
     return response.json();
 };
 
-export const doGet = (url: string) => fetcher(url, {
+const loadedFetch = (url: string, payload: AnyObject, method: LoadedMethod) => fetcher(url, {
+    method,
+    headers: {
+        'Content-type': 'application/json'
+    },
+    body: JSON.stringify(payload)
+})
+
+const queriedFetch = (url: string, query: AnyObject = {}, method: QueriedMethod) => fetcher(`${url}${toParams(query)}`, {
+    method,
     headers: {
         Accept: 'application/json'
     }
 });
 
-export const doPost = (url: string, payload: AnyObject) => fetcher(url, {
-    method: 'POST',
-    headers: {
-        'Content-type': 'application/json'
-    },
-    body: JSON.stringify(payload)
-});
+export const doPost = (url: string, payload: AnyObject) => loadedFetch(url, payload, 'POST');
+export const doPut = (url: string, payload: AnyObject) => loadedFetch(url, payload, 'PUT');
+export const doPatch = (url: string, payload: AnyObject) => loadedFetch(url, payload, 'PATCH');
 
-export const doDelete = (url: string, query: AnyObject) => fetcher(`${url}${toParams(query)}`, {
-    method: 'DELETE'
-});
-
-export const doPut = (url: string, payload: AnyObject) => fetcher(url, {
-    method: 'PUT',
-    headers: {
-        'Content-type': 'application/json'
-    },
-    body: JSON.stringify(payload)
-});
+export const doGet = (url: string, query: AnyObject) => queriedFetch(url, query, 'GET');
+export const doDelete = (url: string, query: AnyObject) => queriedFetch(url, query, 'DELETE');

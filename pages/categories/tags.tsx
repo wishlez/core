@@ -3,9 +3,10 @@ import {FunctionComponent} from 'react';
 import useSWR, {SWRConfig, useSWRConfig} from 'swr';
 import {authenticated} from '../../lib/auth/ss-auth';
 import {getUser} from '../../lib/auth/ss-user';
-import {TagCreateForm} from '../../lib/components/categories/tag-create-form';
 import {Nav} from '../../lib/components/categories/nav';
+import {TagCreateForm} from '../../lib/components/categories/tag-create-form';
 import {TagItem} from '../../lib/components/categories/tag-item';
+import {swrKeys} from '../../lib/components/swr-keys';
 import {doGet} from '../../lib/fetch';
 import {getTags} from '../../lib/services/categories/tags';
 import {WithTags} from '../../types/categories';
@@ -17,13 +18,11 @@ type Props = {
 
 type Tags = FunctionComponent<Props>
 
-const swrKey = '/api/categories/tags';
-
 const Tags: Tags = ({fallback}) => {
-    const {data, error} = useSWR<WithTags>(swrKey, doGet);
+    const {data, error} = useSWR<WithTags>(swrKeys.categories.tags, doGet);
     const {mutate} = useSWRConfig();
 
-    const refresh = () => mutate(swrKey);
+    const refresh = () => mutate(swrKeys.categories.tags);
 
     return (
         <SWRConfig value={{fallback}}>
@@ -36,7 +35,6 @@ const Tags: Tags = ({fallback}) => {
                     key={tag.id}
                     onEdit={refresh}
                     onDelete={refresh}
-                    swrKey={swrKey}
                 />
             ))}
         </SWRConfig>
@@ -52,7 +50,7 @@ export const getServerSideProps: GetServerSideProps = authenticated<Props>(async
     return {
         props: {
             fallback: {
-                [swrKey]: tags
+                [swrKeys.categories.tags]: tags
             }
         }
     };

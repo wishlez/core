@@ -20,7 +20,7 @@ model CategoryTag {
     id     Int                @id @default(autoincrement())
     name   String             @unique @db.VarChar(256)
     user   User               @relation(fields: [userId], references: [id])
-    group  CategoryTagGroup[]
+    groups  CategoryTagGroup[]
     userId Int
 }
 
@@ -29,7 +29,7 @@ model CategoryGroup {
     name   String             @unique @db.VarChar(256)
     budget Float              @default(0)
     user   User               @relation(fields: [userId], references: [id])
-    group  CategoryTagGroup[]
+    tags  CategoryTagGroup[]
     userId Int
 }
 

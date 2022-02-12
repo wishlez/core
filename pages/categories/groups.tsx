@@ -4,8 +4,9 @@ import useSWR, {SWRConfig, useSWRConfig} from 'swr';
 import {authenticated} from '../../lib/auth/ss-auth';
 import {getUser} from '../../lib/auth/ss-user';
 import {GroupCreateForm} from '../../lib/components/categories/group-create-form';
-import {Nav} from '../../lib/components/categories/nav';
 import {GroupItem} from '../../lib/components/categories/group-item';
+import {Nav} from '../../lib/components/categories/nav';
+import {swrKeys} from '../../lib/components/swr-keys';
 import {doGet} from '../../lib/fetch';
 import {getGroups} from '../../lib/services/categories/groups';
 import {WithGroups} from '../../types/categories';
@@ -17,13 +18,11 @@ type Props = {
 
 type Groups = FunctionComponent<Props>
 
-const swrKey = '/api/categories/groups';
-
 const Groups: Groups = ({fallback}) => {
-    const {data, error} = useSWR<WithGroups>(swrKey, doGet);
+    const {data, error} = useSWR<WithGroups>(swrKeys.categories.groups, doGet);
     const {mutate} = useSWRConfig();
 
-    const refresh = () => mutate(swrKey);
+    const refresh = () => mutate(swrKeys.categories.groups);
 
     return (
         <SWRConfig value={{fallback}}>
@@ -36,7 +35,6 @@ const Groups: Groups = ({fallback}) => {
                     key={group.id}
                     onEdit={refresh}
                     onDelete={refresh}
-                    swrKey={swrKey}
                 />
             ))}
         </SWRConfig>
@@ -52,7 +50,7 @@ export const getServerSideProps: GetServerSideProps = authenticated<Props>(async
     return {
         props: {
             fallback: {
-                [swrKey]: groups
+                [swrKeys.categories.groups]: groups
             }
         }
     };

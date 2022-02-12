@@ -6,6 +6,13 @@ const prisma = getPrismaClient();
 export const getGroups = async (user: Prisma.UserWhereInput) => await prisma.categoryGroup.findMany({
     where: {
         user
+    },
+    include: {
+        tags: {
+            include: {
+                tag: true
+            }
+        }
     }
 });
 
