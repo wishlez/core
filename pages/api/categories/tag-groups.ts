@@ -1,3 +1,4 @@
+import {NextApiResponse} from 'next';
 import {authenticatedApi, authorizedApi} from '../../../lib/auth/ss-auth';
 import {buildApiHandler} from '../../../lib/build-api-handler';
 import {badRequest, forbidden, internalServerError} from '../../../lib/handle-error';
@@ -5,7 +6,7 @@ import {getGroupUserId} from '../../../lib/services/categories/groups';
 import {updateTagGroup} from '../../../lib/services/categories/tag-groups';
 
 export default authenticatedApi(() => buildApiHandler({
-    async patch(req, res) {
+    async patch(req, res: NextApiResponse<{}>) {
         const groupId = Number(req.query.groupId);
 
         if (isNaN(groupId)) {
@@ -18,8 +19,6 @@ export default authenticatedApi(() => buildApiHandler({
 
         try {
             const {added, deleted} = req.body;
-
-            console.log(req.body);
 
             await updateTagGroup(groupId, added, deleted);
 

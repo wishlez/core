@@ -1,10 +1,12 @@
+import {NextApiResponse} from 'next';
 import {authenticatedApi, authorizedApi} from '../../../lib/auth/ss-auth';
 import {buildApiHandler} from '../../../lib/build-api-handler';
 import {badRequest, forbidden, internalServerError} from '../../../lib/handle-error';
 import {createGroup, deleteGroup, getGroups, getGroupUserId, updateGroup} from '../../../lib/services/categories/groups';
+import {Group, WithGroups} from '../../../types/categories';
 
 export default authenticatedApi((user) => buildApiHandler({
-    async get(req, res) {
+    async get(req, res: NextApiResponse<WithGroups>) {
         try {
             const groups = await getGroups(user);
 
@@ -15,7 +17,7 @@ export default authenticatedApi((user) => buildApiHandler({
             return internalServerError(res, err, 'Failed to retrieve groups');
         }
     },
-    async post(req, res) {
+    async post(req, res: NextApiResponse<Group>) {
         try {
             const group = await createGroup({
                 name: req.body.name,
@@ -27,7 +29,7 @@ export default authenticatedApi((user) => buildApiHandler({
             return internalServerError(res, err, 'Failed to create group');
         }
     },
-    async put(req, res) {
+    async put(req, res: NextApiResponse<Group>) {
         if (!await authorizedApi(req, await getGroupUserId(req.body.id))) {
             return forbidden(res);
         }
@@ -43,7 +45,7 @@ export default authenticatedApi((user) => buildApiHandler({
             return internalServerError(res, err, 'Failed to update group');
         }
     },
-    async delete(req, res) {
+    async delete(req, res: NextApiResponse<{}>) {
         const id = Number(req.query.id);
 
         if (isNaN(id)) {

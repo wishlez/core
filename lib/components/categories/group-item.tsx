@@ -1,11 +1,11 @@
 import {FormEvent, FunctionComponent, useRef, useState} from 'react';
-import {Group} from '../../../types/categories';
+import {TagGroup} from '../../../types/categories';
 import {doDelete, doPut} from '../../fetch';
 import {swrKeys} from '../swr-keys';
 import {TagGroups} from './tag-groups';
 
 type Props = {
-    group: Group
+    group: TagGroup
     onEdit: () => void
     onDelete: () => void
 }
