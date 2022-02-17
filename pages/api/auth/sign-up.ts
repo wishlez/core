@@ -1,17 +1,12 @@
 import {NextApiHandler} from 'next';
-import {encryptPassword} from '../../../lib/password';
-import {getPrismaClient} from '../../../lib/prisma';
-
-const prisma = getPrismaClient();
+import {createUser} from '../../../lib/services/users';
 
 const handler: NextApiHandler = async (req, res) => {
     try {
-        await prisma.user.create({
-            data: {
-                name: req.body.name,
-                login: req.body.login,
-                password: encryptPassword(req.body.password)
-            }
+        await createUser({
+            name: req.body.name,
+            login: req.body.login,
+            password: req.body.password
         });
         res.redirect('/auth/sign-in');
     } catch (err) {

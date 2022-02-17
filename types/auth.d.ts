@@ -11,3 +11,8 @@ type GetRedirect = (context: GetServerSidePropsContext) => Redirect
 export type Auth = (checkSession: ShouldRedirect, getRedirect: GetRedirect, auth: boolean) =>
     <P extends AnyObject = AnyObject, Q extends ParsedUrlQuery = ParsedUrlQuery, D extends PreviewData = PreviewData>(getServerSideProps?: GetServerSideProps<P, Q, D>) =>
         GetServerSideProps<P, Q, D>
+
+export type Credentials = {
+    login: string
+    password: string
+}
