@@ -1,16 +1,17 @@
 {
   "name": "@wishlez/core",
   "version": "0.0.0",
-  "description": "Spending analyzer and budgeteer",
+  "description": "Cash flow analyzer and budgeteer",
   "main": "index.js",
   "scripts": {
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
+    "prisma:generate": "prisma generate",
     "prisma:migrate": "prisma migrate dev",
-    "prisma:studio": "prisma studio",
-    "prisma:generate": "prisma generate"
+    "prisma:seed": "prisma db seed",
+    "prisma:studio": "prisma studio"
   },
   "repository": {
     "type": "git",
@@ -35,7 +36,11 @@
     "@types/react": "^17.0.39",
     "eslint": "8.8.0",
     "eslint-config-next": "12.0.10",
-    "prisma": "^3.9.1",
+    "prisma": "^3.9.2",
+    "ts-node": "^10.5.0",
     "typescript": "^4.5.5"
+  },
+  "prisma": {
+    "seed": "ts-node --compiler-options {\"module\":\"CommonJS\"} --files prisma/seed.ts"
   }
 }
