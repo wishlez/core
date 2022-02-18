@@ -30,10 +30,10 @@ CREATE TABLE `CategoryTagGroup` (
 ) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 
 -- AddForeignKey
-ALTER TABLE `CategoryTag` ADD CONSTRAINT `CategoryTag_userId_fkey` FOREIGN KEY (`userId`) REFERENCES `User`(`id`) ON DELETE RESTRICT ON UPDATE CASCADE;
+ALTER TABLE `CategoryTag` ADD CONSTRAINT `CategoryTag_userId_fkey` FOREIGN KEY (`userId`) REFERENCES `User`(`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE `CategoryGroup` ADD CONSTRAINT `CategoryGroup_userId_fkey` FOREIGN KEY (`userId`) REFERENCES `User`(`id`) ON DELETE RESTRICT ON UPDATE CASCADE;
+ALTER TABLE `CategoryGroup` ADD CONSTRAINT `CategoryGroup_userId_fkey` FOREIGN KEY (`userId`) REFERENCES `User`(`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 -- AddForeignKey
 ALTER TABLE `CategoryTagGroup` ADD CONSTRAINT `CategoryTagGroup_tagId_fkey` FOREIGN KEY (`tagId`) REFERENCES `CategoryTag`(`id`) ON DELETE CASCADE ON UPDATE CASCADE;
