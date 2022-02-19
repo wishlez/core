@@ -13,7 +13,7 @@ export const AccountCreateForm: FunctionComponent<Props> = (props) => {
     const initialRef = useRef<HTMLInputElement>();
     const maximumRef = useRef<HTMLInputElement>();
     const accountTypeRef = useRef<HTMLSelectElement>();
-    const {data} = useSWR<WithAccountTypes>(swrKeys.accountTypes, doGet);
+    const {data: {accountTypes} = {accountTypes: []}} = useSWR<WithAccountTypes>(swrKeys.accountTypes, doGet);
     const [error, setError] = useState<ResponseErrorType>();
 
     const createAccount = async (event: FormEvent) => {
@@ -48,7 +48,7 @@ export const AccountCreateForm: FunctionComponent<Props> = (props) => {
                 <input ref={initialRef} type="number" placeholder="Enter initial balance" step={0.01} min={0}/>
                 <input ref={maximumRef} type="number" placeholder="Enter maximum limit" step={0.01} min={0}/>
                 <select ref={accountTypeRef}>
-                    {data && data.accountTypes.map(({id, type}) => (
+                    {accountTypes.map(({id, type}) => (
                         <option key={id} value={id}>{type}</option>
                     ))}
                 </select>

@@ -16,7 +16,7 @@ export const AccountItem: FunctionComponent<Props> = (props) => {
     const initialRef = useRef<HTMLInputElement>();
     const maximumRef = useRef<HTMLInputElement>();
     const accountTypeRef = useRef<HTMLSelectElement>();
-    const {data} = useSWR<WithAccountTypes>(swrKeys.accountTypes, doGet);
+    const {data: {accountTypes} = {accountTypes: []}} = useSWR<WithAccountTypes>(swrKeys.accountTypes, doGet);
     const [editing, setEditing] = useState<boolean>(false);
 
     const deleteAccount = async (id: number) => {
@@ -59,7 +59,7 @@ export const AccountItem: FunctionComponent<Props> = (props) => {
                 defaultValue={props.account.maximumAmountOwed}
             />
             <select ref={accountTypeRef} defaultValue={props.account.accountTypeId}>
-                {data && data.accountTypes.map(({id, type}) => (
+                {accountTypes.map(({id, type}) => (
                     <option key={id} value={id}>{type}</option>
                 ))}
             </select>

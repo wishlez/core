@@ -17,7 +17,7 @@ export const TransactionItem: FunctionComponent<Props> = (props) => {
     const amountRef = useRef<HTMLInputElement>();
     const fromAccountRef = useRef<HTMLSelectElement>();
     const toAccountRef = useRef<HTMLSelectElement>();
-    const {data} = useSWR<WithAccounts>(swrKeys.accounts, doGet);
+    const {data: {accounts} = {accounts: []}} = useSWR<WithAccounts>(swrKeys.accounts, doGet);
     const [editing, setEditing] = useState<boolean>(false);
 
     const deleteTransaction = async (id: number) => {
@@ -54,12 +54,12 @@ export const TransactionItem: FunctionComponent<Props> = (props) => {
                 defaultValue={props.transaction.amount}
             />
             <select ref={fromAccountRef} defaultValue={props.transaction.fromAccountId}>
-                {data && data.accounts.map(({id, name}) => (
+                {accounts.map(({id, name}) => (
                     <option key={id} value={id}>{name}</option>
                 ))}
             </select>
             <select ref={toAccountRef} defaultValue={props.transaction.toAccountId}>
-                {data && data.accounts.map(({id, name}) => (
+                {accounts.map(({id, name}) => (
                     <option key={id} value={id}>{name}</option>
                 ))}
             </select>

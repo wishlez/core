@@ -14,7 +14,7 @@ export const TransactionCreateForm: FunctionComponent<Props> = (props) => {
     const amountRef = useRef<HTMLInputElement>();
     const fromAccountRef = useRef<HTMLSelectElement>();
     const toAccountRef = useRef<HTMLSelectElement>();
-    const {data} = useSWR<WithAccounts>(swrKeys.accounts, doGet);
+    const {data: {accounts} = {accounts: []}} = useSWR<WithAccounts>(swrKeys.accounts, doGet);
     const [error, setError] = useState<ResponseErrorType>();
 
     const createTransaction = async (event: FormEvent) => {
@@ -51,12 +51,12 @@ export const TransactionCreateForm: FunctionComponent<Props> = (props) => {
                 <input ref={dateRef} type="date" placeholder="Select date" required/>
                 <input ref={amountRef} type="number" placeholder="Enter amount" step={0.01} min={0.01} required/>
                 <select ref={fromAccountRef}>
-                    {data && data.accounts.map(({id, name}) => (
+                    {accounts.map(({id, name}) => (
                         <option key={id} value={id}>{name}</option>
                     ))}
                 </select>
                 <select ref={toAccountRef}>
-                    {data && data.accounts.map(({id, name}) => (
+                    {accounts.map(({id, name}) => (
                         <option key={id} value={id}>{name}</option>
                     ))}
                 </select>

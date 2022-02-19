@@ -14,7 +14,7 @@ type Props = {
 const swrKey = '/api/categories/tag-groups';
 
 export const TagGroups: FunctionComponent<Props> = (props) => {
-    const {data} = useSWR<WithTags>(swrKeys.categories.tags, doGet);
+    const {data: {tags} = {tags: []}} = useSWR<WithTags>(swrKeys.categories.tags, doGet);
     const [groupedTags, setGroupedTags] = useState<Set<number>>(() => new Set(props.tags));
 
     const updateGroup = (id: number, checked: boolean) => {
@@ -40,13 +40,13 @@ export const TagGroups: FunctionComponent<Props> = (props) => {
     };
 
     const toggleAll = () => {
-        const allTags = data.tags.map((tag) => tag.id);
+        const allTags = tags.map((tag) => tag.id);
         setGroupedTags(new Set(groupedTags.size === 0 ? allTags : []));
     };
 
-    return data ? (
+    return (
         <div>
-            {data.tags.map((tag) => (
+            {tags.map((tag) => (
                 <label key={tag.id}>
                     <input
                         type="checkbox" checked={groupedTags.has(tag.id)}
@@ -59,9 +59,5 @@ export const TagGroups: FunctionComponent<Props> = (props) => {
             <button onClick={() => props.onCancel()}>Cancel</button>
             <button onClick={() => toggleAll()}>Toggle All</button>
         </div>
-    ) : (
-        <>
-            ...
-        </>
     );
 };
