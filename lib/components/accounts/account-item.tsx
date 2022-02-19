@@ -58,7 +58,7 @@ export const AccountItem: FunctionComponent<Props> = (props) => {
                 min={0}
                 defaultValue={props.account.maximumAmountOwed}
             />
-            <select ref={accountTypeRef}>
+            <select ref={accountTypeRef} defaultValue={props.account.accountTypeId}>
                 {data && data.accountTypes.map(({id, type}) => (
                     <option key={id} value={id}>{type}</option>
                 ))}
