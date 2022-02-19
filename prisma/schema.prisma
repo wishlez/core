@@ -12,9 +12,10 @@ model User {
     login          String          @unique @db.VarChar(64)
     name           String          @db.VarChar(64)
     password       String          @db.VarChar(64)
+    accounts       Account[]
     categoryTags   CategoryTag[]
     categoryGroups CategoryGroup[]
-    accounts       Account[]
+    transactions   Transaction[]
 }
 
 model AccountType {
@@ -24,13 +25,15 @@ model AccountType {
 }
 
 model Account {
-    id                Int         @id @default(autoincrement())
-    name              String      @db.VarChar(32)
-    openingBalance    Decimal     @default(0) @db.Decimal(10, 2)
-    maximumAmountOwed Decimal     @default(0) @db.Decimal(10, 2)
-    builtIn           Boolean     @default(false)
-    accountType       AccountType @relation(fields: [accountTypeId], references: [id], onDelete: Cascade, onUpdate: Cascade)
-    user              User        @relation(fields: [userId], references: [id], onDelete: Cascade, onUpdate: Cascade)
+    id                Int           @id @default(autoincrement())
+    name              String        @db.VarChar(32)
+    openingBalance    Decimal       @default(0) @db.Decimal(10, 2)
+    maximumAmountOwed Decimal       @default(0) @db.Decimal(10, 2)
+    builtIn           Boolean       @default(false)
+    accountType       AccountType   @relation(fields: [accountTypeId], references: [id], onDelete: Cascade, onUpdate: Cascade)
+    user              User          @relation(fields: [userId], references: [id], onDelete: Cascade, onUpdate: Cascade)
+    outgoing          Transaction[] @relation("fromAccount")
+    incoming          Transaction[] @relation("toAccount")
     accountTypeId     Int
     userId            Int
 
@@ -38,11 +41,12 @@ model Account {
 }
 
 model CategoryTag {
-    id     Int                @id @default(autoincrement())
-    name   String             @unique @db.VarChar(256)
-    user   User               @relation(fields: [userId], references: [id], onDelete: Cascade, onUpdate: Cascade)
-    groups CategoryTagGroup[]
-    userId Int
+    id           Int                @id @default(autoincrement())
+    name         String             @unique @db.VarChar(256)
+    user         User               @relation(fields: [userId], references: [id], onDelete: Cascade, onUpdate: Cascade)
+    groups       CategoryTagGroup[]
+    transactions TransactionTag[]
+    userId       Int
 }
 
 model CategoryGroup {
@@ -62,4 +66,28 @@ model CategoryTagGroup {
     groupId Int
 
     @@unique([tagId, groupId])
+}
+
+model Transaction {
+    id            Int              @id @default(autoincrement())
+    description   String           @unique @db.VarChar(256)
+    amount        Decimal          @default(0) @db.Decimal(10, 2)
+    date          DateTime         @db.Date
+    fromAccount   Account          @relation(name: "fromAccount", fields: [fromAccountId], references: [id], onDelete: Cascade, onUpdate: Cascade)
+    toAccount     Account          @relation(name: "toAccount", fields: [toAccountId], references: [id], onDelete: Cascade, onUpdate: Cascade)
+    user          User             @relation(fields: [userId], references: [id], onDelete: Cascade, onUpdate: Cascade)
+    tags          TransactionTag[]
+    fromAccountId Int
+    toAccountId   Int
+    userId        Int
+}
+
+model TransactionTag {
+    id            Int         @id @default(autoincrement())
+    tag           CategoryTag @relation(references: [id], fields: [tagId], onDelete: Cascade, onUpdate: Cascade)
+    transaction   Transaction @relation(references: [id], fields: [transactionId], onDelete: Cascade, onUpdate: Cascade)
+    tagId         Int
+    transactionId Int
+
+    @@unique([tagId, transactionId])
 }
