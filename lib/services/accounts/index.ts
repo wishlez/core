@@ -4,7 +4,7 @@ import {getPrismaClient} from '../../prisma';
 
 const prisma = getPrismaClient();
 
-const convertDecimalsToNumber = (account: PrismaAccount): Account => ({
+const serialize = (account: PrismaAccount): Account => ({
     ...account,
     openingBalance: account.openingBalance.toNumber(),
     maximumAmountOwed: account.maximumAmountOwed.toNumber()
@@ -17,10 +17,10 @@ export const getAccounts = async (user: Prisma.UserWhereInput): Promise<Account[
         }
     });
 
-    return accounts.map(convertDecimalsToNumber);
+    return accounts.map(serialize);
 };
 
-export const createAccount = async (data: Prisma.AccountUncheckedCreateInput) => convertDecimalsToNumber(await prisma.account.create({
+export const createAccount = async (data: Prisma.AccountUncheckedCreateInput) => serialize(await prisma.account.create({
     data
 }));
 
@@ -30,7 +30,7 @@ export const deleteAccount = async (id: number) => await prisma.account.delete({
     }
 });
 
-export const updateAccount = async (data: Prisma.AccountUncheckedUpdateInput) => convertDecimalsToNumber(await prisma.account.update({
+export const updateAccount = async (data: Prisma.AccountUncheckedUpdateInput) => serialize(await prisma.account.update({
     data,
     where: {
         id: data.id as number
