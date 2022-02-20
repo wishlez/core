@@ -3,6 +3,7 @@ import {AppProps} from 'next/app';
 import {Fragment, FunctionComponent} from 'react';
 import {CsAuth} from '../lib/auth/cs-auth';
 import {AppContainer} from '../lib/components/app-container';
+import './_app.css';
 
 const App: FunctionComponent<AppProps> = ({Component, pageProps}) => {
     let AuthWrapper = CsAuth;

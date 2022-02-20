@@ -1,0 +1,77 @@
+@font-face {
+    font-family: 'Montserrat';
+    font-weight: bold;
+    src: url('/fonts/Montserrat-SemiBold.ttf') format('truetype'),
+    url('/fonts/Montserrat-SemiBold.woff') format('woff'),
+    url('/fonts/Montserrat-SemiBold.woff2') format('woff2');
+}
+
+@font-face {
+    font-family: 'Montserrat';
+    font-weight: normal;
+    src: url('/fonts/Montserrat-Regular.ttf') format('truetype'),
+    url('/fonts/Montserrat-Regular.woff') format('woff'),
+    url('/fonts/Montserrat-Regular.woff2') format('woff2');
+}
+
+:root {
+    font-family: Montserrat, sans-serif;
+}
+
+/* Misc */
+:root {
+    --padding: .75em 1.25em;
+    --transition: all .3s ease-in-out;
+    --body-background: #f8f9f0;
+    --grid-gap: .75em;
+    --border-radius: 2px;
+}
+
+/* Core */
+:root {
+    --core-100: #111111;
+    --core-200: #2f330d;
+    --core-300: #4d5509;
+    --core-400: #6a7704;
+    --core-500: #889900;
+    --core-600: #a4b13c;
+    --core-700: #c0c978;
+    --core-800: #dce1b4;
+    --core-900: #f8f9f0;
+}
+
+/* Gray */
+:root {
+    --gray-100: #111111;
+    --gray-200: #2e2e2d;
+    --gray-300: #4b4b49;
+    --gray-400: #686865;
+    --gray-500: #858581;
+    --gray-600: #a1a29c;
+    --gray-700: #bebfb8;
+    --gray-800: #dbdcd4;
+    --gray-900: #f8f9f0;
+}
+
+/* Alert */
+:root {
+    --alert-error-500: #da1e28;
+    --alert-info-500: #fddc69;
+    --alert-success-500: #198038;
+    --alert-warning-500: #ff832b;
+}
+
+body {
+    background-color: var(--core-900);
+    color: var(--core-100);
+    margin: 0;
+    padding: 0;
+}
+
+input,
+select,
+button {
+    color: inherit;
+    font-family: inherit;
+    font-size: inherit;
+}
