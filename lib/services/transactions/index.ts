@@ -8,7 +8,7 @@ const serialize = (transaction: PrismaTransaction): Transaction => ({
     ...transaction,
     amount: transaction.amount.toNumber(),
     date: transaction.date.toISOString()
-})
+});
 
 export const getTransactions = async (user: Prisma.UserWhereInput): Promise<Transaction[]> => {
     const transactions = await prisma.transaction.findMany({
@@ -25,6 +25,11 @@ export const getTransactions = async (user: Prisma.UserWhereInput): Promise<Tran
                 select: {
                     name: true
                 }
+            },
+            tags: {
+                include: {
+                    tag: true
+                }
             }
         }
     });
@@ -32,8 +37,17 @@ export const getTransactions = async (user: Prisma.UserWhereInput): Promise<Tran
     return transactions.map(serialize);
 };
 
-export const createTransaction = async (data: Prisma.TransactionUncheckedCreateInput) => serialize(await prisma.transaction.create({
-    data
+export const createTransaction = async (data: Prisma.TransactionUncheckedCreateInput, tags: number[]) => serialize(await prisma.transaction.create({
+    data: {
+        ...data,
+        tags: {
+            createMany: {
+                data: tags.map((tagId) => ({
+                    tagId
+                }))
+            }
+        }
+    }
 }));
 
 export const deleteTransaction = async (id: number) => await prisma.transaction.delete({
@@ -42,8 +56,22 @@ export const deleteTransaction = async (id: number) => await prisma.transaction.
     }
 });
 
-export const updateTransaction = async (data: Prisma.TransactionUncheckedUpdateInput) => serialize(await prisma.transaction.update({
-    data,
+export const updateTransaction = async (data: Prisma.TransactionUncheckedUpdateInput, addedTags: number[], deletedTags: number[]) => serialize(await prisma.transaction.update({
+    data: {
+        ...data,
+        tags: {
+            deleteMany: {
+                tagId: {
+                    in: deletedTags
+                }
+            },
+            createMany: {
+                data: addedTags.map((tagId) => ({
+                    tagId
+                }))
+            }
+        }
+    },
     where: {
         id: data.id as number
     }

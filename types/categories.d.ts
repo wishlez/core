@@ -3,6 +3,10 @@ import {AnyObject} from './object';
 
 export type Tag = CategoryTag;
 
+export type WithTag<P = AnyObject> = P & {
+    tag: Tag
+}
+
 export type WithTags<P = AnyObject> = P & {
     tags: Tag[]
 }

@@ -1,6 +1,7 @@
 import {FormEvent, FunctionComponent, useRef, useState} from 'react';
 import useSWR from 'swr';
 import {WithAccounts} from '../../../types/accounts';
+import {WithTags} from '../../../types/categories';
 import {Transaction} from '../../../types/transactions';
 import {doDelete, doGet, doPut} from '../../fetch';
 import {swrKeys} from '../swr-keys';
@@ -17,8 +18,11 @@ export const TransactionItem: FunctionComponent<Props> = (props) => {
     const amountRef = useRef<HTMLInputElement>();
     const fromAccountRef = useRef<HTMLSelectElement>();
     const toAccountRef = useRef<HTMLSelectElement>();
+    const tagsRef = useRef<HTMLSelectElement>();
     const {data: {accounts} = {accounts: []}} = useSWR<WithAccounts>(swrKeys.accounts, doGet);
+    const {data: {tags} = {tags: []}} = useSWR<WithTags>(swrKeys.categories.tags, doGet);
     const [editing, setEditing] = useState<boolean>(false);
+    const existingTags = props.transaction.tags.map((transactionTag) => transactionTag.tagId);
 
     const deleteTransaction = async (id: number) => {
         await doDelete(swrKeys.transactions, {id});
@@ -27,13 +31,18 @@ export const TransactionItem: FunctionComponent<Props> = (props) => {
 
     const saveTransaction = async (event: FormEvent) => {
         event.preventDefault();
+        const updatedTags = Array.from(tagsRef.current.selectedOptions, (option) => Number(option.value));
         await doPut(swrKeys.transactions, {
             ...props.transaction,
             description: descriptionRef.current.value,
             date: new Date(dateRef.current.value),
             amount: Number(amountRef.current.value),
             fromAccountId: Number(fromAccountRef.current.value),
-            toAccountId: Number(toAccountRef.current.value)
+            toAccountId: Number(toAccountRef.current.value),
+            tags: {
+                deleted: existingTags.filter((tag) => !updatedTags.includes(tag)),
+                added: updatedTags.filter((tag) => !existingTags.includes(tag))
+            }
         });
         setEditing(false);
         props.onEdit();
@@ -63,6 +72,11 @@ export const TransactionItem: FunctionComponent<Props> = (props) => {
                     <option key={id} value={id}>{name}</option>
                 ))}
             </select>
+            <select ref={tagsRef} multiple defaultValue={existingTags.map((tag) => tag.toString())}>
+                {tags.map(({id, name}) => (
+                    <option key={id} value={id}>{name}</option>
+                ))}
+            </select>
             <button>Save</button>
             <button type="button" onClick={() => setEditing(false)}>Cancel</button>
         </form>
@@ -73,6 +87,9 @@ export const TransactionItem: FunctionComponent<Props> = (props) => {
             worth {props.transaction.amount}
             <button onClick={() => setEditing(true)}>Edit</button>
             <button onClick={() => deleteTransaction(props.transaction.id)}>Delete</button>
+            <div>
+                {props.transaction.tags.map(({tag}) => `#${tag.name}`).join(' ')}
+            </div>
         </div>
     );
 };

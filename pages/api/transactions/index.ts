@@ -19,14 +19,17 @@ export default authenticatedApi((user) => buildApiHandler({
     },
     async post(req, res: NextApiResponse<Transaction>) {
         try {
-            const transaction = await createTransaction({
-                description: req.body.description,
-                amount: req.body.amount,
-                toAccountId: req.body.toAccountId,
-                fromAccountId: req.body.fromAccountId,
-                date: req.body.date,
-                userId: user.id
-            });
+            const transaction = await createTransaction(
+                {
+                    description: req.body.description,
+                    amount: req.body.amount,
+                    toAccountId: req.body.toAccountId,
+                    fromAccountId: req.body.fromAccountId,
+                    date: req.body.date,
+                    userId: user.id
+                },
+                Array.from(req.body.tags, (id) => Number(id))
+            );
 
             return res.send(transaction);
         } catch (err) {
@@ -39,14 +42,18 @@ export default authenticatedApi((user) => buildApiHandler({
         }
 
         try {
-            const transaction = await updateTransaction({
-                id: req.body.id,
-                description: req.body.description,
-                amount: req.body.amount,
-                toAccountId: req.body.toAccountId,
-                fromAccountId: req.body.fromAccountId,
-                date: req.body.date
-            });
+            const transaction = await updateTransaction(
+                {
+                    id: req.body.id,
+                    description: req.body.description,
+                    amount: req.body.amount,
+                    toAccountId: req.body.toAccountId,
+                    fromAccountId: req.body.fromAccountId,
+                    date: req.body.date
+                },
+                Array.from(req.body.tags.added, (id) => Number(id)),
+                Array.from(req.body.tags.deleted, (id) => Number(id))
+            );
 
             return res.send(transaction);
         } catch (err) {

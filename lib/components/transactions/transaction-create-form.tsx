@@ -1,6 +1,7 @@
 import {FormEvent, FunctionComponent, useRef, useState} from 'react';
 import useSWR from 'swr';
 import {WithAccounts} from '../../../types/accounts';
+import {WithTags} from '../../../types/categories';
 import {doGet, doPost, ResponseErrorType} from '../../fetch';
 import {swrKeys} from '../swr-keys';
 
@@ -14,7 +15,9 @@ export const TransactionCreateForm: FunctionComponent<Props> = (props) => {
     const amountRef = useRef<HTMLInputElement>();
     const fromAccountRef = useRef<HTMLSelectElement>();
     const toAccountRef = useRef<HTMLSelectElement>();
+    const tagsRef = useRef<HTMLSelectElement>();
     const {data: {accounts} = {accounts: []}} = useSWR<WithAccounts>(swrKeys.accounts, doGet);
+    const {data: {tags} = {tags: []}} = useSWR<WithTags>(swrKeys.categories.tags, doGet);
     const [error, setError] = useState<ResponseErrorType>();
 
     const createTransaction = async (event: FormEvent) => {
@@ -26,7 +29,8 @@ export const TransactionCreateForm: FunctionComponent<Props> = (props) => {
                 date: new Date(dateRef.current.value),
                 amount: Number(amountRef.current.value),
                 fromAccountId: Number(fromAccountRef.current.value),
-                toAccountId: Number(toAccountRef.current.value)
+                toAccountId: Number(toAccountRef.current.value),
+                tags: Array.from(tagsRef.current.selectedOptions, (option) => option.value)
             });
 
             descriptionRef.current.value = '';
@@ -34,6 +38,7 @@ export const TransactionCreateForm: FunctionComponent<Props> = (props) => {
             amountRef.current.value = '';
             fromAccountRef.current.value = '';
             toAccountRef.current.value = '';
+            tagsRef.current.value = '';
             descriptionRef.current.focus();
 
             props.onCreate();
@@ -57,6 +62,11 @@ export const TransactionCreateForm: FunctionComponent<Props> = (props) => {
                 </select>
                 <select ref={toAccountRef}>
                     {accounts.map(({id, name}) => (
+                        <option key={id} value={id}>{name}</option>
+                    ))}
+                </select>
+                <select ref={tagsRef} multiple>
+                    {tags.map(({id, name}) => (
                         <option key={id} value={id}>{name}</option>
                     ))}
                 </select>
