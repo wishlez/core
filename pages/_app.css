@@ -56,6 +56,7 @@
 /* Alert */
 :root {
     --alert-error-500: #da1e28;
+    --alert-error-400: #a4171e;
     --alert-info-500: #fddc69;
     --alert-success-500: #198038;
     --alert-warning-500: #ff832b;
