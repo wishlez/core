@@ -16,3 +16,10 @@ export type Transaction = Omit<PrismaTransaction, 'amount' | 'date'> & {
 export type WithTransactions<P = AnyObject> = P & {
     transactions: Transaction[]
 }
+
+export type TransactionRequest = Omit<PrismaTransaction, 'amount' | 'date' | 'id' | 'userId'> & {
+    id?: number,
+    amount: number,
+    date: Date,
+    tags: number[]
+}

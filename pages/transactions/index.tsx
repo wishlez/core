@@ -3,7 +3,7 @@ import {FunctionComponent} from 'react';
 import useSWR, {SWRConfig, useSWRConfig} from 'swr';
 import {authenticated} from '../../lib/auth/ss-auth';
 import {getUser} from '../../lib/auth/ss-user';
-import {TransactionCreateForm} from '../../lib/components/transactions/transaction-create-form';
+import {TransactionCreate} from '../../lib/components/transactions/transaction-create';
 import {TransactionItem} from '../../lib/components/transactions/transaction-item';
 import {swrKeys} from '../../lib/components/swr-keys';
 import {doGet} from '../../lib/fetch';
@@ -23,7 +23,7 @@ const Transactions: FunctionComponent<Props> = ({fallback}) => {
 
     return (
         <SWRConfig value={{fallback}}>
-            <TransactionCreateForm onCreate={refresh}/>
+            <TransactionCreate onCreate={refresh}/>
             {error && 'Failed to load transactions'}
             {data && data.transactions.map((transaction) => (
                 <TransactionItem

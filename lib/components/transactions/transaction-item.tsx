@@ -1,10 +1,9 @@
-import {FormEvent, FunctionComponent, useRef, useState} from 'react';
-import useSWR from 'swr';
-import {WithAccounts} from '../../../types/accounts';
-import {WithTags} from '../../../types/categories';
-import {Transaction} from '../../../types/transactions';
-import {doDelete, doGet, doPut} from '../../fetch';
+import {FunctionComponent, useState} from 'react';
+import {Transaction, TransactionRequest} from '../../../types/transactions';
+import {Button} from '../../design/button';
+import {doDelete, doPut} from '../../fetch';
 import {swrKeys} from '../swr-keys';
+import {TransactionForm} from './transaction-form';
 
 type Props = {
     transaction: Transaction
@@ -13,14 +12,6 @@ type Props = {
 }
 
 export const TransactionItem: FunctionComponent<Props> = (props) => {
-    const descriptionRef = useRef<HTMLInputElement>();
-    const dateRef = useRef<HTMLInputElement>();
-    const amountRef = useRef<HTMLInputElement>();
-    const fromAccountRef = useRef<HTMLSelectElement>();
-    const toAccountRef = useRef<HTMLSelectElement>();
-    const tagsRef = useRef<HTMLSelectElement>();
-    const {data: {accounts} = {accounts: []}} = useSWR<WithAccounts>(swrKeys.accounts, doGet);
-    const {data: {tags} = {tags: []}} = useSWR<WithTags>(swrKeys.categories.tags, doGet);
     const [editing, setEditing] = useState<boolean>(false);
     const existingTags = props.transaction.tags.map((transactionTag) => transactionTag.tagId);
 
@@ -29,19 +20,13 @@ export const TransactionItem: FunctionComponent<Props> = (props) => {
         props.onDelete();
     };
 
-    const saveTransaction = async (event: FormEvent) => {
-        event.preventDefault();
-        const updatedTags = Array.from(tagsRef.current.selectedOptions, (option) => Number(option.value));
+    const saveTransaction = async (transaction: TransactionRequest) => {
         await doPut(swrKeys.transactions, {
             ...props.transaction,
-            description: descriptionRef.current.value,
-            date: new Date(dateRef.current.value),
-            amount: Number(amountRef.current.value),
-            fromAccountId: Number(fromAccountRef.current.value),
-            toAccountId: Number(toAccountRef.current.value),
+            ...transaction,
             tags: {
-                deleted: existingTags.filter((tag) => !updatedTags.includes(tag)),
-                added: updatedTags.filter((tag) => !existingTags.includes(tag))
+                deleted: existingTags.filter((tag) => !transaction.tags.includes(tag)),
+                added: transaction.tags.filter((tag) => !existingTags.includes(tag))
             }
         });
         setEditing(false);
@@ -49,44 +34,18 @@ export const TransactionItem: FunctionComponent<Props> = (props) => {
     };
 
     return editing ? (
-        <form onSubmit={saveTransaction}>
-            <input
-                ref={descriptionRef} type="text" placeholder="Describe transaction" required
-                defaultValue={props.transaction.description}
-            />
-            <input
-                ref={dateRef} type="date" placeholder="Select date" step={0.01} min={0} required
-                defaultValue={props.transaction.date.toString().substring(0, 10)}
-            />
-            <input
-                ref={amountRef} type="number" placeholder="Enter amount" step={0.01} min={0.01} required
-                defaultValue={props.transaction.amount}
-            />
-            <select ref={fromAccountRef} defaultValue={props.transaction.fromAccountId}>
-                {accounts.map(({id, name}) => (
-                    <option key={id} value={id}>{name}</option>
-                ))}
-            </select>
-            <select ref={toAccountRef} defaultValue={props.transaction.toAccountId}>
-                {accounts.map(({id, name}) => (
-                    <option key={id} value={id}>{name}</option>
-                ))}
-            </select>
-            <select ref={tagsRef} multiple defaultValue={existingTags.map((tag) => tag.toString())}>
-                {tags.map(({id, name}) => (
-                    <option key={id} value={id}>{name}</option>
-                ))}
-            </select>
-            <button>Save</button>
-            <button type="button" onClick={() => setEditing(false)}>Cancel</button>
-        </form>
+        <TransactionForm
+            onSubmit={saveTransaction}
+            onCancel={() => setEditing(false)}
+            transaction={props.transaction}
+        />
     ) : (
         <div>
             {props.transaction.description} on {props.transaction.date.toString()}
             from {props.transaction.fromAccount.name} to {props.transaction.toAccount.name}
             worth {props.transaction.amount}
-            <button onClick={() => setEditing(true)}>Edit</button>
-            <button onClick={() => deleteTransaction(props.transaction.id)}>Delete</button>
+            <Button variant="filled" color="primary" onClick={() => setEditing(true)}>Edit</Button>
+            <Button variant="filled" color="danger" onClick={() => deleteTransaction(props.transaction.id)}>Delete</Button>
             <div>
                 {props.transaction.tags.map(({tag}) => `#${tag.name}`).join(' ')}
             </div>
