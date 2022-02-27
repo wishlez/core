@@ -17,6 +17,7 @@ const _Select = styled.select`
 const InputContainer = styled(InputInteractive.withComponent(Box))<WithInputError>`
     display: flex;
     flex-wrap: wrap;
+    padding: 0;
 
     &:focus-within {
         ${inputFocusStyles}
@@ -28,11 +29,12 @@ const Input = styled.input`
     background-color: var(--mono-900);
     flex-grow: 1;
     outline: none;
+    padding: var(--control-padding);
 `;
 
 const Badge = styled(Box)`
     background-color: var(--mono-800);
-    margin-right: var(--grid-gap);
+    margin: calc(var(--grid-gap) / 2);
     padding: 0.25em var(--control-padding-x);
     cursor: pointer;
     user-select: none;
