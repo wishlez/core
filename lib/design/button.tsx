@@ -7,10 +7,15 @@ export const Button = styled.button<WithColorVariant>`
     background-color: unset;
     border-radius: var(--border-radius);
     cursor: pointer;
+    display: inline-flex;
     font-variant: small-caps;
+    justify-content: center;
+    align-items: center;
+    line-height: 1.5em;
     padding: var(--control-padding);
     text-transform: capitalize;
     transition: var(--transition);
+    vertical-align: middle;
 
     ${withColor}
 
