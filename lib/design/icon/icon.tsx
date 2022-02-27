@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 type Props = {
-    type: 'add'
+    type: 'add' | 'create' | 'delete'
 }
 
 export const Icon = styled.i<Props>`
