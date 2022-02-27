@@ -4,6 +4,7 @@ import {Box} from './box';
 
 type Props = {
     isOpen: boolean
+    onClose?: () => void
 }
 
 const FullScreen = styled(Box)`
@@ -44,7 +45,7 @@ const Backdrop = styled(FullScreen)`
 
 export const Modal: FunctionComponent<Props> = (props) => props.isOpen && (
     <ModalContainer>
-        <Backdrop/>
+        <Backdrop onClick={props.onClose}/>
         <ModalContent>
             {props.children}
         </ModalContent>
