@@ -7,7 +7,7 @@ export const Button = styled.button<WithColorVariant>`
     border-radius: var(--border-radius);
     cursor: pointer;
     font-variant: small-caps;
-    padding: var(--padding);
+    padding: var(--control-padding);
     text-transform: capitalize;
     transition: var(--transition);
 

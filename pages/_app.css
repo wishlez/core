@@ -20,10 +20,13 @@
 
 /* Misc */
 :root {
-    --padding: .75em 1.25em;
     --transition: all .3s ease-in-out;
     --body-background: #f8f9f0;
     --grid-gap: .75em;
+    --control-padding: var(--control-padding-y) var(--control-padding-x);
+    --uniform-padding: 1.25em;
+    --control-padding-x: 1.25em;
+    --control-padding-y: .75em;
     --border-radius: 2px;
 }
 
@@ -42,21 +45,21 @@
 
 /* Gray */
 :root {
-    --gray-100: #111111;
-    --gray-200: #2e2e2d;
-    --gray-300: #4b4b49;
-    --gray-400: #686865;
-    --gray-500: #858581;
-    --gray-600: #a1a29c;
-    --gray-700: #bebfb8;
-    --gray-800: #dbdcd4;
-    --gray-900: #f8f9f0;
+    --mono-100: var(--core-100);
+    --mono-200: #2e2e2d;
+    --mono-300: #4b4b49;
+    --mono-400: #686865;
+    --mono-500: #858581;
+    --mono-600: #a1a29c;
+    --mono-700: #bebfb8;
+    --mono-800: #dbdcd4;
+    --mono-900: var(--core-900);
 }
 
 /* Alert */
 :root {
-    --alert-error-500: #da1e28;
     --alert-error-400: #a4171e;
+    --alert-error-500: #da1e28;
     --alert-info-500: #fddc69;
     --alert-success-500: #198038;
     --alert-warning-500: #ff832b;
