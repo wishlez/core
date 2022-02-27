@@ -30,7 +30,6 @@ export const TransactionCreate: FunctionComponent<Props> = (props) => {
             </Fab>
             <Modal isOpen={isOpen} onClose={closeModal}>
                 <TransactionForm
-                    clearFormOnSave
                     onSubmit={createTransaction}
                     onCancel={closeModal}
                     title={'Create new transaction'}

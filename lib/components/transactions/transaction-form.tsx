@@ -15,7 +15,6 @@ import {doGet} from '../../fetch';
 import {swrKeys} from '../swr-keys';
 
 type Props = {
-    clearFormOnSave?: true
     onCancel?: () => void
     onSubmit?: (transaction: TransactionRequest) => void
     transaction?: Transaction
@@ -34,19 +33,6 @@ export const TransactionForm: FunctionComponent<Props> = (props) => {
 
     const existingTags = props.transaction?.tags.map((transactionTag) => transactionTag.tagId.toString());
 
-    const clearForm = () => {
-        if (props.clearFormOnSave) {
-            descriptionRef.current.value = '';
-            dateRef.current.value = '';
-            amountRef.current.value = '';
-            fromAccountRef.current.value = '';
-            toAccountRef.current.value = '';
-            tagsRef.current.value = '';
-
-            descriptionRef.current?.focus();
-        }
-    };
-
     const createTransaction = async (event: FormEvent) => {
         event.preventDefault();
 
@@ -58,12 +44,9 @@ export const TransactionForm: FunctionComponent<Props> = (props) => {
             toAccountId: Number(toAccountRef.current.value),
             tags: Array.from(tagsRef.current.selectedOptions, (option) => Number(option.value))
         });
-
-        clearForm();
     };
 
     const cancel = () => {
-        clearForm();
         props.onCancel?.();
     };
 
