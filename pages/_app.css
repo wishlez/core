@@ -14,6 +14,13 @@
     url('/fonts/Montserrat-Regular.woff2') format('woff2');
 }
 
+@font-face {
+    font-family: 'Material Icons';
+    font-weight: normal;
+    src: url('/fonts/MaterialIconsSharp-Regular.otf') format('opentype'),
+    url('/fonts/MaterialIconsSharp-Regular.woff2') format('woff2');
+}
+
 :root {
     font-family: Montserrat, sans-serif;
 }
