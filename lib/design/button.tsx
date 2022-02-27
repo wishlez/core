@@ -1,5 +1,6 @@
 import styled, {css} from 'styled-components';
 import {WithColorVariant} from '../../types/variants';
+import {withColor} from './helpers/with-color';
 
 export const Button = styled.button<WithColorVariant>`
     border: none;
@@ -11,23 +12,22 @@ export const Button = styled.button<WithColorVariant>`
     text-transform: capitalize;
     transition: var(--transition);
 
+    ${withColor}
+
     ${(props) => {
         switch (props.color) {
             case 'primary':
                 return css`
-                    --primary-color: var(--core-500);
                     --text-color: var(--core-900);
                     --active-primary-color: var(--core-400);
                 `;
             case 'secondary':
                 return css`
-                    --primary-color: var(--core-300);
                     --text-color: var(--core-800);
                     --active-primary-color: var(--core-200);
                 `;
             case 'danger':
                 return css`
-                    --primary-color: var(--alert-error-500);
                     --text-color: var(--core-900);
                     --active-primary-color: var(--alert-error-400);
                 `;
@@ -38,8 +38,8 @@ export const Button = styled.button<WithColorVariant>`
         switch (props.variant) {
             case 'filled':
                 return css`
-                    background-color: var(--primary-color);
-                    border: 1px solid var(--primary-color);
+                    background-color: var(--with-color);
+                    border: 1px solid var(--with-color);
                     color: var(--text-color);
 
                     &:hover {
@@ -50,7 +50,7 @@ export const Button = styled.button<WithColorVariant>`
                 return css`
                     background-color: transparent;
                     border: 1px solid transparent;
-                    color: var(--primary-color);
+                    color: var(--with-color);
 
                     &:hover {
                         color: var(--active-primary-color);
@@ -59,8 +59,8 @@ export const Button = styled.button<WithColorVariant>`
             case 'outlined':
                 return css`
                     background-color: transparent;
-                    border: 1px solid var(--primary-color);
-                    color: var(--primary-color);
+                    border: 1px solid var(--with-color);
+                    color: var(--with-color);
 
                     &:hover {
                         border-color: var(--active-primary-color);

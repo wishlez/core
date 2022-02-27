@@ -1,23 +1,14 @@
-import styled, {css} from 'styled-components';
+import styled from 'styled-components';
 import {WithColor} from '../../types/variants';
+import {withColor} from './helpers/with-color';
 
 export const Note = styled.div<WithColor>`
     font-size: .85em;
+    color: var(--with-color);
 
-    ${(props) => {
-        switch (props.color) {
-            case 'primary' :
-                return css`
-                    color: var(--core-100);
-                `
-            case 'secondary' :
-                return css`
-                    color: var(--core-300);
-                `
-            case 'danger':
-                return css`
-                    color: var(--alert-error-500)
-                `;
-        }
-    }}
+    ${withColor}
 `;
+
+Note.defaultProps = {
+    color: 'secondary'
+};
