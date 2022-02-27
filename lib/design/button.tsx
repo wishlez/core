@@ -1,8 +1,11 @@
 import styled, {css} from 'styled-components';
-import {WithColorVariant} from '../../types/variant';
-import {withColor} from './helpers/with-color';
+import {WithVariant} from '../../types/variant';
+import {WithColor, withColor} from './helpers/with-color';
+import {withSize, WithSize} from './helpers/with-size';
 
-export const Button = styled.button<WithColorVariant>`
+type Props = WithColor & WithSize & WithVariant
+
+export const Button = styled.button<Props>`
     border: none;
     background-color: unset;
     border-radius: var(--border-radius);
@@ -12,12 +15,12 @@ export const Button = styled.button<WithColorVariant>`
     justify-content: center;
     align-items: center;
     line-height: 1.5em;
-    padding: var(--control-padding);
     text-transform: capitalize;
     transition: var(--transition);
     vertical-align: middle;
 
     ${withColor}
+    ${withSize}
 
     ${(props) => {
         switch (props.variant) {
@@ -58,5 +61,6 @@ export const Button = styled.button<WithColorVariant>`
 
 Button.defaultProps = {
     color: 'primary',
-    variant: 'filled'
+    variant: 'filled',
+    size: 'comfortable'
 };
