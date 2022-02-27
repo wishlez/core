@@ -3,13 +3,13 @@ import {FunctionComponent} from 'react';
 import useSWR, {SWRConfig, useSWRConfig} from 'swr';
 import {authenticated} from '../../lib/auth/ss-auth';
 import {getUser} from '../../lib/auth/ss-user';
+import {swrKeys} from '../../lib/components/swr-keys';
 import {TransactionCreate} from '../../lib/components/transactions/transaction-create';
 import {TransactionItem} from '../../lib/components/transactions/transaction-item';
-import {swrKeys} from '../../lib/components/swr-keys';
 import {doGet} from '../../lib/fetch';
 import {getTransactions} from '../../lib/services/transactions';
-import {WithTransactions} from '../../types/transactions';
 import {AnyObject} from '../../types/object';
+import {WithTransactions} from '../../types/transactions';
 
 type Props = {
     fallback: AnyObject
@@ -23,7 +23,6 @@ const Transactions: FunctionComponent<Props> = ({fallback}) => {
 
     return (
         <SWRConfig value={{fallback}}>
-            <TransactionCreate onCreate={refresh}/>
             {error && 'Failed to load transactions'}
             {data && data.transactions.map((transaction) => (
                 <TransactionItem
@@ -33,6 +32,7 @@ const Transactions: FunctionComponent<Props> = ({fallback}) => {
                     onDelete={refresh}
                 />
             ))}
+            <TransactionCreate onCreate={refresh}/>
         </SWRConfig>
     );
 };
