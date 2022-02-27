@@ -15,35 +15,15 @@ export const Button = styled.button<WithColorVariant>`
     ${withColor}
 
     ${(props) => {
-        switch (props.color) {
-            case 'primary':
-                return css`
-                    --text-color: var(--core-900);
-                    --active-primary-color: var(--core-400);
-                `;
-            case 'secondary':
-                return css`
-                    --text-color: var(--core-800);
-                    --active-primary-color: var(--core-200);
-                `;
-            case 'danger':
-                return css`
-                    --text-color: var(--core-900);
-                    --active-primary-color: var(--alert-error-400);
-                `;
-        }
-    }}
-
-    ${(props) => {
         switch (props.variant) {
             case 'filled':
                 return css`
                     background-color: var(--with-color);
                     border: 1px solid var(--with-color);
-                    color: var(--text-color);
+                    color: var(--with-text-color);
 
                     &:hover {
-                        background-color: var(--active-primary-color);
+                        background-color: var(--with-active-color);
                     }
                 `;
             case 'text':
@@ -53,7 +33,7 @@ export const Button = styled.button<WithColorVariant>`
                     color: var(--with-color);
 
                     &:hover {
-                        color: var(--active-primary-color);
+                        color: var(--with-active-color);
                     }
                 `;
             case 'outlined':
@@ -63,8 +43,8 @@ export const Button = styled.button<WithColorVariant>`
                     color: var(--with-color);
 
                     &:hover {
-                        border-color: var(--active-primary-color);
-                        color: var(--active-primary-color);
+                        border-color: var(--with-active-color);
+                        color: var(--with-active-color);
                     }
                 `;
         }
