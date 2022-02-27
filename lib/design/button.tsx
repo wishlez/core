@@ -38,7 +38,7 @@ export const Button = styled.button<WithColorVariant>`
                 `;
             case 'outlined':
                 return css`
-                    background-color: transparent;
+                    background-color: var(--core-900);
                     border: 1px solid var(--with-color);
                     color: var(--with-color);
 
