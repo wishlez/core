@@ -1,10 +1,11 @@
 import type {Transaction as PrismaTransaction, TransactionTag as PrismaTransactionTag} from '@prisma/client';
 import {Account} from './accounts';
 import {WithTag} from './categories';
+import {AnyObject} from './object';
 
 export type TransactionTag = WithTag<PrismaTransactionTag>;
 
-export type Transaction = Omit<Omit<PrismaTransaction, 'amount'>, 'date'> & {
+export type Transaction = Omit<PrismaTransaction, 'amount' | 'date'> & {
     amount: number,
     date: string,
     fromAccount?: Account
@@ -12,6 +13,6 @@ export type Transaction = Omit<Omit<PrismaTransaction, 'amount'>, 'date'> & {
     tags?: TransactionTag[]
 };
 
-export type WithTransactions = {
+export type WithTransactions<P = AnyObject> = P & {
     transactions: Transaction[]
 }
