@@ -5,8 +5,18 @@ const FormContext = createContext<MutableRefObject<HTMLFormElement>>(null);
 
 const _Form = styled.form`
     display: grid;
-    grid-gap: var(--grid-gap);
+    grid-gap: calc(var(--grid-gap) * 3);
     padding: var(--uniform-padding);
+    grid-template-areas:
+        "title"
+        "fields"
+        "actions";
+    grid-template-rows: auto 1fr auto;
+    height: 100%;
+
+    @media (min-width: 480px) {
+        height: auto;
+    }
 `;
 
 export const useForm = () => useContext(FormContext);
