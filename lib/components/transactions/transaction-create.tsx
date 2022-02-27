@@ -16,6 +16,7 @@ export const TransactionCreate: FunctionComponent<Props> = (props) => {
     const createTransaction = async (transaction: TransactionRequest) => {
         await doPost('/api/transactions', transaction);
 
+        setIsOpen(false);
         props.onCreate();
     };
 
