@@ -1,5 +1,10 @@
 import {AnyObject} from './object';
 
+export type Option = {
+    label: string
+    value: string
+}
+
 export type WithInputProps<P = AnyObject> = P & {
     label?: string
     note?: string
