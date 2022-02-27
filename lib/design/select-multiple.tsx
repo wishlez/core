@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import {Option, WithInputError, WithInputProps} from '../../types/input';
 import {getRandomId} from '../randomizer';
 import {Box} from './box';
+import {useForm} from './form';
 import {inputFocusStyles, InputInteractive} from './input';
 import {Label} from './label';
 import {Note} from './note';
@@ -55,12 +56,20 @@ export const SelectMultiple = forwardRef<HTMLSelectElement, Props>(({label, note
     const [invalid, setInvalid] = useState<boolean>(false);
     const [selectedIds, setSelectedIds] = useState<string[]>(props.defaultValue as string [] || []);
     const inputRef = useRef<HTMLInputElement>();
-
-    console.log(options);
+    const formRef = useForm();
 
     useEffect(() => {
         setOptions(getOptions(props.children));
     }, [props.children]);
+
+    useEffect(() => {
+        const handleReset = () => setSelectedIds([]);
+        const current = formRef?.current;
+
+        current?.addEventListener('reset', handleReset);
+
+        return () => current?.removeEventListener('reset', handleReset);
+    }, [formRef]);
 
     const handleInvalid = (event: FormEvent<HTMLSelectElement>) => {
         event.preventDefault();
