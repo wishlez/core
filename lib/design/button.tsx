@@ -1,5 +1,5 @@
 import styled, {css} from 'styled-components';
-import {WithColorVariant} from '../../types/variants';
+import {WithColorVariant} from '../../types/variant';
 import {withColor} from './helpers/with-color';
 
 export const Button = styled.button<WithColorVariant>`

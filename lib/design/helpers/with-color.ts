@@ -1,5 +1,11 @@
 import {css} from 'styled-components';
-import {WithColor} from '../../../types/variants';
+import {AnyObject} from '../../../types/object';
+
+export type Color = 'primary' | 'secondary' | 'danger'
+
+export type WithColor<P = AnyObject> = P & {
+    color?: Color
+}
 
 export const withColor = (props: WithColor) => {
     switch (props.color) {
@@ -13,7 +19,7 @@ export const withColor = (props: WithColor) => {
             `;
         case 'danger':
             return css`
-                --with-color: var(--alert-error-500)
+                --with-color: var(--alert-error-500);
             `;
     }
 };
