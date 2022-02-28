@@ -1,4 +1,4 @@
-import {AnyObject} from './object';
+import {AnyObject} from '../../../types/object';
 
 export type Variant = 'text' | 'outlined' | 'filled'
 

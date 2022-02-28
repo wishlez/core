@@ -1,7 +1,7 @@
 import {FunctionComponent, useState} from 'react';
 import {TransactionRequest} from '../../../types/transactions';
 import {Fab} from '../../design/fab';
-import {Icon} from '../../design/icon/icon';
+import {Icon} from '../../design/icon';
 import {Modal} from '../../design/modal';
 import {doPost} from '../../fetch';
 import {TransactionForm} from './transaction-form';

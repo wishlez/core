@@ -1,7 +1,7 @@
 import {FunctionComponent, useState} from 'react';
 import {Transaction, TransactionRequest} from '../../../types/transactions';
 import {Button} from '../../design/button';
-import {Icon} from '../../design/icon/icon';
+import {Icon} from '../../design/icon';
 import {Modal} from '../../design/modal';
 import {doPut} from '../../fetch';
 import {swrKeys} from '../swr-keys';

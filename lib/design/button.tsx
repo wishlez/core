@@ -1,5 +1,5 @@
 import styled, {css} from 'styled-components';
-import {WithVariant} from '../../types/variant';
+import {WithVariant} from './helpers/with-variant';
 import {WithColor, withColor} from './helpers/with-color';
 import {withSize, WithSize} from './helpers/with-size';
 
