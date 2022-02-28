@@ -2,6 +2,7 @@ import {ChangeEvent, FormEvent, forwardRef, KeyboardEvent, ReactNode, SelectHTML
 import styled from 'styled-components';
 import {Option, WithInputError, WithInputProps} from '../../types/input';
 import {getRandomId} from '../randomizer';
+import {Badge} from './badge';
 import {Box} from './box';
 import {useForm} from './form';
 import {inputFocusStyles, InputInteractive} from './input';
@@ -30,19 +31,6 @@ const Input = styled.input`
     flex-grow: 1;
     outline: none;
     padding: var(--control-padding);
-`;
-
-const Badge = styled(Box)`
-    background-color: var(--mono-800);
-    margin: var(--grid-gap-small);
-    padding: var(--control-padding-cozy);
-    cursor: pointer;
-    user-select: none;
-    transition: var(--transition);
-
-    &:hover {
-        background-color: var(--mono-700);
-    }
 `;
 
 const getOptions = (children: ReactNode): Option[] => [].concat(children).map((child) => ({
