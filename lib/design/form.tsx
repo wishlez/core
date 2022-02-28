@@ -5,7 +5,7 @@ const FormContext = createContext<MutableRefObject<HTMLFormElement>>(null);
 
 const _Form = styled.form`
     display: grid;
-    grid-gap: calc(var(--grid-gap) * 3);
+    grid-gap: var(--grid-gap-large);
     padding: var(--uniform-padding);
     grid-template-areas:
         "title"

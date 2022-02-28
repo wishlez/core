@@ -32,7 +32,7 @@ const ModalContent = styled(Box)`
     position: relative;
 
     @media (min-width: 480px) {
-        box-shadow: var(--box-shadow-1);
+        box-shadow: var(--box-shadow-2);
         height: auto;
         max-width: 500px;
     }

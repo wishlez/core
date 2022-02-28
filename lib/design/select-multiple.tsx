@@ -34,7 +34,7 @@ const Input = styled.input`
 
 const Badge = styled(Box)`
     background-color: var(--mono-800);
-    margin: calc(var(--grid-gap) / 2);
+    margin: var(--grid-gap-small);
     padding: var(--control-padding-compact);
     cursor: pointer;
     user-select: none;
