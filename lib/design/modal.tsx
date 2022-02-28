@@ -1,6 +1,7 @@
 import {FunctionComponent} from 'react';
 import styled from 'styled-components';
 import {Box} from './box';
+import {Portal} from './portal';
 
 type Props = {
     isOpen: boolean
@@ -29,7 +30,6 @@ const ModalContent = styled(Box)`
     height: 100vh;
     width: 100vw;
     position: relative;
-    z-index: 1;
 
     @media (min-width: 480px) {
         box-shadow: var(--box-shadow-1);
@@ -44,10 +44,12 @@ const Backdrop = styled(FullScreen)`
 `;
 
 export const Modal: FunctionComponent<Props> = (props) => props.isOpen && (
-    <ModalContainer>
-        <Backdrop onClick={props.onClose}/>
-        <ModalContent>
-            {props.children}
-        </ModalContent>
-    </ModalContainer>
+    <Portal>
+        <ModalContainer>
+            <Backdrop onClick={props.onClose}/>
+            <ModalContent>
+                {props.children}
+            </ModalContent>
+        </ModalContainer>
+    </Portal>
 );
