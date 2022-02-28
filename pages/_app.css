@@ -1,9 +1,9 @@
 @font-face {
     font-family: 'Montserrat';
     font-weight: bold;
-    src: url('/fonts/Montserrat-SemiBold.ttf') format('truetype'),
-    url('/fonts/Montserrat-SemiBold.woff') format('woff'),
-    url('/fonts/Montserrat-SemiBold.woff2') format('woff2');
+    src: url('/fonts/Montserrat-Medium.ttf') format('truetype'),
+    url('/fonts/Montserrat-Medium.woff') format('woff'),
+    url('/fonts/Montserrat-Medium.woff2') format('woff2');
 }
 
 @font-face {
