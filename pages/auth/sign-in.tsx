@@ -1,9 +1,9 @@
 import {getCsrfToken} from 'next-auth/react';
-import Head from 'next/head';
 import Link from 'next/link';
 import {FunctionComponent} from 'react';
 import {useAuthError} from '../../lib/auth/cs-auth-error';
 import {unauthenticated} from '../../lib/auth/ss-auth';
+import {PageTitle} from '../../lib/components/page-title';
 import styles from './auth.module.css';
 
 type Props = {
@@ -15,9 +15,7 @@ const SignIn: FunctionComponent<Props> = ({csrfToken}) => {
 
     return (
         <>
-            <Head>
-                <title>Wishlez | Sign In</title>
-            </Head>
+            <PageTitle title="Sign In"/>
             <div>
                 <form action={'/api/auth/callback/credentials'} method="post">
                     <input type="hidden" name="csrfToken" value={csrfToken} required/>

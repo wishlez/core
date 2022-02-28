@@ -6,6 +6,7 @@ import {getUser} from '../../lib/auth/ss-user';
 import {Nav} from '../../lib/components/categories/nav';
 import {TagCreateForm} from '../../lib/components/categories/tag-create-form';
 import {TagItem} from '../../lib/components/categories/tag-item';
+import {PageTitle} from '../../lib/components/page-title';
 import {swrKeys} from '../../lib/components/swr-keys';
 import {doGet} from '../../lib/fetch';
 import {getTags} from '../../lib/services/categories/tags';
@@ -24,6 +25,7 @@ const Tags: FunctionComponent<Props> = ({fallback}) => {
 
     return (
         <SWRConfig value={{fallback}}>
+            <PageTitle title="Categories - Tags"/>
             <Nav/>
             <TagCreateForm onCreate={refresh}/>
             {error && 'Failed to load tags'}

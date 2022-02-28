@@ -5,6 +5,7 @@ import {authenticated} from '../../lib/auth/ss-auth';
 import {getUser} from '../../lib/auth/ss-user';
 import {AccountCreateForm} from '../../lib/components/accounts/account-create-form';
 import {AccountItem} from '../../lib/components/accounts/account-item';
+import {PageTitle} from '../../lib/components/page-title';
 import {swrKeys} from '../../lib/components/swr-keys';
 import {doGet} from '../../lib/fetch';
 import {getAccounts} from '../../lib/services/accounts';
@@ -23,6 +24,7 @@ const Accounts: FunctionComponent<Props> = ({fallback}) => {
 
     return (
         <SWRConfig value={{fallback}}>
+            <PageTitle title="Accounts"/>
             <AccountCreateForm onCreate={refresh}/>
             {error && 'Failed to load accounts'}
             {data && data.accounts.map((account) => (

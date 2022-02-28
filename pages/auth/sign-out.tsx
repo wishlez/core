@@ -2,6 +2,7 @@ import {getCsrfToken} from 'next-auth/react';
 import {useRouter} from 'next/router';
 import {FunctionComponent} from 'react';
 import {authenticated} from '../../lib/auth/ss-auth';
+import {PageTitle} from '../../lib/components/page-title';
 
 type Props = {
     csrfToken: string
@@ -12,6 +13,7 @@ const SignOut: FunctionComponent<Props> = ({csrfToken}) => {
 
     return (
         <form action="/api/auth/signout" method="post">
+            <PageTitle title="Sign Out"/>
             Do you want to sign out?
             <input type="hidden" name="csrfToken" value={csrfToken} required/>
             <button>Continue</button>

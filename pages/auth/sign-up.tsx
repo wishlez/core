@@ -1,8 +1,8 @@
-import Head from 'next/head';
 import Link from 'next/link';
 import {FunctionComponent, useRef} from 'react';
 import {useAuthError} from '../../lib/auth/cs-auth-error';
 import {unauthenticated} from '../../lib/auth/ss-auth';
+import {PageTitle} from '../../lib/components/page-title';
 import styles from './auth.module.css';
 
 const SignUp: FunctionComponent = () => {
@@ -20,11 +20,9 @@ const SignUp: FunctionComponent = () => {
 
     return (
         <>
-            <Head>
-                <title>Wishlez | Sign Up</title>
-            </Head>
+            <PageTitle title="Sign Up"/>
             <div>
-                <form action="/api/auth/sign-up" method="post">
+                <form action="/api/auth/signup" method="post">
                     <label className={styles.label}>
                         Name:
                         <input type="text" name="name" autoFocus required/></label>
