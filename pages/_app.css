@@ -68,6 +68,7 @@
 
 /* Gray */
 :root {
+    --mono-000: #000000;
     --mono-100: var(--core-100);
     --mono-200: #2e2e2d;
     --mono-300: #4b4b49;
@@ -77,6 +78,7 @@
     --mono-700: #bebfb8;
     --mono-800: #dbdcd4;
     --mono-900: var(--core-900);
+    --mono-999: #ffffff;
 }
 
 /* Alert */
