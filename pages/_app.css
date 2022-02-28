@@ -15,6 +15,13 @@
 }
 
 @font-face {
+    font-family: 'CutiveMono';
+    font-weight: normal;
+    src: url('/fonts/CutiveMono-Regular.ttf') format('truetype'),
+    url('/fonts/CutiveMono-Regular.woff2') format('woff2');
+}
+
+@font-face {
     font-family: 'Material Icons';
     font-weight: normal;
     src: url('/fonts/MaterialIconsSharp-Regular.otf') format('opentype'),
