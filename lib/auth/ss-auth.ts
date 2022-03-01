@@ -2,7 +2,7 @@ import {GetServerSideProps, NextApiHandler, NextApiRequest} from 'next';
 import {getSession} from 'next-auth/react';
 import {Auth} from '../../types/auth';
 import {User} from '../../types/user';
-import {unauthorized} from '../handle-error';
+import {unauthorized} from '../helpers/handle-error';
 import {getUser} from './ss-user';
 
 const defaultServerSideProps: GetServerSideProps<any, any, any> = async () => ({

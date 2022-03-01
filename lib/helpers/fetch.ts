@@ -1,4 +1,4 @@
-import {AnyObject} from '../types/object';
+import {AnyObject} from '../../types/object';
 
 type LoadedMethod = 'POST' | 'PUT' | 'PATCH';
 type QueriedMethod = 'GET' | 'DELETE';

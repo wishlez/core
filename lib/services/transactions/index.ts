@@ -1,7 +1,7 @@
 import {Prisma, Transaction as PrismaTransaction} from '@prisma/client';
 import {Transaction} from '../../../types/transactions';
-import {getPrismaClient} from '../../prisma';
-import {toTags} from '../../tags';
+import {getPrismaClient} from '../../helpers/prisma';
+import {toTags} from '../../helpers/tags';
 
 const prisma = getPrismaClient();
 

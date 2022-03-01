@@ -1,7 +1,7 @@
 import {Prisma} from '@prisma/client';
 import {Credentials} from '../../../types/auth';
-import {encryptPassword} from '../../password';
-import {getPrismaClient} from '../../prisma';
+import {encryptPassword} from '../../helpers/password';
+import {getPrismaClient} from '../../helpers/prisma';
 
 const prisma = getPrismaClient();
 

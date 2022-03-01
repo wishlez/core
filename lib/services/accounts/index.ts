@@ -1,6 +1,6 @@
 import {Prisma, Account as PrismaAccount} from '@prisma/client';
 import {Account} from '../../../types/accounts';
-import {getPrismaClient} from '../../prisma';
+import {getPrismaClient} from '../../helpers/prisma';
 
 const prisma = getPrismaClient();
 

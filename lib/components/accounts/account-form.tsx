@@ -9,7 +9,7 @@ import {FormFields} from '../../design/form-fields';
 import {FormTitle} from '../../design/form-title';
 import {Input} from '../../design/input';
 import {SelectSingle} from '../../design/select-single';
-import {doGet} from '../../fetch';
+import {doGet} from '../../helpers/fetch';
 import {swrKeys} from '../swr-keys';
 
 type Props = {

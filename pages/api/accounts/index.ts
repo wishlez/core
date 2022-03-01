@@ -1,7 +1,7 @@
 import {NextApiResponse} from 'next';
 import {authenticatedApi, authorizedApi} from '../../../lib/auth/ss-auth';
-import {buildApiHandler} from '../../../lib/build-api-handler';
-import {badRequest, forbidden, internalServerError} from '../../../lib/handle-error';
+import {buildApiHandler} from '../../../lib/helpers/build-api-handler';
+import {badRequest, forbidden, internalServerError} from '../../../lib/helpers/handle-error';
 import {createAccount, deleteAccount, getAccounts, getAccountUserId, updateAccount} from '../../../lib/services/accounts';
 import {Account, WithAccounts} from '../../../types/accounts';
 

@@ -2,7 +2,7 @@ import {FunctionComponent, useState} from 'react';
 import {Group} from '../../../types/categories';
 import {Button} from '../../design/button';
 import {Icon} from '../../design/icon';
-import {doDelete} from '../../fetch';
+import {doDelete} from '../../helpers/fetch';
 import {ConfirmationModal} from '../confirmation-modal';
 import {swrKeys} from '../swr-keys';
 

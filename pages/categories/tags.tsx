@@ -8,7 +8,7 @@ import {TagCreate} from '../../lib/components/categories/tag-create';
 import {TagItem} from '../../lib/components/categories/tag-item';
 import {PageTitle} from '../../lib/components/page-title';
 import {swrKeys} from '../../lib/components/swr-keys';
-import {doGet} from '../../lib/fetch';
+import {doGet} from '../../lib/helpers/fetch';
 import {getTags} from '../../lib/services/categories/tags';
 import {WithTags} from '../../types/categories';
 import {AnyObject} from '../../types/object';

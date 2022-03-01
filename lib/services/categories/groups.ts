@@ -1,7 +1,7 @@
 import {CategoryGroup, Prisma} from '@prisma/client';
 import {Group} from '../../../types/categories';
-import {getPrismaClient} from '../../prisma';
-import {toTags} from '../../tags';
+import {getPrismaClient} from '../../helpers/prisma';
+import {toTags} from '../../helpers/tags';
 
 const prisma = getPrismaClient();
 

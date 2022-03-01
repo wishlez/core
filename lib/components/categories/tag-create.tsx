@@ -3,7 +3,7 @@ import {TagRequest} from '../../../types/categories';
 import {Fab} from '../../design/fab';
 import {Icon} from '../../design/icon';
 import {Modal} from '../../design/modal';
-import {doPost} from '../../fetch';
+import {doPost} from '../../helpers/fetch';
 import {TagForm} from './tag-form';
 
 type Props = {

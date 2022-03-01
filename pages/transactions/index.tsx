@@ -7,7 +7,7 @@ import {PageTitle} from '../../lib/components/page-title';
 import {swrKeys} from '../../lib/components/swr-keys';
 import {TransactionCreate} from '../../lib/components/transactions/transaction-create';
 import {TransactionItem} from '../../lib/components/transactions/transaction-item';
-import {doGet} from '../../lib/fetch';
+import {doGet} from '../../lib/helpers/fetch';
 import {getTransactions} from '../../lib/services/transactions';
 import {AnyObject} from '../../types/object';
 import {WithTransactions} from '../../types/transactions';

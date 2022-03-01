@@ -1,10 +1,10 @@
 import {FunctionComponent, useState} from 'react';
 import {Group, GroupRequest} from '../../../types/categories';
-import {getAdjustedTags, toTagIds} from '../../tags';
+import {getAdjustedTags, toTagIds} from '../../helpers/tags';
 import {Button} from '../../design/button';
 import {Icon} from '../../design/icon';
 import {Modal} from '../../design/modal';
-import {doPut} from '../../fetch';
+import {doPut} from '../../helpers/fetch';
 import {swrKeys} from '../swr-keys';
 import {GroupForm} from './group-form';
 

@@ -3,7 +3,7 @@ import {Tag, TagRequest} from '../../../types/categories';
 import {Button} from '../../design/button';
 import {Icon} from '../../design/icon';
 import {Modal} from '../../design/modal';
-import {doPut} from '../../fetch';
+import {doPut} from '../../helpers/fetch';
 import {swrKeys} from '../swr-keys';
 import {TagForm} from './tag-form';
 

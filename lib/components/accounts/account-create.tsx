@@ -3,7 +3,7 @@ import {AccountRequest} from '../../../types/accounts';
 import {Fab} from '../../design/fab';
 import {Icon} from '../../design/icon';
 import {Modal} from '../../design/modal';
-import {doPost} from '../../fetch';
+import {doPost} from '../../helpers/fetch';
 import {AccountForm} from './account-form';
 
 type Props = {

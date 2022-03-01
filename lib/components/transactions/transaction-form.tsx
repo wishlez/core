@@ -12,7 +12,7 @@ import {toSelectedIds} from '../../design/helpers/selected-ids';
 import {Input} from '../../design/input';
 import {SelectMultiple} from '../../design/select-multiple';
 import {SelectSingle} from '../../design/select-single';
-import {doGet} from '../../fetch';
+import {doGet} from '../../helpers/fetch';
 import {swrKeys} from '../swr-keys';
 
 type Props = {

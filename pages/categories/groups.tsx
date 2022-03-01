@@ -8,7 +8,7 @@ import {GroupItem} from '../../lib/components/categories/group-item';
 import {Nav} from '../../lib/components/categories/nav';
 import {PageTitle} from '../../lib/components/page-title';
 import {swrKeys} from '../../lib/components/swr-keys';
-import {doGet} from '../../lib/fetch';
+import {doGet} from '../../lib/helpers/fetch';
 import {getGroups} from '../../lib/services/categories/groups';
 import {WithGroups} from '../../types/categories';
 import {AnyObject} from '../../types/object';

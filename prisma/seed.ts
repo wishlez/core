@@ -1,4 +1,4 @@
-import {getPrismaClient} from '../lib/prisma';
+import {getPrismaClient} from '../lib/helpers/prisma';
 import {AccountTypes} from '../types/account-types';
 
 const prisma = getPrismaClient();
