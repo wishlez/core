@@ -12,7 +12,7 @@ CREATE TABLE `CategoryTag` (
 CREATE TABLE `CategoryGroup` (
     `id` INTEGER NOT NULL AUTO_INCREMENT,
     `name` VARCHAR(256) NOT NULL,
-    `budget` DOUBLE NOT NULL DEFAULT 0,
+    `budget` DECIMAL(10, 2) NOT NULL DEFAULT 0,
     `userId` INTEGER NOT NULL,
 
     UNIQUE INDEX `CategoryGroup_name_key`(`name`),
