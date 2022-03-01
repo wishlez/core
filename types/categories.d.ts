@@ -13,6 +13,10 @@ export type WithTags<P = AnyObject> = P & {
 
 export type Group = CategoryGroup
 
+export type GroupRequest = Omit<CategoryGroup, 'id' | 'userId'> & {
+    id?: number
+};
+
 export type TagGroup = Group & {
     tags: { tag: Tag }[]
 }

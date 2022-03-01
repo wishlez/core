@@ -1,47 +1,23 @@
-import {FormEvent, FunctionComponent, useRef, useState} from 'react';
+import {FunctionComponent, useState} from 'react';
 import {TagGroup} from '../../../types/categories';
-import {doDelete, doPut} from '../../fetch';
-import {swrKeys} from '../swr-keys';
+import {GroupDelete} from './group-delete';
+import {GroupEdit} from './group-edit';
 import {TagGroups} from './tag-groups';
 
 type Props = {
     group: TagGroup
-    onEdit: () => void
-    onDelete: () => void
+    onUpdate: () => void
 }
 
 export const GroupItem: FunctionComponent<Props> = (props) => {
-    const nameRef = useRef<HTMLInputElement>();
-    const [editing, setEditing] = useState<boolean>(false);
     const [tagging, setTagging] = useState<boolean>(false);
-
-    const deleteGroup = async (id: number) => {
-        await doDelete(swrKeys.categories.groups, {id});
-        props.onDelete();
-    };
-
-    const saveGroup = async (event: FormEvent) => {
-        event.preventDefault();
-        await doPut(swrKeys.categories.groups, {
-            ...props.group,
-            name: nameRef.current.value
-        });
-        setEditing(false);
-        props.onEdit();
-    };
 
     const refreshTags = () => {
         setTagging(false);
-        props.onEdit();
+        props.onUpdate();
     };
 
-    return editing ? (
-        <form onSubmit={saveGroup}>
-            <input ref={nameRef} defaultValue={props.group.name}/>
-            <button>Save</button>
-            <button type="button" onClick={() => setEditing(false)}>Cancel</button>
-        </form>
-    ) : (
+    return (
         <div>
             {props.group.name}
             {tagging ? (
@@ -53,8 +29,8 @@ export const GroupItem: FunctionComponent<Props> = (props) => {
                 />
             ) : (
                 <>
-                    <button onClick={() => setEditing(true)}>Edit</button>
-                    <button onClick={() => deleteGroup(props.group.id)}>Delete</button>
+                    <GroupEdit group={props.group} onSave={props.onUpdate}/>
+                    <GroupDelete group={props.group} onDelete={props.onUpdate}/>
                     <button onClick={() => setTagging(true)}>Edit tags</button>
                     <div>
                         {props.group.tags.map(({tag}) => `#${tag.name}`).join(' ')}

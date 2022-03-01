@@ -3,7 +3,7 @@ import {FunctionComponent} from 'react';
 import useSWR, {SWRConfig, useSWRConfig} from 'swr';
 import {authenticated} from '../../lib/auth/ss-auth';
 import {getUser} from '../../lib/auth/ss-user';
-import {GroupCreateForm} from '../../lib/components/categories/group-create-form';
+import {GroupCreate} from '../../lib/components/categories/group-create';
 import {GroupItem} from '../../lib/components/categories/group-item';
 import {Nav} from '../../lib/components/categories/nav';
 import {PageTitle} from '../../lib/components/page-title';
@@ -27,14 +27,13 @@ const Groups: FunctionComponent<Props> = ({fallback}) => {
         <SWRConfig value={{fallback}}>
             <PageTitle title="Categories - Groups"/>
             <Nav/>
-            <GroupCreateForm onCreate={refresh}/>
+            <GroupCreate onCreate={refresh}/>
             {error && 'Failed to load groups'}
             {data && data.groups.map((group) => (
                 <GroupItem
                     group={group}
                     key={group.id}
-                    onEdit={refresh}
-                    onDelete={refresh}
+                    onUpdate={refresh}
                 />
             ))}
         </SWRConfig>
