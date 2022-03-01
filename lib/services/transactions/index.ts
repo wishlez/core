@@ -1,6 +1,7 @@
 import {Prisma, Transaction as PrismaTransaction} from '@prisma/client';
 import {Transaction} from '../../../types/transactions';
 import {getPrismaClient} from '../../prisma';
+import {toTags} from '../../tags';
 
 const prisma = getPrismaClient();
 
@@ -42,9 +43,7 @@ export const createTransaction = async (data: Prisma.TransactionUncheckedCreateI
         ...data,
         tags: {
             createMany: {
-                data: tags.map((tagId) => ({
-                    tagId
-                }))
+                data: toTags(tags)
             }
         }
     }
@@ -66,9 +65,7 @@ export const updateTransaction = async (data: Prisma.TransactionUncheckedUpdateI
                 }
             },
             createMany: {
-                data: addedTags.map((tagId) => ({
-                    tagId
-                }))
+                data: toTags(addedTags)
             }
         }
     },

@@ -3,11 +3,11 @@ import {Account} from './accounts';
 import {WithTag} from './categories';
 import {AnyObject} from './object';
 
-export type TransactionTag = WithTag<PrismaTransactionTag>;
+type TransactionTag = WithTag<PrismaTransactionTag>;
 
 export type Transaction = Omit<PrismaTransaction, 'amount' | 'date'> & {
-    amount: number,
-    date: string,
+    amount: number
+    date: string
     fromAccount?: Account
     toAccount?: Account
     tags?: TransactionTag[]
@@ -18,8 +18,8 @@ export type WithTransactions<P = AnyObject> = P & {
 }
 
 export type TransactionRequest = Omit<PrismaTransaction, 'amount' | 'date' | 'id' | 'userId'> & {
-    id?: number,
-    amount: number,
-    date: Date,
+    id?: number
+    amount: number
+    date: Date
     tags: number[]
 }

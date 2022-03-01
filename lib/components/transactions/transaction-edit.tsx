@@ -1,5 +1,6 @@
 import {FunctionComponent, useState} from 'react';
 import {Transaction, TransactionRequest} from '../../../types/transactions';
+import {getAdjustedTags, toTagIds} from '../../tags';
 import {Button} from '../../design/button';
 import {Icon} from '../../design/icon';
 import {Modal} from '../../design/modal';
@@ -14,7 +15,7 @@ type Props = {
 
 export const TransactionEdit: FunctionComponent<Props> = (props) => {
     const [isOpen, setIsOpen] = useState<boolean>(false);
-    const existingTags = props.transaction.tags.map((transactionTag) => transactionTag.tagId);
+    const existingTags = toTagIds(props.transaction.tags);
 
     const openModal = () => setIsOpen(true);
     const closeModal = () => setIsOpen(false);
@@ -23,10 +24,7 @@ export const TransactionEdit: FunctionComponent<Props> = (props) => {
         await doPut(swrKeys.transactions, {
             ...props.transaction,
             ...transaction,
-            tags: {
-                deleted: existingTags.filter((tag) => !transaction.tags.includes(tag)),
-                added: transaction.tags.filter((tag) => !existingTags.includes(tag))
-            }
+            tags: getAdjustedTags(existingTags, transaction.tags)
         });
 
         closeModal();

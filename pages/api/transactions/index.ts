@@ -28,7 +28,7 @@ export default authenticatedApi((user) => buildApiHandler({
                     date: req.body.date,
                     userId: user.id
                 },
-                Array.from(req.body.tags, (id) => Number(id))
+                req.body.tags
             );
 
             return res.send(transaction);
@@ -51,8 +51,8 @@ export default authenticatedApi((user) => buildApiHandler({
                     fromAccountId: req.body.fromAccountId,
                     date: req.body.date
                 },
-                Array.from(req.body.tags.added, (id) => Number(id)),
-                Array.from(req.body.tags.deleted, (id) => Number(id))
+                req.body.tags.added,
+                req.body.tags.deleted
             );
 
             return res.send(transaction);

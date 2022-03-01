@@ -8,6 +8,7 @@ import {Form} from '../../design/form';
 import {FormActions} from '../../design/form-actions';
 import {FormFields} from '../../design/form-fields';
 import {FormTitle} from '../../design/form-title';
+import {toSelectedIds} from '../../design/helpers/selected-ids';
 import {Input} from '../../design/input';
 import {SelectMultiple} from '../../design/select-multiple';
 import {SelectSingle} from '../../design/select-single';
@@ -42,7 +43,7 @@ export const TransactionForm: FunctionComponent<Props> = (props) => {
             amount: Number(amountRef.current.value),
             fromAccountId: Number(fromAccountRef.current.value),
             toAccountId: Number(toAccountRef.current.value),
-            tags: Array.from(tagsRef.current.selectedOptions, (option) => Number(option.value))
+            tags: toSelectedIds(tagsRef.current.selectedOptions)
         });
     };
 
