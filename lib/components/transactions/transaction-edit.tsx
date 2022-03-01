@@ -16,6 +16,9 @@ export const TransactionEdit: FunctionComponent<Props> = (props) => {
     const [isOpen, setIsOpen] = useState<boolean>(false);
     const existingTags = props.transaction.tags.map((transactionTag) => transactionTag.tagId);
 
+    const openModal = () => setIsOpen(true);
+    const closeModal = () => setIsOpen(false);
+
     const saveTransaction = async (transaction: TransactionRequest) => {
         await doPut(swrKeys.transactions, {
             ...props.transaction,
@@ -25,12 +28,10 @@ export const TransactionEdit: FunctionComponent<Props> = (props) => {
                 added: transaction.tags.filter((tag) => !existingTags.includes(tag))
             }
         });
-        setIsOpen(false);
+
+        closeModal();
         props.onSave();
     };
-
-    const openModal = () => setIsOpen(true);
-    const closeModal = () => setIsOpen(false);
 
     return (
         <>

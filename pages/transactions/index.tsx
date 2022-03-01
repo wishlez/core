@@ -30,8 +30,7 @@ const Transactions: FunctionComponent<Props> = ({fallback}) => {
                 <TransactionItem
                     transaction={transaction}
                     key={transaction.id}
-                    onEdit={refresh}
-                    onDelete={refresh}
+                    onUpdate={refresh}
                 />
             ))}
             <TransactionCreate onCreate={refresh}/>

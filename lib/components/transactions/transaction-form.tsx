@@ -16,7 +16,7 @@ import {swrKeys} from '../swr-keys';
 
 type Props = {
     onCancel?: () => void
-    onSubmit?: (transaction: TransactionRequest) => void
+    onSubmit: (transaction: TransactionRequest) => void
     transaction?: Transaction
     title: string
 }
@@ -36,7 +36,7 @@ export const TransactionForm: FunctionComponent<Props> = (props) => {
     const createTransaction = async (event: FormEvent) => {
         event.preventDefault();
 
-        await props.onSubmit?.({
+        await props.onSubmit({
             description: descriptionRef.current.value,
             date: new Date(dateRef.current.value),
             amount: Number(amountRef.current.value),

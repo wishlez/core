@@ -10,8 +10,7 @@ import {Actions, BigAmount, CashFlow, Categories, Container, Description, Detail
 
 type Props = {
     transaction: Transaction
-    onEdit: () => void
-    onDelete: () => void
+    onUpdate: () => void
 }
 
 export const TransactionItem: FunctionComponent<Props> = (props) => (
@@ -45,8 +44,8 @@ export const TransactionItem: FunctionComponent<Props> = (props) => (
                 <FormattedAmount number={props.transaction.amount}/>
             </BigAmount>
             <Actions>
-                <TransactionEdit transaction={props.transaction} onSave={props.onEdit}/>
-                <TransactionDelete transaction={props.transaction} onDelete={props.onDelete}/>
+                <TransactionEdit transaction={props.transaction} onSave={props.onUpdate}/>
+                <TransactionDelete transaction={props.transaction} onDelete={props.onUpdate}/>
             </Actions>
         </Details2>
     </Container>

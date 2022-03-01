@@ -14,14 +14,15 @@ type Props = {
 export const TransactionDelete: FunctionComponent<Props> = (props) => {
     const [isOpen, setIsOpen] = useState<boolean>(false);
 
-    const deleteTransaction = async () => {
-        await doDelete(swrKeys.transactions, {id: props.transaction.id});
-        setIsOpen(false);
-        props.onDelete();
-    };
-
     const openModal = () => setIsOpen(true);
     const closeModal = () => setIsOpen(false);
+
+    const deleteTransaction = async () => {
+        await doDelete(swrKeys.transactions, {id: props.transaction.id});
+
+        closeModal();
+        props.onDelete();
+    };
 
     return (
         <>

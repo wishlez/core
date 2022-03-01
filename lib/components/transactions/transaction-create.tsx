@@ -13,15 +13,15 @@ type Props = {
 export const TransactionCreate: FunctionComponent<Props> = (props) => {
     const [isOpen, setIsOpen] = useState<boolean>(false);
 
+    const openModal = () => setIsOpen(true);
+    const closeModal = () => setIsOpen(false);
+
     const createTransaction = async (transaction: TransactionRequest) => {
         await doPost('/api/transactions', transaction);
 
-        setIsOpen(false);
+        closeModal();
         props.onCreate();
     };
-
-    const openModal = () => setIsOpen(true);
-    const closeModal = () => setIsOpen(false);
 
     return (
         <>
