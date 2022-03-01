@@ -25,6 +25,10 @@ export const InputInteractive = styled.input<WithInputError>`
         ${inputFocusStyles}
     }
 
+    & ~ ${Note} {
+        margin-top: var(--grid-gap-small);
+    }
+
     ${(props) => props.hasError ? css`
         outline: 2px solid var(--alert-error-500);
         outline-offset: -2px;
