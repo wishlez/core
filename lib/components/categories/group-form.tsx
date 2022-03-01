@@ -39,6 +39,7 @@ export const GroupForm: FunctionComponent<Props> = (props) => {
                         ref={nameRef}
                         type="text"
                         placeholder="Enter group name"
+                        autoFocus
                         required
                         defaultValue={props.group?.name}
                     />

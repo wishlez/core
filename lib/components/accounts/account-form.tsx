@@ -50,6 +50,7 @@ export const AccountForm: FunctionComponent<Props> = (props) => {
                         ref={nameRef}
                         type="text"
                         placeholder="Enter account name"
+                        autoFocus
                         required
                         defaultValue={props.account?.name}
                     />
