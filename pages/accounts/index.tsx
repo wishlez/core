@@ -3,7 +3,7 @@ import {FunctionComponent} from 'react';
 import useSWR, {SWRConfig, useSWRConfig} from 'swr';
 import {authenticated} from '../../lib/auth/ss-auth';
 import {getUser} from '../../lib/auth/ss-user';
-import {AccountCreateForm} from '../../lib/components/accounts/account-create-form';
+import {AccountCreate} from '../../lib/components/accounts/account-create';
 import {AccountItem} from '../../lib/components/accounts/account-item';
 import {PageTitle} from '../../lib/components/page-title';
 import {swrKeys} from '../../lib/components/swr-keys';
@@ -25,14 +25,13 @@ const Accounts: FunctionComponent<Props> = ({fallback}) => {
     return (
         <SWRConfig value={{fallback}}>
             <PageTitle title="Accounts"/>
-            <AccountCreateForm onCreate={refresh}/>
+            <AccountCreate onCreate={refresh}/>
             {error && 'Failed to load accounts'}
             {data && data.accounts.map((account) => (
                 <AccountItem
                     account={account}
                     key={account.id}
-                    onEdit={refresh}
-                    onDelete={refresh}
+                    onUpdate={refresh}
                 />
             ))}
         </SWRConfig>
