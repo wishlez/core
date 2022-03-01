@@ -4,7 +4,7 @@ import useSWR, {SWRConfig, useSWRConfig} from 'swr';
 import {authenticated} from '../../lib/auth/ss-auth';
 import {getUser} from '../../lib/auth/ss-user';
 import {Nav} from '../../lib/components/categories/nav';
-import {TagCreateForm} from '../../lib/components/categories/tag-create-form';
+import {TagCreate} from '../../lib/components/categories/tag-create';
 import {TagItem} from '../../lib/components/categories/tag-item';
 import {PageTitle} from '../../lib/components/page-title';
 import {swrKeys} from '../../lib/components/swr-keys';
@@ -27,14 +27,13 @@ const Tags: FunctionComponent<Props> = ({fallback}) => {
         <SWRConfig value={{fallback}}>
             <PageTitle title="Categories - Tags"/>
             <Nav/>
-            <TagCreateForm onCreate={refresh}/>
+            <TagCreate onCreate={refresh}/>
             {error && 'Failed to load tags'}
             {data && data.tags.map((tag) => (
                 <TagItem
                     tag={tag}
                     key={tag.id}
-                    onEdit={refresh}
-                    onDelete={refresh}
+                    onUpdate={refresh}
                 />
             ))}
         </SWRConfig>

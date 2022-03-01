@@ -28,3 +28,7 @@ export type WithGroups<P = AnyObject> = P & {
 export type WithTagGroups<P = AnyObject> = P & {
     groups: TagGroup[]
 }
+
+export type TagRequest = Omit<CategoryTag, 'id' | 'userId'> & {
+    id?: number
+};
