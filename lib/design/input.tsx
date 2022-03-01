@@ -6,7 +6,9 @@ import {Box} from './box';
 import {Label} from './label';
 import {Note} from './note';
 
-type Props = WithInputProps<InputHTMLAttributes<HTMLInputElement>>;
+type Props = WithInputProps<InputHTMLAttributes<HTMLInputElement>> & {
+    type: 'text' | 'date' | 'number'
+};
 
 export const inputFocusStyles = css`
     outline: 2px solid var(--core-500);
