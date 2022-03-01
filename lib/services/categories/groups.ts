@@ -1,24 +1,42 @@
-import {Prisma} from '@prisma/client';
+import {CategoryGroup, Prisma} from '@prisma/client';
+import {Group} from '../../../types/categories';
 import {getPrismaClient} from '../../prisma';
+import {toTags} from '../../tags';
 
 const prisma = getPrismaClient();
 
-export const getGroups = async (user: Prisma.UserWhereInput) => await prisma.categoryGroup.findMany({
-    where: {
-        user
-    },
-    include: {
+const serialize = (group: CategoryGroup): Group => ({
+    ...group,
+    budget: group.budget.toNumber()
+});
+
+export const getGroups = async (user: Prisma.UserWhereInput) => {
+    const groups = await prisma.categoryGroup.findMany({
+        where: {
+            user
+        },
+        include: {
+            tags: {
+                include: {
+                    tag: true
+                }
+            }
+        }
+    });
+
+    return groups.map(serialize);
+};
+
+export const createGroup = async (data: Prisma.CategoryGroupUncheckedCreateInput, tags: number[]) => serialize(await prisma.categoryGroup.create({
+    data: {
+        ...data,
         tags: {
-            include: {
-                tag: true
+            createMany: {
+                data: toTags(tags)
             }
         }
     }
-});
-
-export const createGroup = async (data: Prisma.CategoryGroupUncheckedCreateInput) => await prisma.categoryGroup.create({
-    data
-});
+}));
 
 export const deleteGroup = async (id: number) => await prisma.categoryGroup.delete({
     where: {
@@ -26,12 +44,24 @@ export const deleteGroup = async (id: number) => await prisma.categoryGroup.dele
     }
 });
 
-export const updateGroup = async (data: Prisma.CategoryGroupUncheckedUpdateInput) => await prisma.categoryGroup.update({
-    data,
+export const updateGroup = async (data: Prisma.CategoryGroupUncheckedUpdateInput, addedTags: number[], deletedTags: number[]) => serialize(await prisma.categoryGroup.update({
+    data: {
+        ...data,
+        tags: {
+            deleteMany: {
+                tagId: {
+                    in: deletedTags
+                }
+            },
+            createMany: {
+                data: toTags(addedTags)
+            }
+        }
+    },
     where: {
         id: data.id as number
     }
-});
+}));
 
 export const getGroupUserId = async (id: number): Promise<number> => (await prisma.categoryGroup.findUnique({
     where: {

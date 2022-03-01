@@ -10,7 +10,7 @@ import {PageTitle} from '../../lib/components/page-title';
 import {swrKeys} from '../../lib/components/swr-keys';
 import {doGet} from '../../lib/fetch';
 import {getGroups} from '../../lib/services/categories/groups';
-import {WithTagGroups} from '../../types/categories';
+import {WithGroups} from '../../types/categories';
 import {AnyObject} from '../../types/object';
 
 type Props = {
@@ -18,7 +18,7 @@ type Props = {
 }
 
 const Groups: FunctionComponent<Props> = ({fallback}) => {
-    const {data, error} = useSWR<WithTagGroups>(swrKeys.categories.groups, doGet);
+    const {data, error} = useSWR<WithGroups>(swrKeys.categories.groups, doGet);
     const {mutate} = useSWRConfig();
 
     const refresh = () => mutate(swrKeys.categories.groups);

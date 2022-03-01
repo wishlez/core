@@ -1,5 +1,6 @@
 import {FunctionComponent, useState} from 'react';
 import {Group, GroupRequest} from '../../../types/categories';
+import {getAdjustedTags, toTagIds} from '../../tags';
 import {Button} from '../../design/button';
 import {Icon} from '../../design/icon';
 import {Modal} from '../../design/modal';
@@ -14,6 +15,7 @@ type Props = {
 
 export const GroupEdit: FunctionComponent<Props> = (props) => {
     const [isOpen, setIsOpen] = useState<boolean>(false);
+    const existingTags = toTagIds(props.group.tags);
 
     const openModal = () => setIsOpen(true);
     const closeModal = () => setIsOpen(false);
@@ -21,7 +23,8 @@ export const GroupEdit: FunctionComponent<Props> = (props) => {
     const saveGroup = async (group: GroupRequest) => {
         await doPut(swrKeys.categories.groups, {
             ...props.group,
-            ...group
+            ...group,
+            tags: getAdjustedTags(existingTags, group.tags)
         });
 
         closeModal();

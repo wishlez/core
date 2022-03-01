@@ -1,5 +1,7 @@
-import type {CategoryGroup, CategoryTag} from '@prisma/client';
+import type {CategoryGroup, CategoryTag, CategoryTagGroup} from '@prisma/client';
 import {AnyObject} from './object';
+
+type TagGroup = WithTag<CategoryTagGroup>;
 
 export type Tag = CategoryTag;
 
@@ -11,24 +13,26 @@ export type WithTags<P = AnyObject> = P & {
     tags: Tag[]
 }
 
-export type Group = CategoryGroup
-
-export type GroupRequest = Omit<CategoryGroup, 'id' | 'userId'> & {
+export type TagRequest = Omit<CategoryTag, 'id' | 'userId'> & {
     id?: number
 };
 
-export type TagGroup = Group & {
-    tags: { tag: Tag }[]
-}
+export type Group = Omit<CategoryGroup, 'budget'> & {
+    budget: number
+    tags?: TagGroup[]
+};
 
 export type WithGroups<P = AnyObject> = P & {
     groups: Group[]
 }
 
-export type WithTagGroups<P = AnyObject> = P & {
-    groups: TagGroup[]
-}
-
-export type TagRequest = Omit<CategoryTag, 'id' | 'userId'> & {
+export type GroupRequest = Omit<CategoryGroup, 'id' | 'budget' | 'userId'> & {
     id?: number
+    budget?: number
+    tags: number[]
 };
+
+export type AdjustedTags = {
+    added: number[]
+    deleted: number[]
+}

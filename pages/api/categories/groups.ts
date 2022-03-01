@@ -19,10 +19,13 @@ export default authenticatedApi((user) => buildApiHandler({
     },
     async post(req, res: NextApiResponse<Group>) {
         try {
-            const group = await createGroup({
-                name: req.body.name,
-                userId: user.id
-            });
+            const group = await createGroup(
+                {
+                    name: req.body.name,
+                    userId: user.id
+                },
+                req.body.tags
+            );
 
             return res.send(group);
         } catch (err) {
@@ -35,10 +38,14 @@ export default authenticatedApi((user) => buildApiHandler({
         }
 
         try {
-            const group = await updateGroup({
-                id: req.body.id,
-                name: req.body.name
-            });
+            const group = await updateGroup(
+                {
+                    id: req.body.id,
+                    name: req.body.name
+                },
+                req.body.tags.added,
+                req.body.tags.deleted
+            );
 
             return res.send(group);
         } catch (err) {
