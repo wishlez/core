@@ -2,7 +2,7 @@
 CREATE TABLE `Transaction` (
     `id` INTEGER NOT NULL AUTO_INCREMENT,
     `description` VARCHAR(256) NOT NULL,
-    `amount` DECIMAL(10, 2) NOT NULL DEFAULT 0,
+    `amount` DECIMAL(10, 2) NOT NULL,
     `date` DATE NOT NULL,
     `fromAccountId` INTEGER NOT NULL,
     `toAccountId` INTEGER NOT NULL,
