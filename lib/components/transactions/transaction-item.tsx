@@ -4,11 +4,14 @@ import {Badge} from '../../design/badge';
 import {FormattedAmount} from '../../design/formatted-amount';
 import {FormattedDate} from '../../design/formatted-date';
 import {Icon} from '../../design/icon';
+import {ItemActions} from '../shared/item-actions';
+import {BigAmount} from '../shared/big-amount';
+import {Details1, Details2} from '../shared/details-column';
 import {TagsContainer} from '../shared/tags-container';
 import {ItemDescription} from '../shared/item-description';
 import {TransactionDelete} from './transaction-delete';
 import {TransactionEdit} from './transaction-edit';
-import {Actions, BigAmount, CashFlow, Container, Details1, Details2, OnDate, TitleContainer} from './transaction-item-styled';
+import {CashFlow, Container, OnDate, TitleContainer} from './transaction-item-styled';
 
 type Props = {
     transaction: Transaction
@@ -45,10 +48,10 @@ export const TransactionItem: FunctionComponent<Props> = (props) => (
             <BigAmount>
                 <FormattedAmount number={props.transaction.amount}/>
             </BigAmount>
-            <Actions>
+            <ItemActions>
                 <TransactionEdit transaction={props.transaction} onSave={props.onUpdate}/>
                 <TransactionDelete transaction={props.transaction} onDelete={props.onUpdate}/>
-            </Actions>
+            </ItemActions>
         </Details2>
     </Container>
 );

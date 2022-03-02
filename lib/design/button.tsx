@@ -1,7 +1,7 @@
-import styled, {css} from 'styled-components';
-import {WithVariant} from './helpers/with-variant';
+import styled from 'styled-components';
 import {WithColor, withColor} from './helpers/with-color';
 import {withSize, WithSize} from './helpers/with-size';
+import {withVariant, WithVariant} from './helpers/with-variant';
 
 type Props = WithColor & WithSize & WithVariant
 
@@ -21,42 +21,7 @@ export const Button = styled.button<Props>`
 
     ${withColor}
     ${withSize}
-
-    ${(props) => {
-        switch (props.variant) {
-            case 'filled':
-                return css`
-                    background-color: var(--with-color);
-                    border: 1px solid var(--with-color);
-                    color: var(--with-text-color);
-
-                    &:hover {
-                        background-color: var(--with-active-color);
-                    }
-                `;
-            case 'text':
-                return css`
-                    background-color: transparent;
-                    border: 1px solid transparent;
-                    color: var(--with-color);
-
-                    &:hover {
-                        color: var(--with-active-color);
-                    }
-                `;
-            case 'outlined':
-                return css`
-                    background-color: var(--core-900);
-                    border: 1px solid var(--with-color);
-                    color: var(--with-color);
-
-                    &:hover {
-                        border-color: var(--with-active-color);
-                        color: var(--with-active-color);
-                    }
-                `;
-        }
-    }}
+    ${withVariant}
 `;
 
 Button.defaultProps = {

@@ -14,6 +14,9 @@ export const getAccounts = async (user: Prisma.UserWhereInput): Promise<Account[
     const accounts = await prisma.account.findMany({
         where: {
             user
+        },
+        include: {
+            accountType: true
         }
     });
 

@@ -1,7 +1,7 @@
 import {css} from 'styled-components';
 import {AnyObject} from '../../../types/object';
 
-export type Color = 'primary' | 'secondary' | 'danger'
+export type Color = 'primary' | 'secondary' | 'tertiary' | 'danger'
 
 export type WithColor<P = AnyObject> = P & {
     color?: Color
@@ -20,6 +20,12 @@ export const withColor = (props: WithColor) => {
                 --with-color: var(--core-300);
                 --with-active-color: var(--core-200);
                 --with-text-color: var(--core-800);
+            `;
+        case 'tertiary':
+            return css`
+                --with-color: var(--mono-500);
+                --with-active-color: var(--mono-400);
+                --with-text-color: var(--core-900);
             `;
         case 'danger':
             return css`
