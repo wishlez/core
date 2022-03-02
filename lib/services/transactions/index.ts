@@ -13,16 +13,8 @@ const serialize = (transaction: PrismaTransaction): Transaction => ({
 
 export const getTransactions = async (user: Prisma.UserWhereInput): Promise<Transaction[]> => {
     const transactions = await prisma.transaction.findMany({
-        where: {
-            user
-        },
         include: {
             fromAccount: {
-                select: {
-                    name: true
-                }
-            },
-            toAccount: {
                 select: {
                     name: true
                 }
@@ -31,7 +23,15 @@ export const getTransactions = async (user: Prisma.UserWhereInput): Promise<Tran
                 include: {
                     tag: true
                 }
+            },
+            toAccount: {
+                select: {
+                    name: true
+                }
             }
+        },
+        where: {
+            user
         }
     });
 
@@ -59,13 +59,13 @@ export const updateTransaction = async (data: Prisma.TransactionUncheckedUpdateI
     data: {
         ...data,
         tags: {
+            createMany: {
+                data: toTags(addedTags)
+            },
             deleteMany: {
                 tagId: {
                     in: deletedTags
                 }
-            },
-            createMany: {
-                data: toTags(addedTags)
             }
         }
     },

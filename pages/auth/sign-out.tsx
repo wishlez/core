@@ -12,12 +12,24 @@ const SignOut: FunctionComponent<Props> = ({csrfToken}) => {
     const router = useRouter();
 
     return (
-        <form action="/api/auth/signout" method="post">
-            <PageTitle title="Sign Out"/>
-            Do you want to sign out?
-            <input type="hidden" name="csrfToken" value={csrfToken} required/>
-            <button>Continue</button>
-            <a onClick={() => router.back()}>Cancel</a>
+        <form
+            action={'/api/auth/signout'}
+            method={'post'}
+        >
+            <PageTitle title={'Sign Out'}/>
+            {'Do you want to sign out?'}
+            <input
+                name={'csrfToken'}
+                required
+                type={'hidden'}
+                value={csrfToken}
+            />
+            <button>
+                {'Continue'}
+            </button>
+            <a onClick={() => router.back()}>
+                {'Cancel'}
+            </a>
         </form>
     );
 };

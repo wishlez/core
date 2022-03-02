@@ -4,8 +4,8 @@ import {PageTitle} from '../lib/components/page-title';
 
 const Dashboard: FunctionComponent = () => (
     <>
-        <PageTitle title="Dashboard"/>
-        Welcome to Wishlez!
+        <PageTitle title={'Dashboard'}/>
+        {'Welcome to Wishlez!'}
     </>
 );
 

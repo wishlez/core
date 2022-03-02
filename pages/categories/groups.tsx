@@ -25,7 +25,7 @@ const Groups: FunctionComponent<Props> = ({fallback}) => {
 
     return (
         <SWRConfig value={{fallback}}>
-            <PageTitle title="Categories - Groups"/>
+            <PageTitle title={'Categories - Groups'}/>
             <Nav/>
             <GroupCreate onCreate={refresh}/>
             {error && 'Failed to load groups'}

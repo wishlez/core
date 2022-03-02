@@ -15,7 +15,10 @@ type Props = {
 }
 
 export const ConfirmationModal: FunctionComponent<Props> = (props) => (
-    <Modal isOpen={props.isOpen} onClose={props.onCancel}>
+    <Modal
+        isOpen={props.isOpen}
+        onClose={props.onCancel}
+    >
         <Form>
             <FormTitle>
                 {props.title}
@@ -24,14 +27,28 @@ export const ConfirmationModal: FunctionComponent<Props> = (props) => (
                 {props.message}
             </FormFields>
             <FormActions>
-                <Button variant="filled" color="primary" type="button" onClick={props.onConfirm}>Yes</Button>
-                <Button variant="outlined" color="secondary" type="button" onClick={props.onCancel}>No</Button>
+                <Button
+                    color={'primary'}
+                    onClick={props.onConfirm}
+                    type={'button'}
+                    variant={'filled'}
+                >
+                    {'Yes'}
+                </Button>
+                <Button
+                    color={'secondary'}
+                    onClick={props.onCancel}
+                    type={'button'}
+                    variant={'outlined'}
+                >
+                    {'No'}
+                </Button>
             </FormActions>
         </Form>
     </Modal>
 );
 
 ConfirmationModal.defaultProps = {
-    title: 'Confirm',
-    message: 'Do wish to proceed?'
+    message: 'Do wish to proceed?',
+    title: 'Confirm'
 };

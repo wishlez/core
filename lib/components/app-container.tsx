@@ -9,8 +9,13 @@ export const AppContainer: FunctionComponent = ({children}) => {
     return (
         <>
             <div>
-                Hello, {user.name}!
-                <button onClick={() => signOut()}>Sign Out</button>
+                {'Hello, '}
+                {' '}
+                {user.name}
+                {'!'}
+                <button onClick={() => signOut()}>
+                    {'Sign Out'}
+                </button>
             </div>
             <Nav/>
             {children}

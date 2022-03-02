@@ -15,30 +15,30 @@ export const getUser = async (credentials: Credentials) => await prisma.user.fin
 export const createUser = async (data: Prisma.UserUncheckedCreateInput) => await prisma.user.create({
     data: {
         ...data,
-        password: encryptPassword(data.password),
         accounts: {
             createMany: {
                 data: [
                     {
-                        name: 'Cash Income',
-                        builtIn: true,
                         accountTypeId: (await prisma.accountType.findUnique({
                             where: {
                                 type: 'Revenue'
                             }
-                        })).id
+                        })).id,
+                        builtIn: true,
+                        name: 'Cash Income'
                     },
                     {
-                        name: 'Cash Expense',
-                        builtIn: true,
                         accountTypeId: (await prisma.accountType.findUnique({
                             where: {
                                 type: 'Expense'
                             }
-                        })).id
+                        })).id,
+                        builtIn: true,
+                        name: 'Cash Expense'
                     }
                 ]
             }
-        }
+        },
+        password: encryptPassword(data.password)
     }
 });

@@ -96,15 +96,19 @@ export const SelectMultiple = forwardRef<HTMLSelectElement, Props>(({label, note
 
     return (
         <Box>
-            {label && <Label htmlFor={inputId}>{label}</Label>}
+            {label && (
+                <Label htmlFor={inputId}>
+                    {label}
+                </Label>
+            )}
             <_Select
                 {...props}
-                ref={ref}
-                onInvalid={handleInvalid}
-                multiple={true}
                 defaultValue={undefined}
-                value={selectedIds}
                 disabled
+                multiple={true}
+                onInvalid={handleInvalid}
+                ref={ref}
+                value={selectedIds}
             />
             <InputContainer
                 hasError={invalid || Boolean(error)}
@@ -113,29 +117,46 @@ export const SelectMultiple = forwardRef<HTMLSelectElement, Props>(({label, note
                     .map((value) => options.find((option) => option.value === value))
                     .filter((value) => value)
                     .map(({label, value}) => (
-                        <Badge key={value} onClick={() => removeBadge(value)}>{label}</Badge>
+                        <Badge
+                            key={value}
+                            onClick={() => removeBadge(value)}
+                        >
+                            {label}
+                        </Badge>
                     ))}
                 {selectedIds.length !== options.length && (
                     <Input
-                        type="text" placeholder={props.placeholder}
                         id={inputId}
                         list={dataListId}
-                        onInput={handleInput}
                         onChange={handleChange}
+                        onInput={handleInput}
                         onKeyDown={handleKeydown}
+                        placeholder={props.placeholder}
                         ref={inputRef}
+                        type={'text'}
                     />
                 )}
                 <datalist id={dataListId}>
                     {options
                         .filter(({value}) => !selectedIds.includes(value))
                         .map(({label, value}) => (
-                            <option key={value} value={label}/>
+                            <option
+                                key={value}
+                                value={label}
+                            />
                         ))}
                 </datalist>
             </InputContainer>
-            {!error && note && <Note>{note}</Note>}
-            {error && <Note color="danger">{error}</Note>}
+            {!error && note && (
+                <Note>
+                    {note}
+                </Note>
+            )}
+            {error && (
+                <Note color={'danger'}>
+                    {error}
+                </Note>
+            )}
         </Box>
     );
 });

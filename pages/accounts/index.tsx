@@ -24,7 +24,7 @@ const Accounts: FunctionComponent<Props> = ({fallback}) => {
 
     return (
         <SWRConfig value={{fallback}}>
-            <PageTitle title="Accounts"/>
+            <PageTitle title={'Accounts'}/>
             <AccountCreate onCreate={refresh}/>
             {error && 'Failed to load accounts'}
             {data && data.accounts.map((account) => (

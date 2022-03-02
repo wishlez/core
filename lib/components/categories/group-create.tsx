@@ -28,11 +28,14 @@ export const GroupCreate: FunctionComponent<Props> = (props) => {
             <Fab onClick={openModal}>
                 <Icon type={'add'}/>
             </Fab>
-            <Modal isOpen={isOpen} onClose={closeModal}>
+            <Modal
+                isOpen={isOpen}
+                onClose={closeModal}
+            >
                 <GroupForm
-                    onSubmit={createGroup}
                     onCancel={closeModal}
-                    title="Create new group"
+                    onSubmit={createGroup}
+                    title={'Create new group'}
                 />
             </Modal>
         </>

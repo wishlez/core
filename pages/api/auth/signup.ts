@@ -4,8 +4,8 @@ import {createUser} from '../../../lib/services/users';
 const handler: NextApiHandler = async (req, res) => {
     try {
         await createUser({
-            name: req.body.name,
             login: req.body.login,
+            name: req.body.name,
             password: req.body.password
         });
         res.redirect('/auth/sign-in');

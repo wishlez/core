@@ -20,30 +20,61 @@ const SignUp: FunctionComponent = () => {
 
     return (
         <>
-            <PageTitle title="Sign Up"/>
+            <PageTitle title={'Sign Up'}/>
             <div>
-                <form action="/api/auth/signup" method="post">
+                <form
+                    action={'/api/auth/signup'}
+                    method={'post'}
+                >
                     <label className={styles.label}>
-                        Name:
-                        <input type="text" name="name" autoFocus required/></label>
-                    <label className={styles.label}>
-                        Username:
-                        <input type="text" name="login" required/>
+                        {'Name:'}
+                        <input
+                            autoFocus
+                            name={'name'}
+                            required
+                            type={'text'}
+                        />
                     </label>
                     <label className={styles.label}>
-                        Password:
-                        <input ref={passwordRef} type="password" name="password" onInput={handleConfirm} required/>
+                        {'Username:'}
+                        <input
+                            name={'login'}
+                            required
+                            type={'text'}
+                        />
                     </label>
                     <label className={styles.label}>
-                        Confirm Password:
-                        <input ref={confirmRef} type="password" name="confirm" onInput={handleConfirm} required/>
+                        {'Password:'}
+                        <input
+                            name={'password'}
+                            onInput={handleConfirm}
+                            ref={passwordRef}
+                            required
+                            type={'password'}
+                        />
                     </label>
-                    <button type="submit" value="sign-up" name="action">Sign Up</button>
+                    <label className={styles.label}>
+                        {'Confirm Password:'}
+                        <input
+                            name={'confirm'}
+                            onInput={handleConfirm}
+                            ref={confirmRef}
+                            required
+                            type={'password'}
+                        />
+                    </label>
+                    <button
+                        name={'action'}
+                        type={'submit'}
+                        value={'sign-up'}
+                    >
+                        {'Sign Up'}
+                    </button>
                     <Link href={'/auth/sign-in'}>
-                        Sign In
+                        {'Sign In'}
                     </Link>
                     <Link href={'/'}>
-                        Cancel
+                        {'Cancel'}
                     </Link>
                     <div>
                         {authError}

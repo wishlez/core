@@ -28,11 +28,14 @@ export const AccountCreate: FunctionComponent<Props> = (props) => {
             <Fab onClick={openModal}>
                 <Icon type={'add'}/>
             </Fab>
-            <Modal isOpen={isOpen} onClose={closeModal}>
+            <Modal
+                isOpen={isOpen}
+                onClose={closeModal}
+            >
                 <AccountForm
-                    onSubmit={createAccount}
                     onCancel={closeModal}
-                    title="Create new account"
+                    onSubmit={createAccount}
+                    title={'Create new account'}
                 />
             </Modal>
         </>

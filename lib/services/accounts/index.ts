@@ -6,17 +6,17 @@ const prisma = getPrismaClient();
 
 const serialize = (account: PrismaAccount): Account => ({
     ...account,
-    openingBalance: account.openingBalance.toNumber(),
-    maximumAmountOwed: account.maximumAmountOwed.toNumber()
+    maximumAmountOwed: account.maximumAmountOwed.toNumber(),
+    openingBalance: account.openingBalance.toNumber()
 })
 
 export const getAccounts = async (user: Prisma.UserWhereInput): Promise<Account[]> => {
     const accounts = await prisma.account.findMany({
-        where: {
-            user
-        },
         include: {
             accountType: true
+        },
+        where: {
+            user
         }
     });
 

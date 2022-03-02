@@ -6,6 +6,25 @@ import {createTag, deleteTag, getTags, getTagUserId, updateTag} from '../../../l
 import {Tag, WithTags} from '../../../types/categories';
 
 export default authenticatedApi((user) => buildApiHandler({
+    async delete(req, res: NextApiResponse<{}>) {
+        const id = Number(req.query.id);
+
+        if (isNaN(id)) {
+            return badRequest(res);
+        }
+
+        if (!await authorizedApi(req, await getTagUserId(id))) {
+            return forbidden(res);
+        }
+
+        try {
+            await deleteTag(id);
+
+            return res.send({});
+        } catch (err) {
+            return internalServerError(res, err, 'Failed to delete tag');
+        }
+    },
     async get(req, res: NextApiResponse<WithTags>) {
         try {
             const tags = await getTags(user);
@@ -43,25 +62,6 @@ export default authenticatedApi((user) => buildApiHandler({
             return res.send(tag);
         } catch (err) {
             return internalServerError(res, err, 'Failed to update tag');
-        }
-    },
-    async delete(req, res: NextApiResponse<{}>) {
-        const id = Number(req.query.id);
-
-        if (isNaN(id)) {
-            return badRequest(res);
-        }
-
-        if (!await authorizedApi(req, await getTagUserId(id))) {
-            return forbidden(res);
-        }
-
-        try {
-            await deleteTag(id);
-
-            return res.send({});
-        } catch (err) {
-            return internalServerError(res, err, 'Failed to delete tag');
         }
     }
 }));

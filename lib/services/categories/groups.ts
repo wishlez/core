@@ -12,15 +12,15 @@ const serialize = (group: CategoryGroup): Group => ({
 
 export const getGroups = async (user: Prisma.UserWhereInput) => {
     const groups = await prisma.categoryGroup.findMany({
-        where: {
-            user
-        },
         include: {
             tags: {
                 include: {
                     tag: true
                 }
             }
+        },
+        where: {
+            user
         }
     });
 
@@ -48,13 +48,13 @@ export const updateGroup = async (data: Prisma.CategoryGroupUncheckedUpdateInput
     data: {
         ...data,
         tags: {
+            createMany: {
+                data: toTags(addedTags)
+            },
             deleteMany: {
                 tagId: {
                     in: deletedTags
                 }
-            },
-            createMany: {
-                data: toTags(addedTags)
             }
         }
     },

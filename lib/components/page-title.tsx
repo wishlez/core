@@ -7,6 +7,9 @@ type Props = {
 
 export const PageTitle: FunctionComponent<Props> = (props) => (
     <Head>
-        <title>{props.title ? `${props.title} | ` : ''}Wishlez v{process.env.VERSION}</title>
+        <title>
+            {props.title ? `${props.title} | ` : ''}
+            {`Wishlez v${process.env.VERSION}`}
+        </title>
     </Head>
 );

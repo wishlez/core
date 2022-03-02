@@ -15,7 +15,7 @@ export const CsAuth: FunctionComponent = ({children}) => {
 
     useEffect(() => {
         if (status === 'unauthenticated') {
-            router.push(`/auth/sign-in`);
+            router.push('/auth/sign-in');
         }
     }, [user, status, router]);
 
@@ -34,7 +34,7 @@ export const useAuth: UseAuth = () => {
     const {data: session, status} = useSession();
 
     return {
-        user: session?.user as User,
-        status
+        status,
+        user: session?.user as User
     };
 };

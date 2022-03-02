@@ -35,12 +35,23 @@ export const AccountItem: FunctionComponent<Props> = (props) => (
             </ItemDescription>
             <TagsContainer>
                 {props.account.builtIn && (
-                    <Badge variant="outlined" color="danger" size="compact">
-                        <Icon type={'lock'} size={'in-text'}/>
-                        Built-in
+                    <Badge
+                        color={'danger'}
+                        size={'compact'}
+                        variant={'outlined'}
+                    >
+                        <Icon
+                            size={'in-text'}
+                            type={'lock'}
+                        />
+                        {'Built-in'}
                     </Badge>
                 )}
-                <Badge variant="outlined" color="secondary" size="compact">
+                <Badge
+                    color={'secondary'}
+                    size={'compact'}
+                    variant={'outlined'}
+                >
                     {props.account.accountType.type}
                 </Badge>
             </TagsContainer>
@@ -52,8 +63,14 @@ export const AccountItem: FunctionComponent<Props> = (props) => (
                         <FormattedAmount number={0}/>
                     </BigAmount>
                     <ItemActions>
-                        <AccountEdit account={props.account} onSave={props.onUpdate}/>
-                        <AccountDelete account={props.account} onDelete={props.onUpdate}/>
+                        <AccountEdit
+                            account={props.account}
+                            onSave={props.onUpdate}
+                        />
+                        <AccountDelete
+                            account={props.account}
+                            onDelete={props.onUpdate}
+                        />
                     </ItemActions>
                 </>
             )}

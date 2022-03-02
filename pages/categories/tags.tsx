@@ -32,16 +32,16 @@ const Tags: FunctionComponent<Props> = ({fallback}) => {
 
     return (
         <SWRConfig value={{fallback}}>
-            <PageTitle title="Categories - Tags"/>
+            <PageTitle title={'Categories - Tags'}/>
             <Nav/>
             <TagCreate onCreate={refresh}/>
             {error && 'Failed to load tags'}
             <Container>
                 {data && data.tags.map((tag) => (
                     <TagItem
-                        tag={tag}
                         key={tag.id}
                         onUpdate={refresh}
+                        tag={tag}
                     />
                 ))}
             </Container>

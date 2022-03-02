@@ -43,18 +43,18 @@ const fetcher = async (url: string, options?: RequestInit) => {
 };
 
 const loadedFetch = (url: string, payload: AnyObject, method: LoadedMethod) => fetcher(url, {
-    method,
+    body: JSON.stringify(payload),
     headers: {
         'Content-type': 'application/json'
     },
-    body: JSON.stringify(payload)
+    method
 })
 
 const queriedFetch = (url: string, query: AnyObject = {}, method: QueriedMethod) => fetcher(`${url}${toParams(query)}`, {
-    method,
     headers: {
         Accept: 'application/json'
-    }
+    },
+    method
 });
 
 export const doPost = (url: string, payload: AnyObject) => loadedFetch(url, payload, 'POST');

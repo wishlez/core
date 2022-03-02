@@ -30,10 +30,10 @@ export const AccountForm: FunctionComponent<Props> = (props) => {
         event.preventDefault();
 
         await props.onSubmit({
-            name: nameRef.current.value,
-            openingBalance: Number(initialRef.current.value) || 0,
+            accountTypeId: Number(accountTypeRef.current.value),
             maximumAmountOwed: Number(maximumRef.current.value) || 0,
-            accountTypeId: Number(accountTypeRef.current.value)
+            name: nameRef.current.value,
+            openingBalance: Number(initialRef.current.value) || 0
         });
     };
 
@@ -42,51 +42,68 @@ export const AccountForm: FunctionComponent<Props> = (props) => {
     };
 
     return (
-        <>
-            <Form onSubmit={createAccount}>
-                <FormTitle>{props.title}</FormTitle>
-                <FormFields>
-                    <Input
-                        ref={nameRef}
-                        type="text"
-                        placeholder="Enter account name"
-                        autoFocus
-                        required
-                        defaultValue={props.account?.name}
-                    />
-                    <Input
-                        ref={initialRef}
-                        type="number"
-                        placeholder="Enter initial balance"
-                        step={0.01}
-                        min={0}
-                        defaultValue={props.account?.openingBalance}
-                        note="The current balance after which the transactions are tracked. (Optional)"
-                    />
-                    <Input
-                        ref={maximumRef}
-                        type="number"
-                        placeholder="Enter maximum limit"
-                        step={0.01}
-                        min={0}
-                        defaultValue={props.account?.maximumAmountOwed}
-                        note="Maximum amount e.g. credit line, or total loan owed. (Optional)"
-                    />
-                    <SelectSingle
-                        label="Account type"
-                        ref={accountTypeRef}
-                        defaultValue={props.account?.accountTypeId}
-                    >
-                        {accountTypes.map(({id, type}) => (
-                            <option key={id} value={id}>{type}</option>
-                        ))}
-                    </SelectSingle>
-                </FormFields>
-                <FormActions>
-                    <Button variant="filled" color="primary">Save</Button>
-                    <Button variant="outlined" color="secondary" type="reset" onClick={cancel}>Cancel</Button>
-                </FormActions>
-            </Form>
-        </>
+        <Form onSubmit={createAccount}>
+            <FormTitle>
+                {props.title}
+            </FormTitle>
+            <FormFields>
+                <Input
+                    autoFocus
+                    defaultValue={props.account?.name}
+                    placeholder={'Enter account name'}
+                    ref={nameRef}
+                    required
+                    type={'text'}
+                />
+                <Input
+                    defaultValue={props.account?.openingBalance}
+                    min={0}
+                    note={'The current balance after which the transactions are tracked. (Optional)'}
+                    placeholder={'Enter initial balance'}
+                    ref={initialRef}
+                    step={0.01}
+                    type={'number'}
+                />
+                <Input
+                    defaultValue={props.account?.maximumAmountOwed}
+                    min={0}
+                    note={'Maximum amount e.g. credit line, or total loan owed. (Optional)'}
+                    placeholder={'Enter maximum limit'}
+                    ref={maximumRef}
+                    step={0.01}
+                    type={'number'}
+                />
+                <SelectSingle
+                    defaultValue={props.account?.accountTypeId}
+                    label={'Account type'}
+                    ref={accountTypeRef}
+                >
+                    {accountTypes.map(({id, type}) => (
+                        <option
+                            key={id}
+                            value={id}
+                        >
+                            {type}
+                        </option>
+                    ))}
+                </SelectSingle>
+            </FormFields>
+            <FormActions>
+                <Button
+                    color={'primary'}
+                    variant={'filled'}
+                >
+                    {'Save'}
+                </Button>
+                <Button
+                    color={'secondary'}
+                    onClick={cancel}
+                    type={'reset'}
+                    variant={'outlined'}
+                >
+                    {'Cancel'}
+                </Button>
+            </FormActions>
+        </Form>
     );
 };

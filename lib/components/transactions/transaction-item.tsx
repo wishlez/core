@@ -26,12 +26,17 @@ export const TransactionItem: FunctionComponent<Props> = (props) => (
                     {props.transaction.description}
                 </ItemDescription>
                 <OnDate>
-                    on <FormattedDate dateTime={props.transaction.date}/>
+                    {'on '}
+                    {' '}
+                    <FormattedDate dateTime={props.transaction.date}/>
                 </OnDate>
             </TitleContainer>
             <CashFlow>
                 {props.transaction.fromAccount.name}
-                <Icon type={'east'} size={'in-text'}/>
+                <Icon
+                    size={'in-text'}
+                    type={'east'}
+                />
                 {props.transaction.toAccount.name}
             </CashFlow>
             {Boolean(props.transaction.tags.length) && (
@@ -49,8 +54,14 @@ export const TransactionItem: FunctionComponent<Props> = (props) => (
                 <FormattedAmount number={props.transaction.amount}/>
             </BigAmount>
             <ItemActions>
-                <TransactionEdit transaction={props.transaction} onSave={props.onUpdate}/>
-                <TransactionDelete transaction={props.transaction} onDelete={props.onUpdate}/>
+                <TransactionEdit
+                    onSave={props.onUpdate}
+                    transaction={props.transaction}
+                />
+                <TransactionDelete
+                    onDelete={props.onUpdate}
+                    transaction={props.transaction}
+                />
             </ItemActions>
         </Details2>
     </Container>

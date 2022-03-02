@@ -17,9 +17,13 @@ const Home: FunctionComponent = () => {
 
     return (
         <>
-            <PageTitle title="Welcome"/>
-            Welcome to Wishlez!
-            {status === 'unauthenticated' && <button onClick={() => signIn()}>Sign In!</button>}
+            <PageTitle title={'Welcome'}/>
+            {'Welcome to Wishlez!'}
+            {status === 'unauthenticated' && (
+                <button onClick={() => signIn()}>
+                    {'Sign In!'}
+                </button>
+            )}
         </>
     );
 };

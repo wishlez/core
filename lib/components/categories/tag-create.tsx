@@ -28,11 +28,14 @@ export const TagCreate: FunctionComponent<Props> = (props) => {
             <Fab onClick={openModal}>
                 <Icon type={'add'}/>
             </Fab>
-            <Modal isOpen={isOpen} onClose={closeModal}>
+            <Modal
+                isOpen={isOpen}
+                onClose={closeModal}
+            >
                 <TagForm
-                    onSubmit={createTag}
                     onCancel={closeModal}
-                    title="Create new tag"
+                    onSubmit={createTag}
+                    title={'Create new tag'}
                 />
             </Modal>
         </>

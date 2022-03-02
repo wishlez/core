@@ -4,8 +4,8 @@ type Tags = {
 }[]
 
 export const getAdjustedTags = (existingTags: TagIds, updatedTags: TagIds) => ({
-    deleted: existingTags.filter((tag) => !updatedTags.includes(tag)),
-    added: updatedTags.filter((tag) => !existingTags.includes(tag))
+    added: updatedTags.filter((tag) => !existingTags.includes(tag)),
+    deleted: existingTags.filter((tag) => !updatedTags.includes(tag))
 });
 
 export const toTags = (tagIds: TagIds): Tags => tagIds.map((tagId) => ({

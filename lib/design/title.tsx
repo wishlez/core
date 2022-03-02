@@ -11,5 +11,8 @@ const _Title = styled.h1`
 `;
 
 export const Title: FunctionComponent<Props> = (props) => (
-    <_Title {...props} as={props.size}/>
+    <_Title
+        {...props}
+        as={props.size}
+    />
 );

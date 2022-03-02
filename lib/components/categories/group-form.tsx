@@ -31,8 +31,8 @@ export const GroupForm: FunctionComponent<Props> = (props) => {
         event.preventDefault();
 
         await props.onSubmit({
-            name: nameRef.current.value,
             budget: Number(budgetRef.current.value) || 0,
+            name: nameRef.current.value,
             tags: toSelectedIds(tagsRef.current.selectedOptions)
         });
     };
@@ -42,44 +42,61 @@ export const GroupForm: FunctionComponent<Props> = (props) => {
     };
 
     return (
-        <>
-            <Form onSubmit={createGroup}>
-                <FormTitle>{props.title}</FormTitle>
-                <FormFields>
-                    <Input
-                        ref={nameRef}
-                        type="text"
-                        placeholder="Enter group name"
-                        autoFocus
-                        required
-                        defaultValue={props.group?.name}
-                    />
-                    <Input
-                        type="number"
-                        ref={budgetRef}
-                        placeholder="Enter budget for group"
-                        step={0.01}
-                        min={0}
-                        defaultValue={props.group?.budget}
-                        note="(Optional)"
-                    />
-                    <SelectMultiple
-                        label="Select categories"
-                        ref={tagsRef}
-                        multiple
-                        defaultValue={existingTags}
-                        placeholder="Start typing to show categories"
-                    >
-                        {tags.map(({id, name}) => (
-                            <option key={id} value={id}>{name}</option>
-                        ))}
-                    </SelectMultiple>
-                </FormFields>
-                <FormActions>
-                    <Button variant="filled" color="primary">Save</Button>
-                    <Button variant="outlined" color="secondary" type="reset" onClick={cancel}>Cancel</Button>
-                </FormActions>
-            </Form>
-        </>
+        <Form onSubmit={createGroup}>
+            <FormTitle>
+                {props.title}
+            </FormTitle>
+            <FormFields>
+                <Input
+                    autoFocus
+                    defaultValue={props.group?.name}
+                    placeholder={'Enter group name'}
+                    ref={nameRef}
+                    required
+                    type={'text'}
+                />
+                <Input
+                    defaultValue={props.group?.budget}
+                    min={0}
+                    note={'(Optional)'}
+                    placeholder={'Enter budget for group'}
+                    ref={budgetRef}
+                    step={0.01}
+                    type={'number'}
+                />
+                <SelectMultiple
+                    defaultValue={existingTags}
+                    label={'Select categories'}
+                    multiple
+                    placeholder={'Start typing to show categories'}
+                    ref={tagsRef}
+                >
+                    {tags.map(({id, name}) => (
+                        <option
+                            key={id}
+                            value={id}
+                        >
+                            {name}
+                        </option>
+                    ))}
+                </SelectMultiple>
+            </FormFields>
+            <FormActions>
+                <Button
+                    color={'primary'}
+                    variant={'filled'}
+                >
+                    {'Save'}
+                </Button>
+                <Button
+                    color={'secondary'}
+                    onClick={cancel}
+                    type={'reset'}
+                    variant={'outlined'}
+                >
+                    {'Cancel'}
+                </Button>
+            </FormActions>
+        </Form>
     );
 };

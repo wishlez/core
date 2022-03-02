@@ -3,28 +3,6 @@ import Credentials from 'next-auth/providers/credentials';
 import {getUser} from '../../../lib/services/users';
 
 export default NextAuth({
-    providers: [
-        Credentials({
-            name: 'Credentials',
-            credentials: {
-                login: {label: 'Username', type: 'text'},
-                password: {label: 'Password', type: 'password'}
-            },
-            async authorize(credentials) {
-                const user = await getUser(credentials);
-
-                if (!user) {
-                    return null;
-                }
-
-                return {
-                    id: user.id,
-                    name: user.name,
-                    login: user.login
-                };
-            }
-        })
-    ],
     callbacks: {
         jwt({token, user}) {
             if (user) {
@@ -39,9 +17,31 @@ export default NextAuth({
             return session;
         }
     },
-    secret: process.env.JWT_SECRET,
     pages: {
         signIn: '/auth/sign-in',
         signOut: '/auth/sign-out'
-    }
+    },
+    providers: [
+        Credentials({
+            async authorize(credentials) {
+                const user = await getUser(credentials);
+
+                if (!user) {
+                    return null;
+                }
+
+                return {
+                    id: user.id,
+                    login: user.login,
+                    name: user.name
+                };
+            },
+            credentials: {
+                login: {label: 'Username', type: 'text'},
+                password: {label: 'Password', type: 'password'}
+            },
+            name: 'Credentials'
+        })
+    ],
+    secret: process.env.JWT_SECRET
 });

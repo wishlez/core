@@ -6,6 +6,25 @@ import {createTransaction, deleteTransaction, getTransactions, getTransactionUse
 import {Transaction, WithTransactions} from '../../../types/transactions';
 
 export default authenticatedApi((user) => buildApiHandler({
+    async delete(req, res: NextApiResponse<{}>) {
+        const id = Number(req.query.id);
+
+        if (isNaN(id)) {
+            return badRequest(res);
+        }
+
+        if (!await authorizedApi(req, await getTransactionUserId(id))) {
+            return forbidden(res);
+        }
+
+        try {
+            await deleteTransaction(id);
+
+            return res.send({});
+        } catch (err) {
+            return internalServerError(res, err, 'Failed to delete transaction');
+        }
+    },
     async get(req, res: NextApiResponse<WithTransactions>) {
         try {
             const transactions = await getTransactions(user);
@@ -21,11 +40,11 @@ export default authenticatedApi((user) => buildApiHandler({
         try {
             const transaction = await createTransaction(
                 {
-                    description: req.body.description,
                     amount: req.body.amount,
-                    toAccountId: req.body.toAccountId,
-                    fromAccountId: req.body.fromAccountId,
                     date: req.body.date,
+                    description: req.body.description,
+                    fromAccountId: req.body.fromAccountId,
+                    toAccountId: req.body.toAccountId,
                     userId: user.id
                 },
                 req.body.tags
@@ -44,12 +63,12 @@ export default authenticatedApi((user) => buildApiHandler({
         try {
             const transaction = await updateTransaction(
                 {
-                    id: req.body.id,
-                    description: req.body.description,
                     amount: req.body.amount,
-                    toAccountId: req.body.toAccountId,
+                    date: req.body.date,
+                    description: req.body.description,
                     fromAccountId: req.body.fromAccountId,
-                    date: req.body.date
+                    id: req.body.id,
+                    toAccountId: req.body.toAccountId
                 },
                 req.body.tags.added,
                 req.body.tags.deleted
@@ -58,25 +77,6 @@ export default authenticatedApi((user) => buildApiHandler({
             return res.send(transaction);
         } catch (err) {
             return internalServerError(res, err, 'Failed to update transaction');
-        }
-    },
-    async delete(req, res: NextApiResponse<{}>) {
-        const id = Number(req.query.id);
-
-        if (isNaN(id)) {
-            return badRequest(res);
-        }
-
-        if (!await authorizedApi(req, await getTransactionUserId(id))) {
-            return forbidden(res);
-        }
-
-        try {
-            await deleteTransaction(id);
-
-            return res.send({});
-        } catch (err) {
-            return internalServerError(res, err, 'Failed to delete transaction');
         }
     }
 }));

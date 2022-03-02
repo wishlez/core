@@ -30,24 +30,36 @@ export const TagForm: FunctionComponent<Props> = (props) => {
     };
 
     return (
-        <>
-            <Form onSubmit={createTag}>
-                <FormTitle>{props.title}</FormTitle>
-                <FormFields>
-                    <Input
-                        ref={nameRef}
-                        type="text"
-                        placeholder="Enter tag name"
-                        autoFocus
-                        required
-                        defaultValue={props.tag?.name}
-                    />
-                </FormFields>
-                <FormActions>
-                    <Button variant="filled" color="primary">Save</Button>
-                    <Button variant="outlined" color="secondary" type="reset" onClick={cancel}>Cancel</Button>
-                </FormActions>
-            </Form>
-        </>
+        <Form onSubmit={createTag}>
+            <FormTitle>
+                {props.title}
+            </FormTitle>
+            <FormFields>
+                <Input
+                    autoFocus
+                    defaultValue={props.tag?.name}
+                    placeholder={'Enter tag name'}
+                    ref={nameRef}
+                    required
+                    type={'text'}
+                />
+            </FormFields>
+            <FormActions>
+                <Button
+                    color={'primary'}
+                    variant={'filled'}
+                >
+                    {'Save'}
+                </Button>
+                <Button
+                    color={'secondary'}
+                    onClick={cancel}
+                    type={'reset'}
+                    variant={'outlined'}
+                >
+                    {'Cancel'}
+                </Button>
+            </FormActions>
+        </Form>
     );
 };

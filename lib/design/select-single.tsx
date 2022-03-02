@@ -50,21 +50,33 @@ export const SelectSingle = forwardRef<HTMLSelectElement, Props>(({label, note, 
 
     return (
         <Box>
-            {label && <Label htmlFor={id}>{label}</Label>}
+            {label && (
+                <Label htmlFor={id}>
+                    {label}
+                </Label>
+            )}
             <SelectContainer>
                 <_Select
                     {...props}
+                    hasError={invalid || Boolean(error)}
                     id={id}
-                    ref={ref}
+                    multiple={undefined}
                     onInvalid={handleInvalid}
                     onSelect={handleSelect}
-                    hasError={invalid || Boolean(error)}
-                    multiple={undefined}
+                    ref={ref}
                 />
                 <SelectArrow/>
             </SelectContainer>
-            {!error && note && <Note>{note}</Note>}
-            {error && <Note color="danger">{error}</Note>}
+            {!error && note && (
+                <Note>
+                    {note}
+                </Note>
+            )}
+            {error && (
+                <Note color={'danger'}>
+                    {error}
+                </Note>
+            )}
         </Box>
     );
 });

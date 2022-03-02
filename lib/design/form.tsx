@@ -26,7 +26,10 @@ export const Form: FunctionComponent<FormHTMLAttributes<HTMLFormElement>> = (pro
 
     return (
         <FormContext.Provider value={formRef}>
-            <_Form {...props} ref={formRef}/>
+            <_Form
+                {...props}
+                ref={formRef}
+            />
         </FormContext.Provider>
     );
 };

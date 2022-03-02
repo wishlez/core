@@ -33,15 +33,23 @@ export const TransactionEdit: FunctionComponent<Props> = (props) => {
 
     return (
         <>
-            <Button variant="text" color="secondary" size="compact" onClick={openModal}>
-                <Icon type="create"/>
+            <Button
+                color={'secondary'}
+                onClick={openModal}
+                size={'compact'}
+                variant={'text'}
+            >
+                <Icon type={'create'}/>
             </Button>
-            <Modal isOpen={isOpen} onClose={closeModal}>
+            <Modal
+                isOpen={isOpen}
+                onClose={closeModal}
+            >
                 <TransactionForm
-                    onSubmit={saveTransaction}
                     onCancel={closeModal}
-                    transaction={props.transaction}
+                    onSubmit={saveTransaction}
                     title={`Edit transaction #${props.transaction.id}`}
+                    transaction={props.transaction}
                 />
             </Modal>
         </>

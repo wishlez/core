@@ -26,6 +26,6 @@ export const Button = styled.button<Props>`
 
 Button.defaultProps = {
     color: 'primary',
-    variant: 'filled',
-    size: 'comfortable'
+    size: 'comfortable',
+    variant: 'filled'
 };

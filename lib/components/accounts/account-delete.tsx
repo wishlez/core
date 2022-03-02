@@ -26,14 +26,19 @@ export const AccountDelete: FunctionComponent<Props> = (props) => {
 
     return (
         <>
-            <Button variant="text" color="danger" size="compact" onClick={openModal}>
-                <Icon type="delete"/>
+            <Button
+                color={'danger'}
+                onClick={openModal}
+                size={'compact'}
+                variant={'text'}
+            >
+                <Icon type={'delete'}/>
             </Button>
             <ConfirmationModal
-                title={`Delete account #${props.account.id}`}
                 isOpen={isOpen}
                 onCancel={closeModal}
                 onConfirm={deleteAccount}
+                title={`Delete account #${props.account.id}`}
             />
         </>
     );

@@ -25,8 +25,14 @@ export const TagItem: FunctionComponent<Props> = (props) => (
             {props.tag.name}
         </div>
         <div>
-            <TagEdit tag={props.tag} onSave={props.onUpdate}/>
-            <TagDelete tag={props.tag} onDelete={props.onUpdate}/>
+            <TagEdit
+                onSave={props.onUpdate}
+                tag={props.tag}
+            />
+            <TagDelete
+                onDelete={props.onUpdate}
+                tag={props.tag}
+            />
         </div>
     </Item>
 );

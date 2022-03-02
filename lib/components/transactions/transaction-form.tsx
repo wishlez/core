@@ -38,12 +38,12 @@ export const TransactionForm: FunctionComponent<Props> = (props) => {
         event.preventDefault();
 
         await props.onSubmit({
-            description: descriptionRef.current.value,
-            date: new Date(dateRef.current.value),
             amount: Number(amountRef.current.value),
+            date: new Date(dateRef.current.value),
+            description: descriptionRef.current.value,
             fromAccountId: Number(fromAccountRef.current.value),
-            toAccountId: Number(toAccountRef.current.value),
-            tags: toSelectedIds(tagsRef.current.selectedOptions)
+            tags: toSelectedIds(tagsRef.current.selectedOptions),
+            toAccountId: Number(toAccountRef.current.value)
         });
     };
 
@@ -53,66 +53,95 @@ export const TransactionForm: FunctionComponent<Props> = (props) => {
 
     return (
         <Form onSubmit={createTransaction}>
-            <FormTitle>{props.title}</FormTitle>
+            <FormTitle>
+                {props.title}
+            </FormTitle>
             <FormFields>
                 <Input
-                    type="text"
-                    ref={descriptionRef}
-                    placeholder="Describe transaction"
                     autoFocus
-                    required
                     defaultValue={props.transaction?.description}
+                    placeholder={'Describe transaction'}
+                    ref={descriptionRef}
+                    required
+                    type={'text'}
                 />
                 <Input
-                    type="date"
+                    defaultValue={props.transaction?.date.toString().substring(0, 10)}
                     ref={dateRef}
                     required
-                    defaultValue={props.transaction?.date.toString().substring(0, 10)}
+                    type={'date'}
                 />
                 <Input
-                    type="number"
-                    ref={amountRef}
-                    placeholder="Enter amount"
-                    step={0.01}
-                    min={0.01}
-                    required
                     defaultValue={props.transaction?.amount}
+                    min={0.01}
+                    placeholder={'Enter amount'}
+                    ref={amountRef}
+                    required
+                    step={0.01}
+                    type={'number'}
                 />
                 <SelectSingle
-                    label="From account"
-                    ref={fromAccountRef}
                     defaultValue={props.transaction?.fromAccountId}
+                    label={'From account'}
+                    ref={fromAccountRef}
                     required
                 >
                     {accounts.map(({id, name}) => (
-                        <option key={id} value={id}>{name}</option>
+                        <option
+                            key={id}
+                            value={id}
+                        >
+                            {name}
+                        </option>
                     ))}
                 </SelectSingle>
                 <SelectSingle
-                    label="To account"
-                    ref={toAccountRef}
                     defaultValue={props.transaction?.toAccountId}
+                    label={'To account'}
+                    ref={toAccountRef}
                     required
                 >
                     {accounts.map(({id, name}) => (
-                        <option key={id} value={id}>{name}</option>
+                        <option
+                            key={id}
+                            value={id}
+                        >
+                            {name}
+                        </option>
                     ))}
                 </SelectSingle>
                 <SelectMultiple
-                    label="Select categories"
-                    ref={tagsRef}
-                    multiple
                     defaultValue={existingTags}
-                    placeholder="Start typing to show categories"
+                    label={'Select categories'}
+                    multiple
+                    placeholder={'Start typing to show categories'}
+                    ref={tagsRef}
                 >
                     {tags.map(({id, name}) => (
-                        <option key={id} value={id}>{name}</option>
+                        <option
+                            key={id}
+                            value={id}
+                        >
+                            {name}
+                        </option>
                     ))}
                 </SelectMultiple>
             </FormFields>
             <FormActions>
-                <Button variant="filled" color="primary">Save</Button>
-                <Button variant="outlined" color="secondary" type="reset" onClick={cancel}>Cancel</Button>
+                <Button
+                    color={'primary'}
+                    variant={'filled'}
+                >
+                    {'Save'}
+                </Button>
+                <Button
+                    color={'secondary'}
+                    onClick={cancel}
+                    type={'reset'}
+                    variant={'outlined'}
+                >
+                    {'Cancel'}
+                </Button>
             </FormActions>
         </Form>
     );

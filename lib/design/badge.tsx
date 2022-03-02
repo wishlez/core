@@ -22,6 +22,6 @@ export const Badge = styled.span<Props>`
 
 Badge.defaultProps = {
     color: 'tertiary',
-    variant: 'filled',
-    size: 'cozy'
+    size: 'cozy',
+    variant: 'filled'
 };

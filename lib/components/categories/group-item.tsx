@@ -37,8 +37,14 @@ export const GroupItem: FunctionComponent<Props> = (props) => (
             )}
         </DetailsColumn>
         <section>
-            <GroupEdit group={props.group} onSave={props.onUpdate}/>
-            <GroupDelete group={props.group} onDelete={props.onUpdate}/>
+            <GroupEdit
+                group={props.group}
+                onSave={props.onUpdate}
+            />
+            <GroupDelete
+                group={props.group}
+                onDelete={props.onUpdate}
+            />
         </section>
     </Item>
 );

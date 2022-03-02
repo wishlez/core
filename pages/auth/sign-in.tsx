@@ -15,23 +15,47 @@ const SignIn: FunctionComponent<Props> = ({csrfToken}) => {
 
     return (
         <>
-            <PageTitle title="Sign In"/>
+            <PageTitle title={'Sign In'}/>
             <div>
-                <form action={'/api/auth/callback/credentials'} method="post">
-                    <input type="hidden" name="csrfToken" value={csrfToken} required/>
+                <form
+                    action={'/api/auth/callback/credentials'}
+                    method={'post'}
+                >
+                    <input
+                        name={'csrfToken'}
+                        required
+                        type={'hidden'}
+                        value={csrfToken}
+                    />
                     <label className={styles.label}>
-                        Username:
-                        <input type="text" name="login" autoFocus required/></label>
-                    <label className={styles.label}>
-                        Password:
-                        <input type="password" name="password" required/>
+                        {'Username:'}
+                        <input
+                            autoFocus
+                            name={'login'}
+                            required
+                            type={'text'}
+                        />
                     </label>
-                    <button type="submit" value="sign-in" name="action">Sign In</button>
+                    <label className={styles.label}>
+                        {'Password:'}
+                        <input
+                            name={'password'}
+                            required
+                            type={'password'}
+                        />
+                    </label>
+                    <button
+                        name={'action'}
+                        type={'submit'}
+                        value={'sign-in'}
+                    >
+                        {'Sign In'}
+                    </button>
                     <Link href={'/auth/sign-up'}>
-                        Sign Up
+                        {'Sign Up'}
                     </Link>
                     <Link href={'/'}>
-                        Cancel
+                        {'Cancel'}
                     </Link>
                     <div>
                         {authError}

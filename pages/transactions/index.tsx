@@ -24,13 +24,13 @@ const Transactions: FunctionComponent<Props> = ({fallback}) => {
 
     return (
         <SWRConfig value={{fallback}}>
-            <PageTitle title="Transactions"/>
+            <PageTitle title={'Transactions'}/>
             {error && 'Failed to load transactions'}
             {data && data.transactions.map((transaction) => (
                 <TransactionItem
-                    transaction={transaction}
                     key={transaction.id}
                     onUpdate={refresh}
+                    transaction={transaction}
                 />
             ))}
             <TransactionCreate onCreate={refresh}/>

@@ -35,7 +35,7 @@ export default class _Document extends Document {
                 <Head/>
                 <body>
                     <Main/>
-                    <section id="portal"/>
+                    <section id={'portal'}/>
                     <NextScript/>
                 </body>
             </Html>

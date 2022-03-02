@@ -6,6 +6,25 @@ import {createGroup, deleteGroup, getGroups, getGroupUserId, updateGroup} from '
 import {Group, WithGroups} from '../../../types/categories';
 
 export default authenticatedApi((user) => buildApiHandler({
+    async delete(req, res: NextApiResponse<{}>) {
+        const id = Number(req.query.id);
+
+        if (isNaN(id)) {
+            return badRequest(res);
+        }
+
+        if (!await authorizedApi(req, await getGroupUserId(id))) {
+            return forbidden(res);
+        }
+
+        try {
+            await deleteGroup(id);
+
+            return res.send({});
+        } catch (err) {
+            return internalServerError(res, err, 'Failed to delete group');
+        }
+    },
     async get(req, res: NextApiResponse<WithGroups>) {
         try {
             const groups = await getGroups(user);
@@ -50,25 +69,6 @@ export default authenticatedApi((user) => buildApiHandler({
             return res.send(group);
         } catch (err) {
             return internalServerError(res, err, 'Failed to update group');
-        }
-    },
-    async delete(req, res: NextApiResponse<{}>) {
-        const id = Number(req.query.id);
-
-        if (isNaN(id)) {
-            return badRequest(res);
-        }
-
-        if (!await authorizedApi(req, await getGroupUserId(id))) {
-            return forbidden(res);
-        }
-
-        try {
-            await deleteGroup(id);
-
-            return res.send({});
-        } catch (err) {
-            return internalServerError(res, err, 'Failed to delete group');
         }
     }
 }));

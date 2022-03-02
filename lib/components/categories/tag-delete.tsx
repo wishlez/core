@@ -26,14 +26,19 @@ export const TagDelete: FunctionComponent<Props> = (props) => {
 
     return (
         <>
-            <Button variant="text" color="danger" size="compact" onClick={openModal}>
-                <Icon type="delete"/>
+            <Button
+                color={'danger'}
+                onClick={openModal}
+                size={'compact'}
+                variant={'text'}
+            >
+                <Icon type={'delete'}/>
             </Button>
             <ConfirmationModal
-                title={`Delete tag #${props.tag.id}`}
                 isOpen={isOpen}
                 onCancel={closeModal}
                 onConfirm={deleteTag}
+                title={`Delete tag #${props.tag.id}`}
             />
         </>
     );

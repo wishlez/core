@@ -30,13 +30,21 @@ export const TagEdit: FunctionComponent<Props> = (props) => {
 
     return (
         <>
-            <Button variant="text" color="secondary" size="compact" onClick={openModal}>
-                <Icon type="create"/>
+            <Button
+                color={'secondary'}
+                onClick={openModal}
+                size={'compact'}
+                variant={'text'}
+            >
+                <Icon type={'create'}/>
             </Button>
-            <Modal isOpen={isOpen} onClose={closeModal}>
+            <Modal
+                isOpen={isOpen}
+                onClose={closeModal}
+            >
                 <TagForm
-                    onSubmit={saveTag}
                     onCancel={closeModal}
+                    onSubmit={saveTag}
                     tag={props.tag}
                     title={`Edit tag #${props.tag.id}`}
                 />

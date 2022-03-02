@@ -57,17 +57,29 @@ export const Input = forwardRef<HTMLInputElement, Props>(({label, note, error, .
 
     return (
         <Box>
-            {label && <Label htmlFor={id}>{label}</Label>}
+            {label && (
+                <Label htmlFor={id}>
+                    {label}
+                </Label>
+            )}
             <_Input
                 {...props}
-                id={id}
-                ref={ref}
-                onInvalid={handleInvalid}
-                onInput={handleInput}
                 hasError={invalid || Boolean(error)}
+                id={id}
+                onInput={handleInput}
+                onInvalid={handleInvalid}
+                ref={ref}
             />
-            {!error && note && <Note>{note}</Note>}
-            {error && <Note color="danger">{error}</Note>}
+            {!error && note && (
+                <Note>
+                    {note}
+                </Note>
+            )}
+            {error && (
+                <Note color={'danger'}>
+                    {error}
+                </Note>
+            )}
         </Box>
     );
 });
