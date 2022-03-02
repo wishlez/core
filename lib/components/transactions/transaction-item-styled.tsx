@@ -1,12 +1,10 @@
 import styled from 'styled-components';
+import {Card} from '../../design/card';
 import {Amount} from '../../design/formatted-amount';
-import {Title} from '../../design/title';
+import {DetailsColumn} from '../shared/details-column';
 
-export const Container = styled.article`
-    box-shadow: var(--box-shadow-1);
-    background-color: var(--mono-999);
+export const Container = styled(Card)`
     margin: var(--grid-gap);
-    padding: var(--uniform-padding);
 
     @media (min-width: 960px) {
         display: flex;
@@ -14,16 +12,11 @@ export const Container = styled.article`
     }
 `;
 
-const Details = styled.section`
-    display: flex;
-    flex-flow: column;
-`;
-
-export const Details1 = styled(Details)`
+export const Details1 = styled(DetailsColumn)`
     align-items: start;
 `;
 
-export const Details2 = styled(Details)`
+export const Details2 = styled(DetailsColumn)`
     justify-content: space-between;
     align-items: end;
 `;
@@ -34,12 +27,6 @@ export const TitleContainer = styled.div`
     grid-auto-flow: column;
     grid-gap: var(--grid-gap-small);
     margin-bottom: var(--grid-gap-small);
-`;
-
-export const Description = styled(Title).attrs({
-    size: 'h3'
-})`
-    font-weight: bold;
 `;
 
 export const OnDate = styled.div`
@@ -61,6 +48,3 @@ export const Actions = styled.span`
     text-align: right;
 `;
 
-export const Categories = styled.div`
-    margin-top: var(--grid-gap);
-`;

@@ -4,9 +4,11 @@ import {Badge} from '../../design/badge';
 import {FormattedAmount} from '../../design/formatted-amount';
 import {FormattedDate} from '../../design/formatted-date';
 import {Icon} from '../../design/icon';
+import {TagsContainer} from '../shared/tags-container';
+import {ItemDescription} from '../shared/item-description';
 import {TransactionDelete} from './transaction-delete';
 import {TransactionEdit} from './transaction-edit';
-import {Actions, BigAmount, CashFlow, Categories, Container, Description, Details1, Details2, OnDate, TitleContainer} from './transaction-item-styled';
+import {Actions, BigAmount, CashFlow, Container, Details1, Details2, OnDate, TitleContainer} from './transaction-item-styled';
 
 type Props = {
     transaction: Transaction
@@ -17,9 +19,9 @@ export const TransactionItem: FunctionComponent<Props> = (props) => (
     <Container>
         <Details1>
             <TitleContainer>
-                <Description>
+                <ItemDescription>
                     {props.transaction.description}
-                </Description>
+                </ItemDescription>
                 <OnDate>
                     on <FormattedDate dateTime={props.transaction.date}/>
                 </OnDate>
@@ -30,13 +32,13 @@ export const TransactionItem: FunctionComponent<Props> = (props) => (
                 {props.transaction.toAccount.name}
             </CashFlow>
             {Boolean(props.transaction.tags.length) && (
-                <Categories>
+                <TagsContainer>
                     {props.transaction.tags.map(({tag}) => (
                         <Badge key={tag.id}>
                             {tag.name}
                         </Badge>
                     ))}
-                </Categories>
+                </TagsContainer>
             )}
         </Details1>
         <Details2>

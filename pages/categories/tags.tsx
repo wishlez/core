@@ -1,5 +1,6 @@
 import {GetServerSideProps} from 'next';
 import {FunctionComponent} from 'react';
+import styled from 'styled-components';
 import useSWR, {SWRConfig, useSWRConfig} from 'swr';
 import {authenticated} from '../../lib/auth/ss-auth';
 import {getUser} from '../../lib/auth/ss-user';
@@ -8,6 +9,7 @@ import {TagCreate} from '../../lib/components/categories/tag-create';
 import {TagItem} from '../../lib/components/categories/tag-item';
 import {PageTitle} from '../../lib/components/page-title';
 import {swrKeys} from '../../lib/components/swr-keys';
+import {Box} from '../../lib/design/box';
 import {doGet} from '../../lib/helpers/fetch';
 import {getTags} from '../../lib/services/categories/tags';
 import {WithTags} from '../../types/categories';
@@ -16,6 +18,11 @@ import {AnyObject} from '../../types/object';
 type Props = {
     fallback: AnyObject
 }
+
+const Container = styled(Box)`
+    display: flex;
+    flex-wrap: wrap;
+`;
 
 const Tags: FunctionComponent<Props> = ({fallback}) => {
     const {data, error} = useSWR<WithTags>(swrKeys.categories.tags, doGet);
@@ -29,13 +36,15 @@ const Tags: FunctionComponent<Props> = ({fallback}) => {
             <Nav/>
             <TagCreate onCreate={refresh}/>
             {error && 'Failed to load tags'}
-            {data && data.tags.map((tag) => (
-                <TagItem
-                    tag={tag}
-                    key={tag.id}
-                    onUpdate={refresh}
-                />
-            ))}
+            <Container>
+                {data && data.tags.map((tag) => (
+                    <TagItem
+                        tag={tag}
+                        key={tag.id}
+                        onUpdate={refresh}
+                    />
+                ))}
+            </Container>
         </SWRConfig>
     );
 };
