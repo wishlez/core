@@ -94,6 +94,7 @@ body {
     background-color: var(--core-900);
     color: var(--core-100);
     margin: 0;
+    min-width: 375px;
     padding: 0;
 }
 
@@ -111,6 +112,7 @@ a:hover,
 a:focus,
 a:visited,
 a:active {
+    cursor: pointer;
     text-decoration: none;
 }
 

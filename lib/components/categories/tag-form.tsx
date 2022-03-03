@@ -45,10 +45,7 @@ export const TagForm: FunctionComponent<Props> = (props) => {
                 />
             </FormFields>
             <FormActions>
-                <Button
-                    color={'primary'}
-                    variant={'filled'}
-                >
+                <Button>
                     {'Save'}
                 </Button>
                 <Button

@@ -128,10 +128,7 @@ export const TransactionForm: FunctionComponent<Props> = (props) => {
                 </SelectMultiple>
             </FormFields>
             <FormActions>
-                <Button
-                    color={'primary'}
-                    variant={'filled'}
-                >
+                <Button>
                     {'Save'}
                 </Button>
                 <Button

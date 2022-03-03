@@ -26,9 +26,10 @@ const ModalContainer = styled(FullScreen)`
 `;
 
 const ModalContent = styled(Box)`
-    background-color: var(--core-900);
+    background-color: var(--core-999);
     height: 100vh;
     width: 100vw;
+    padding: var(--uniform-padding);
     position: relative;
 
     @media (min-width: 480px) {

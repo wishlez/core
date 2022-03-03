@@ -5,7 +5,11 @@ import {Nav} from '../design/nav';
 import {PageHeader} from '../design/page-header';
 import {Banner} from './banner';
 
-export const _Header = styled(PageHeader)`
+export type Props = {
+    hideNav?: boolean
+}
+
+const _Header = styled(PageHeader)`
     grid-template-columns: auto 1fr auto;
     justify-items: end;
     padding: var(--uniform-padding);
@@ -44,9 +48,9 @@ const items = [
     }
 ];
 
-export const Header: FunctionComponent = (props) => (
+export const Header: FunctionComponent<Props> = (props) => (
     <_Header>
         <Banner/>
-        <Nav items={items}/>
+        {!props.hideNav && <Nav items={items}/>}
     </_Header>
 );

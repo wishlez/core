@@ -25,10 +25,6 @@ export const Menu: FunctionComponent = (props) => {
     const menuText = findFirstOfType(props.children, MenuText);
     const menuItems = findType(props.children, MenuItem);
 
-    console.log(props.children);
-
-    console.log(menuItems);
-
     return (
         <_Menu>
             {menuText}

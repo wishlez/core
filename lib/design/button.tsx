@@ -18,6 +18,7 @@ export const Button = styled.button<Props>`
     text-transform: capitalize;
     transition: var(--transition);
     vertical-align: middle;
+    white-space: nowrap;
 
     ${withColor}
     ${withSize}

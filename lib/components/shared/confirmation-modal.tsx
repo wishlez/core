@@ -1,54 +1,34 @@
-import {FunctionComponent} from 'react';
-import {Button} from '../../design/button';
-import {Form} from '../../design/form';
-import {FormActions} from '../../design/form-actions';
-import {FormFields} from '../../design/form-fields';
-import {FormTitle} from '../../design/form-title';
+import {FormEvent, FunctionComponent} from 'react';
 import {Modal} from '../../design/modal';
+import {ConfirmationForm, Props as ConfirmationFormProps} from './confirmation-form';
 
-type Props = {
+type Props = ConfirmationFormProps & {
     isOpen: boolean
-    message?: string
     onCancel: () => void
     onConfirm: () => void
-    title?: string
 }
 
-export const ConfirmationModal: FunctionComponent<Props> = (props) => (
-    <Modal
-        isOpen={props.isOpen}
-        onClose={props.onCancel}
-    >
-        <Form>
-            <FormTitle>
-                {props.title}
-            </FormTitle>
-            <FormFields>
-                {props.message}
-            </FormFields>
-            <FormActions>
-                <Button
-                    color={'primary'}
-                    onClick={props.onConfirm}
-                    type={'button'}
-                    variant={'filled'}
-                >
-                    {'Yes'}
-                </Button>
-                <Button
-                    color={'secondary'}
-                    onClick={props.onCancel}
-                    type={'button'}
-                    variant={'outlined'}
-                >
-                    {'No'}
-                </Button>
-            </FormActions>
-        </Form>
-    </Modal>
-);
+export const ConfirmationModal: FunctionComponent<Props> = (props) => {
+    const handleReset = (event: FormEvent) => {
+        event.preventDefault();
+        props.onCancel();
+    }
+    const handleSubmit = (event: FormEvent) => {
+        event.preventDefault()
+        props.onConfirm();
+    }
 
-ConfirmationModal.defaultProps = {
-    message: 'Do wish to proceed?',
-    title: 'Confirm'
+    return (
+        <Modal
+            isOpen={props.isOpen}
+            onClose={props.onCancel}
+        >
+            <ConfirmationForm
+                message={props.message}
+                onReset={handleReset}
+                onSubmit={handleSubmit}
+                title={props.title}
+            />
+        </Modal>
+    );
 };

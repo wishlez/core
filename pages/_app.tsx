@@ -8,20 +8,18 @@ import {PageTitle} from '../lib/components/shared/page-title';
 
 const App: FunctionComponent<AppProps> = ({Component, pageProps}) => {
     let AuthWrapper = CsAuth;
-    let AppWrapper = AppContainer;
 
     if (pageProps.auth === false) {
         AuthWrapper = Fragment;
-        AppWrapper = Fragment;
     }
 
     return (
         <SessionProvider>
             <PageTitle/>
             <AuthWrapper>
-                <AppWrapper>
+                <AppContainer hideNav={!pageProps.auth}>
                     <Component {...pageProps}/>
-                </AppWrapper>
+                </AppContainer>
             </AuthWrapper>
         </SessionProvider>
     );

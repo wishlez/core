@@ -89,10 +89,7 @@ export const AccountForm: FunctionComponent<Props> = (props) => {
                 </SelectSingle>
             </FormFields>
             <FormActions>
-                <Button
-                    color={'primary'}
-                    variant={'filled'}
-                >
+                <Button>
                     {'Save'}
                 </Button>
                 <Button

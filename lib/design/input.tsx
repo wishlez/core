@@ -7,7 +7,7 @@ import {Label} from './label';
 import {Note} from './note';
 
 type Props = WithInputProps<InputHTMLAttributes<HTMLInputElement>> & {
-    type: 'text' | 'date' | 'number'
+    type: 'text' | 'date' | 'number' | 'password'
 };
 
 export const inputFocusStyles = css`

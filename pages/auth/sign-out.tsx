@@ -2,7 +2,8 @@ import {getCsrfToken} from 'next-auth/react';
 import {useRouter} from 'next/router';
 import {FunctionComponent} from 'react';
 import {authenticated} from '../../lib/auth/ss-auth';
-import {PageTitle} from '../../lib/components/shared/page-title';
+import {AuthFormContainer} from '../../lib/components/shared/auth-form-container';
+import {ConfirmationForm} from '../../lib/components/shared/confirmation-form';
 
 type Props = {
     csrfToken: string
@@ -12,25 +13,15 @@ const SignOut: FunctionComponent<Props> = ({csrfToken}) => {
     const router = useRouter();
 
     return (
-        <form
-            action={'/api/auth/signout'}
-            method={'post'}
-        >
-            <PageTitle title={'Sign Out'}/>
-            {'Do you want to sign out?'}
-            <input
-                name={'csrfToken'}
-                required
-                type={'hidden'}
-                value={csrfToken}
+        <AuthFormContainer>
+            <ConfirmationForm
+                action={'/api/auth/signout'}
+                method={'post'}
+                onReset={() => router.back()}
+                title={'You are about to sign out'}
+                token={csrfToken}
             />
-            <button>
-                {'Continue'}
-            </button>
-            <a onClick={() => router.back()}>
-                {'Cancel'}
-            </a>
-        </form>
+        </AuthFormContainer>
     );
 };
 

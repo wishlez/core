@@ -1,9 +1,11 @@
 import {FunctionComponent} from 'react';
-import {Header} from './header';
+import {Header, Props as HeaderProps} from './header';
 
-export const AppContainer: FunctionComponent = ({children}) => (
+type Props = HeaderProps;
+
+export const AppContainer: FunctionComponent<Props> = (props) => (
     <>
-        <Header/>
-        {children}
+        <Header hideNav={props.hideNav}/>
+        {props.children}
     </>
 );
