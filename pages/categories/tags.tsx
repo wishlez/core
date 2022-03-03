@@ -4,7 +4,6 @@ import styled from 'styled-components';
 import useSWR, {SWRConfig, useSWRConfig} from 'swr';
 import {authenticated} from '../../lib/auth/ss-auth';
 import {getUser} from '../../lib/auth/ss-user';
-import {Nav} from '../../lib/components/categories/nav';
 import {TagCreate} from '../../lib/components/categories/tag-create';
 import {TagItem} from '../../lib/components/categories/tag-item';
 import {PageTitle} from '../../lib/components/shared/page-title';
@@ -22,6 +21,7 @@ type Props = {
 const Container = styled(Box)`
     display: flex;
     flex-wrap: wrap;
+    padding: var(--grid-gap-small);
 `;
 
 const Tags: FunctionComponent<Props> = ({fallback}) => {
@@ -33,7 +33,6 @@ const Tags: FunctionComponent<Props> = ({fallback}) => {
     return (
         <SWRConfig value={{fallback}}>
             <PageTitle title={'Categories - Tags'}/>
-            <Nav/>
             <TagCreate onCreate={refresh}/>
             {error && 'Failed to load tags'}
             <Container>

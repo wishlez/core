@@ -104,3 +104,24 @@ button {
     font-family: inherit;
     font-size: inherit;
 }
+
+a,
+a:link,
+a:hover,
+a:focus,
+a:visited,
+a:active {
+    text-decoration: none;
+}
+
+a,
+a:link,
+a:visited {
+    color: var(--core-300);
+}
+
+a:hover,
+a:focus,
+a:active {
+    color: var(--core-500);
+}

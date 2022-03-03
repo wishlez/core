@@ -4,7 +4,7 @@ import {Fragment, FunctionComponent} from 'react';
 import {CsAuth} from '../lib/auth/cs-auth';
 import {AppContainer} from '../lib/components/app-container';
 import './_app.css';
-import {PageTitle} from '../lib/components/page-title';
+import {PageTitle} from '../lib/components/shared/page-title';
 
 const App: FunctionComponent<AppProps> = ({Component, pageProps}) => {
     let AuthWrapper = CsAuth;

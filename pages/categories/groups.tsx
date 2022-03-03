@@ -5,7 +5,6 @@ import {authenticated} from '../../lib/auth/ss-auth';
 import {getUser} from '../../lib/auth/ss-user';
 import {GroupCreate} from '../../lib/components/categories/group-create';
 import {GroupItem} from '../../lib/components/categories/group-item';
-import {Nav} from '../../lib/components/categories/nav';
 import {PageTitle} from '../../lib/components/shared/page-title';
 import {swrKeys} from '../../lib/components/swr-keys';
 import {doGet} from '../../lib/helpers/fetch';
@@ -26,7 +25,6 @@ const Groups: FunctionComponent<Props> = ({fallback}) => {
     return (
         <SWRConfig value={{fallback}}>
             <PageTitle title={'Categories - Groups'}/>
-            <Nav/>
             <GroupCreate onCreate={refresh}/>
             {error && 'Failed to load groups'}
             {data && data.groups.map((group) => (
