@@ -10,7 +10,7 @@ export type Props = {
 }
 
 const _Header = styled(PageHeader)`
-    grid-template-columns: auto 1fr auto;
+    grid-template-columns: auto 1fr;
     justify-items: end;
     padding: var(--uniform-padding);
 `;

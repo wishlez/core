@@ -1,20 +1,14 @@
 import {FunctionComponent} from 'react';
 import styled from 'styled-components';
+import {Backdrop} from './backdrop';
 import {Box} from './box';
+import {FullScreen} from './fullScreen';
 import {Portal} from './portal';
 
 type Props = {
     isOpen: boolean
     onClose?: () => void
 }
-
-const FullScreen = styled(Box)`
-    position: fixed;
-    top: 0;
-    left: 0;
-    height: 100vh;
-    width: 100vw;
-`;
 
 const ModalContainer = styled(FullScreen)`
     display: flex;
@@ -37,11 +31,6 @@ const ModalContent = styled(Box)`
         height: auto;
         max-width: 500px;
     }
-`;
-
-const Backdrop = styled(FullScreen)`
-    background-color: rgba(0, 0, 0, 0.23);
-    backdrop-filter: blur(2px);
 `;
 
 export const Modal: FunctionComponent<Props> = (props) => props.isOpen && (

@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 type Props = {
-    type: 'add' | 'create' | 'delete' | 'east' | 'lock' | 'expand_more' | 'account_circle'
+    type: 'add' | 'create' | 'delete' | 'east' | 'lock' | 'expand_more' | 'account_circle' | 'menu' | 'close'
     size?: 'normal' | 'in-text'
 }
 
