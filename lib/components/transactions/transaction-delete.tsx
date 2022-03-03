@@ -3,7 +3,7 @@ import {Transaction} from '../../../types/transactions';
 import {Button} from '../../design/button';
 import {Icon} from '../../design/icon';
 import {doDelete} from '../../helpers/fetch';
-import {ConfirmationModal} from '../confirmation-modal';
+import {ConfirmationModal} from '../shared/confirmation-modal';
 import {swrKeys} from '../swr-keys';
 
 type Props = {

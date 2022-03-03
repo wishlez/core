@@ -6,7 +6,7 @@ import {getUser} from '../../lib/auth/ss-user';
 import {GroupCreate} from '../../lib/components/categories/group-create';
 import {GroupItem} from '../../lib/components/categories/group-item';
 import {Nav} from '../../lib/components/categories/nav';
-import {PageTitle} from '../../lib/components/page-title';
+import {PageTitle} from '../../lib/components/shared/page-title';
 import {swrKeys} from '../../lib/components/swr-keys';
 import {doGet} from '../../lib/helpers/fetch';
 import {getGroups} from '../../lib/services/categories/groups';

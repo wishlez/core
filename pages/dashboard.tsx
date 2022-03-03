@@ -1,6 +1,6 @@
 import {FunctionComponent} from 'react';
 import {authenticated} from '../lib/auth/ss-auth';
-import {PageTitle} from '../lib/components/page-title';
+import {PageTitle} from '../lib/components/shared/page-title';
 
 const Dashboard: FunctionComponent = () => (
     <>

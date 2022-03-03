@@ -1,10 +1,10 @@
 import {FunctionComponent} from 'react';
-import {Button} from '../design/button';
-import {Form} from '../design/form';
-import {FormActions} from '../design/form-actions';
-import {FormFields} from '../design/form-fields';
-import {FormTitle} from '../design/form-title';
-import {Modal} from '../design/modal';
+import {Button} from '../../design/button';
+import {Form} from '../../design/form';
+import {FormActions} from '../../design/form-actions';
+import {FormFields} from '../../design/form-fields';
+import {FormTitle} from '../../design/form-title';
+import {Modal} from '../../design/modal';
 
 type Props = {
     isOpen: boolean

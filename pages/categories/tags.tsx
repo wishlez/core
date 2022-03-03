@@ -7,7 +7,7 @@ import {getUser} from '../../lib/auth/ss-user';
 import {Nav} from '../../lib/components/categories/nav';
 import {TagCreate} from '../../lib/components/categories/tag-create';
 import {TagItem} from '../../lib/components/categories/tag-item';
-import {PageTitle} from '../../lib/components/page-title';
+import {PageTitle} from '../../lib/components/shared/page-title';
 import {swrKeys} from '../../lib/components/swr-keys';
 import {Box} from '../../lib/design/box';
 import {doGet} from '../../lib/helpers/fetch';

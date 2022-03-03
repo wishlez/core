@@ -2,7 +2,7 @@ import Link from 'next/link';
 import {FunctionComponent, useRef} from 'react';
 import {useAuthError} from '../../lib/auth/cs-auth-error';
 import {unauthenticated} from '../../lib/auth/ss-auth';
-import {PageTitle} from '../../lib/components/page-title';
+import {PageTitle} from '../../lib/components/shared/page-title';
 import styles from './auth.module.css';
 
 const SignUp: FunctionComponent = () => {

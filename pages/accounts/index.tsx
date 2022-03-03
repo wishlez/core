@@ -5,7 +5,7 @@ import {authenticated} from '../../lib/auth/ss-auth';
 import {getUser} from '../../lib/auth/ss-user';
 import {AccountCreate} from '../../lib/components/accounts/account-create';
 import {AccountItem} from '../../lib/components/accounts/account-item';
-import {PageTitle} from '../../lib/components/page-title';
+import {PageTitle} from '../../lib/components/shared/page-title';
 import {swrKeys} from '../../lib/components/swr-keys';
 import {doGet} from '../../lib/helpers/fetch';
 import {getAccounts} from '../../lib/services/accounts';

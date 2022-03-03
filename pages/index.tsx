@@ -3,7 +3,7 @@ import {useRouter} from 'next/router';
 import {FunctionComponent, useEffect} from 'react';
 import {useAuth} from '../lib/auth/cs-auth';
 import {unauthenticated} from '../lib/auth/ss-auth';
-import {PageTitle} from '../lib/components/page-title';
+import {PageTitle} from '../lib/components/shared/page-title';
 
 const Home: FunctionComponent = () => {
     const {status} = useAuth();
