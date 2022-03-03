@@ -12,11 +12,18 @@ type Props = {
 
 const Item = styled(Card)`
     display: flex;
-    max-width: 240px;
     width: 100%;
     align-items: center;
     justify-content: space-between;
     margin: var(--grid-gap-small);
+
+    @media (min-width: 480px) {
+        max-width: calc(50% - var(--grid-gap));
+    }
+
+    @media (min-width: 800px) {
+        max-width: 300px;
+    }
 `;
 
 export const TagItem: FunctionComponent<Props> = (props) => (
