@@ -12,11 +12,11 @@ export const ConfirmationModal: FunctionComponent<Props> = (props) => {
     const handleReset = (event: FormEvent) => {
         event.preventDefault();
         props.onCancel();
-    }
+    };
     const handleSubmit = (event: FormEvent) => {
-        event.preventDefault()
+        event.preventDefault();
         props.onConfirm();
-    }
+    };
 
     return (
         <Modal

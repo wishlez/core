@@ -2,7 +2,7 @@ import Link from 'next/link';
 import {FunctionComponent} from 'react';
 import styled from 'styled-components';
 import {Box} from './box';
-import { NormalNav } from './nav-props';
+import {NormalNav} from './nav-props';
 
 export const _NavItem = styled(Box.withComponent('a'))`
     display: block;

@@ -1,8 +1,8 @@
 import {FormEvent, forwardRef, InputHTMLAttributes, useState} from 'react';
 import styled, {css} from 'styled-components';
 import {WithInputError, WithInputProps} from '../../types/input';
-import {getRandomId} from './helpers/randomizer';
 import {Box} from './box';
+import {getRandomId} from './helpers/randomizer';
 import {Label} from './label';
 import {Note} from './note';
 

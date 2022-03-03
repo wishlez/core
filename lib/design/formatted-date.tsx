@@ -1,5 +1,5 @@
-import {FunctionComponent} from 'react';
 import {DateTime} from 'luxon';
+import {FunctionComponent} from 'react';
 
 type Props = {
     dateTime: string

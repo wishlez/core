@@ -1,4 +1,4 @@
-import {Prisma, Account as PrismaAccount} from '@prisma/client';
+import {Account as PrismaAccount, Prisma} from '@prisma/client';
 import {Account} from '../../../types/accounts';
 import {getPrismaClient} from '../../helpers/prisma';
 
@@ -8,7 +8,7 @@ const serialize = (account: PrismaAccount): Account => ({
     ...account,
     maximumAmountOwed: account.maximumAmountOwed.toNumber(),
     openingBalance: account.openingBalance.toNumber()
-})
+});
 
 export const getAccounts = async (user: Prisma.UserWhereInput): Promise<Account[]> => {
     const accounts = await prisma.account.findMany({

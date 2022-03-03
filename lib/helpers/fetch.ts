@@ -48,7 +48,7 @@ const loadedFetch = (url: string, payload: AnyObject, method: LoadedMethod) => f
         'Content-type': 'application/json'
     },
     method
-})
+});
 
 const queriedFetch = (url: string, query: AnyObject = {}, method: QueriedMethod) => fetcher(`${url}${toParams(query)}`, {
     headers: {

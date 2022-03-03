@@ -1,10 +1,10 @@
 import {ChangeEvent, FormEvent, forwardRef, KeyboardEvent, ReactNode, SelectHTMLAttributes, useEffect, useRef, useState} from 'react';
 import styled from 'styled-components';
 import {Option, WithInputError, WithInputProps} from '../../types/input';
-import {getRandomId} from './helpers/randomizer';
 import {Badge} from './badge';
 import {Box} from './box';
 import {useForm} from './form';
+import {getRandomId} from './helpers/randomizer';
 import {inputFocusStyles, InputInteractive} from './input';
 import {Label} from './label';
 import {Note} from './note';

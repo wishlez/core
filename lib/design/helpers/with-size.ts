@@ -9,16 +9,16 @@ export type WithSize<P = AnyObject> = P & {
 
 export const withSize = (props: WithSize) => {
     switch (props.size) {
-    case 'cozy' :
-        return css`
+        case 'cozy' :
+            return css`
                 padding: var(--control-padding-cozy);
             `;
-    case 'compact' :
-        return css`
+        case 'compact' :
+            return css`
                 padding: var(--control-padding-compact);
             `;
-    case 'comfortable' :
-        return css`
+        case 'comfortable' :
+            return css`
                 padding: var(--control-padding);
             `;
     }

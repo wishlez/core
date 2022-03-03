@@ -11,7 +11,7 @@ const Dropdown = styled.div`
     position: absolute;
     top: 100%;
     right: 0;
-`
+`;
 
 const _Menu = styled.div`
     position: relative;

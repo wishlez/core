@@ -63,7 +63,7 @@ export default authenticatedApi((user) => buildApiHandler({
                 id: req.body.id,
                 maximumAmountOwed: req.body.maximumAmountOwed,
                 name: req.body.name,
-                openingBalance: req.body.openingBalance,
+                openingBalance: req.body.openingBalance
             });
 
             return res.send(account);
