@@ -47,7 +47,7 @@
     --control-padding-cozy-y: calc(var(--control-padding-y) / 2);
     --control-padding-x: 1.25em;
     --control-padding-y: .75em;
-    --border-radius: 2px;
+    --border-radius: 5px;
     --box-shadow-1: 0 1px 3px rgba(0, 0, 0, .12), 0 1px 2px rgba(0, 0, 0, .24);
     --box-shadow-2: 0 3px 6px rgba(0, 0, 0, .16), 0 3px 6px rgba(0, 0, 0, .23);
     --box-shadow-3: 0 10px 20px rgba(0, 0, 0, .19), 0 6px 6px rgba(0, 0, 0, .23);
