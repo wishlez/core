@@ -12,10 +12,14 @@ export type Props = {
 const _Header = styled(PageHeader)`
     grid-template-columns: auto 1fr;
     justify-items: end;
-    padding: var(--uniform-padding);
+    padding: var(--control-padding);
 `;
 
 const items = [
+    {
+        href: '/dashboard',
+        label: 'Home'
+    },
     {
         href: '/accounts',
         label: 'Accounts'
