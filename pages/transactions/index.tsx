@@ -7,6 +7,7 @@ import {PageTitle} from '../../lib/components/shared/page-title';
 import {swrKeys} from '../../lib/components/swr-keys';
 import {TransactionCreate} from '../../lib/components/transactions/transaction-create';
 import {TransactionItem} from '../../lib/components/transactions/transaction-item';
+import {Grid} from '../../lib/design/grid';
 import {doGet} from '../../lib/helpers/fetch';
 import {getTransactions} from '../../lib/services/transactions';
 import {AnyObject} from '../../types/object';
@@ -26,13 +27,17 @@ const Transactions: FunctionComponent<Props> = ({fallback}) => {
         <SWRConfig value={{fallback}}>
             <PageTitle title={'Transactions'}/>
             {error && 'Failed to load transactions'}
-            {data && data.transactions.map((transaction) => (
-                <TransactionItem
-                    key={transaction.id}
-                    onUpdate={refresh}
-                    transaction={transaction}
-                />
-            ))}
+            <Grid
+                items={data?.transactions}
+                keyFn={(transaction) => transaction.id}
+            >
+                {(transaction) => (
+                    <TransactionItem
+                        onUpdate={refresh}
+                        transaction={transaction}
+                    />
+                )}
+            </Grid>
             <TransactionCreate onCreate={refresh}/>
         </SWRConfig>
     );

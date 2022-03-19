@@ -13,7 +13,7 @@ type UsePageLayoutState = () => PageLayoutState
 export type WithPageLayoutState<P = AnyObject> = P & PageLayoutState;
 
 export const usePageLayoutState: UsePageLayoutState = () => {
-    const isInDesktop = useMediaQuery({query: '(min-width: 960px)'});
+    const isInDesktop = useMediaQuery({query: '(min-width: 60rem)'});
     const [isNavOpen, setIsNavOpen] = useState(false);
 
     useEffect(() => {

@@ -7,6 +7,7 @@ import {AccountCreate} from '../../lib/components/accounts/account-create';
 import {AccountItem} from '../../lib/components/accounts/account-item';
 import {PageTitle} from '../../lib/components/shared/page-title';
 import {swrKeys} from '../../lib/components/swr-keys';
+import {Grid} from '../../lib/design/grid';
 import {doGet} from '../../lib/helpers/fetch';
 import {getAccounts} from '../../lib/services/accounts';
 import {WithAccounts} from '../../types/accounts';
@@ -27,13 +28,17 @@ const Accounts: FunctionComponent<Props> = ({fallback}) => {
             <PageTitle title={'Accounts'}/>
             <AccountCreate onCreate={refresh}/>
             {error && 'Failed to load accounts'}
-            {data && data.accounts.map((account) => (
-                <AccountItem
-                    account={account}
-                    key={account.id}
-                    onUpdate={refresh}
-                />
-            ))}
+            <Grid
+                items={data?.accounts}
+                keyFn={(account) => account.id}
+            >
+                {(account) => (
+                    <AccountItem
+                        account={account}
+                        onUpdate={refresh}
+                    />
+                )}
+            </Grid>
         </SWRConfig>
     );
 };

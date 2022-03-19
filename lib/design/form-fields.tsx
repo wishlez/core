@@ -1,7 +1,6 @@
 import styled from 'styled-components';
-import {Box} from './box';
 
-export const FormFields = styled(Box)`
+export const FormFields = styled.div`
     display: grid;
     align-content: start;
     grid-area: fields;

@@ -1,11 +1,10 @@
 import {ReactComponentLike} from 'prop-types';
 import {FunctionComponent} from 'react';
 import styled from 'styled-components';
-import {Box} from './box';
 import {Icon} from './icon';
 import {NormalNav} from './nav-props';
 
-export const _NavItem = styled(Box.withComponent('a'))`
+export const _NavItem = styled.a`
     display: grid;
     grid-auto-flow: column;
     grid-gap: var(--grid-gap);

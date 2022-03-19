@@ -1,6 +1,5 @@
 import {GetServerSideProps} from 'next';
 import {FunctionComponent} from 'react';
-import styled from 'styled-components';
 import useSWR, {SWRConfig, useSWRConfig} from 'swr';
 import {authenticated} from '../../lib/auth/ss-auth';
 import {getUser} from '../../lib/auth/ss-user';
@@ -8,7 +7,7 @@ import {TagCreate} from '../../lib/components/categories/tag-create';
 import {TagItem} from '../../lib/components/categories/tag-item';
 import {PageTitle} from '../../lib/components/shared/page-title';
 import {swrKeys} from '../../lib/components/swr-keys';
-import {Box} from '../../lib/design/box';
+import {Grid} from '../../lib/design/grid';
 import {doGet} from '../../lib/helpers/fetch';
 import {getTags} from '../../lib/services/categories/tags';
 import {WithTags} from '../../types/categories';
@@ -17,12 +16,6 @@ import {AnyObject} from '../../types/object';
 type Props = {
     fallback: AnyObject
 }
-
-const Container = styled(Box)`
-    display: flex;
-    flex-wrap: wrap;
-    padding: var(--grid-gap-small);
-`;
 
 const Tags: FunctionComponent<Props> = ({fallback}) => {
     const {data, error} = useSWR<WithTags>(swrKeys.categories.tags, doGet);
@@ -35,15 +28,17 @@ const Tags: FunctionComponent<Props> = ({fallback}) => {
             <PageTitle title={'Categories - Tags'}/>
             <TagCreate onCreate={refresh}/>
             {error && 'Failed to load tags'}
-            <Container>
-                {data && data.tags.map((tag) => (
+            <Grid
+                items={data?.tags}
+                keyFn={(tag) => tag.id}
+            >
+                {(tag) => (
                     <TagItem
-                        key={tag.id}
                         onUpdate={refresh}
                         tag={tag}
                     />
-                ))}
-            </Container>
+                )}
+            </Grid>
         </SWRConfig>
     );
 };

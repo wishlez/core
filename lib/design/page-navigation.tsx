@@ -2,8 +2,8 @@ import {AnimatePresence, motion} from 'framer-motion';
 import {FunctionComponent} from 'react';
 import styled from 'styled-components';
 import {Backdrop} from './backdrop';
-import {Box} from './box';
 import {Button} from './button';
+import {Card} from './card';
 import {Icon} from './icon';
 import {Nav} from './nav';
 import {NavProps} from './nav-props';
@@ -12,15 +12,12 @@ import {Portal} from './portal';
 
 type Props = WithPageLayoutState<NavProps>;
 
-const Aside = styled(Box.withComponent(motion.aside)).attrs({
+const Aside = styled(Card.withComponent(motion.aside)).attrs({
     animate: {x: 0},
     exit: {x: '-100%'},
     initial: {x: '-100%'},
     key: 'navigation'
 })`
-    background-color: var(--mono-999);
-    box-shadow: var(--box-shadow-1);
-    padding: var(--uniform-padding);
     position: fixed;
     top: 0;
     left: 0;

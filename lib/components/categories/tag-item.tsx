@@ -1,7 +1,6 @@
 import {FunctionComponent} from 'react';
 import styled from 'styled-components';
 import {Tag} from '../../../types/categories';
-import {Card} from '../../design/card';
 import {TagDelete} from './tag-delete';
 import {TagEdit} from './tag-edit';
 
@@ -10,20 +9,10 @@ type Props = {
     onUpdate: () => void
 }
 
-const Item = styled(Card)`
+const Item = styled('div')`
     display: flex;
-    width: 100%;
     align-items: center;
     justify-content: space-between;
-    margin: var(--grid-gap-small);
-
-    @media (min-width: 480px) {
-        max-width: calc(50% - var(--grid-gap));
-    }
-
-    @media (min-width: 800px) {
-        max-width: 300px;
-    }
 `;
 
 export const TagItem: FunctionComponent<Props> = (props) => (

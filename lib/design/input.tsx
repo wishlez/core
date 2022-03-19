@@ -1,7 +1,6 @@
 import {FormEvent, forwardRef, InputHTMLAttributes, useState} from 'react';
 import styled, {css} from 'styled-components';
 import {WithInputError, WithInputProps} from '../../types/input';
-import {Box} from './box';
 import {getRandomId} from './helpers/randomizer';
 import {Label} from './label';
 import {Note} from './note';
@@ -19,7 +18,9 @@ export const InputInteractive = styled.input<WithInputError>`
     background-color: var(--mono-900);
     border: none;
     border-bottom: 2px solid var(--mono-100);
+    display: block;
     padding: var(--control-padding);
+    width: 100%;
 
     &:focus {
         ${inputFocusStyles}
@@ -33,11 +34,6 @@ export const InputInteractive = styled.input<WithInputError>`
         outline: 2px solid var(--alert-error-500);
         outline-offset: -2px;
     ` : ''}
-`;
-
-const _Input = styled(InputInteractive)`
-    display: block;
-    width: 100%;
 `;
 
 export const Input = forwardRef<HTMLInputElement, Props>(({label, note, error, ...props}, ref) => {
@@ -56,13 +52,13 @@ export const Input = forwardRef<HTMLInputElement, Props>(({label, note, error, .
     };
 
     return (
-        <Box>
+        <div>
             {label && (
                 <Label htmlFor={id}>
                     {label}
                 </Label>
             )}
-            <_Input
+            <InputInteractive
                 {...props}
                 hasError={invalid || Boolean(error)}
                 id={id}
@@ -80,7 +76,7 @@ export const Input = forwardRef<HTMLInputElement, Props>(({label, note, error, .
                     {error}
                 </Note>
             )}
-        </Box>
+        </div>
     );
 });
 

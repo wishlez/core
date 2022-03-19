@@ -2,7 +2,6 @@ import {FunctionComponent} from 'react';
 import styled from 'styled-components';
 import {Account} from '../../../types/accounts';
 import {Badge} from '../../design/badge';
-import {Card} from '../../design/card';
 import {FormattedAmount} from '../../design/formatted-amount';
 import {Icon} from '../../design/icon';
 import {BigAmount} from '../shared/big-amount';
@@ -18,10 +17,8 @@ type Props = {
     onUpdate: () => void
 }
 
-const Container = styled(Card)`
-    margin: var(--grid-gap);
-
-    @media (min-width: 960px) {
+const Container = styled('div')`
+    @media (min-width: 60rem) {
         display: flex;
         justify-content: space-between;
     }

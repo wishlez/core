@@ -1,11 +1,10 @@
 import {Fragment, FunctionComponent} from 'react';
 import styled from 'styled-components';
 import {Banner} from './banner';
-import {Box} from './box';
 import {NavItem} from './nav-item';
 import {NavProps} from './nav-props';
 
-const Header = styled(Box)`
+const Header = styled.div`
     display: flex;
     justify-content: center;
     margin-bottom: var(--grid-gap);

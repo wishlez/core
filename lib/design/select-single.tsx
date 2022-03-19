@@ -1,7 +1,6 @@
 import {FormEvent, forwardRef, SelectHTMLAttributes, useState} from 'react';
 import styled from 'styled-components';
 import {WithInputProps} from '../../types/input';
-import {Box} from './box';
 import {getRandomId} from './helpers/randomizer';
 import {InputInteractive} from './input';
 import {Label} from './label';
@@ -9,7 +8,7 @@ import {Note} from './note';
 
 type Props = WithInputProps<SelectHTMLAttributes<HTMLSelectElement>>;
 
-const SelectContainer = styled(Box)`
+const SelectContainer = styled.div`
     --select-arrow-box-size: 2em;
     --select-arrow-size: calc(var(--select-arrow-box-size) / 4);
     position: relative;
@@ -30,7 +29,6 @@ const _Select = styled(InputInteractive.withComponent('select'))`
     appearance: none;
     display: block;
     padding-right: calc(var(--select-arrow-box-size) + var(--control-padding-x));
-    width: 100%;
 `;
 
 export const SelectSingle = forwardRef<HTMLSelectElement, Props>(({label, note, error, ...props}, ref) => {
@@ -49,7 +47,7 @@ export const SelectSingle = forwardRef<HTMLSelectElement, Props>(({label, note, 
     };
 
     return (
-        <Box>
+        <div>
             {label && (
                 <Label htmlFor={id}>
                     {label}
@@ -77,7 +75,7 @@ export const SelectSingle = forwardRef<HTMLSelectElement, Props>(({label, note, 
                     {error}
                 </Note>
             )}
-        </Box>
+        </div>
     );
 });
 

@@ -1,6 +1,7 @@
 import {useRouter} from 'next/router';
 import {FunctionComponent, useEffect} from 'react';
 import {NavItems} from '../design/nav-props';
+import {PageBody} from '../design/page-body';
 import {PageContent} from '../design/page-content';
 import {PageHeader} from '../design/page-header';
 import {usePageLayoutState} from '../design/page-layout-state';
@@ -63,7 +64,9 @@ export const AppContainer: FunctionComponent = (props) => {
             />
             <PageContent {...pageLayoutState}>
                 <PageHeader {...pageLayoutState}/>
-                {props.children}
+                <PageBody>
+                    {props.children}
+                </PageBody>
             </PageContent>
         </>
     );

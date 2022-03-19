@@ -2,7 +2,6 @@ import {ChangeEvent, FormEvent, forwardRef, KeyboardEvent, ReactNode, SelectHTML
 import styled from 'styled-components';
 import {Option, WithInputError, WithInputProps} from '../../types/input';
 import {Badge} from './badge';
-import {Box} from './box';
 import {useForm} from './form';
 import {getRandomId} from './helpers/randomizer';
 import {inputFocusStyles, InputInteractive} from './input';
@@ -15,7 +14,7 @@ const _Select = styled.select`
     display: none;
 `;
 
-const InputContainer = styled(InputInteractive.withComponent(Box))<WithInputError>`
+const InputContainer = styled(InputInteractive.withComponent('div'))<WithInputError>`
     display: flex;
     flex-wrap: wrap;
     padding: 0;
@@ -95,7 +94,7 @@ export const SelectMultiple = forwardRef<HTMLSelectElement, Props>(({label, note
     };
 
     return (
-        <Box>
+        <div>
             {label && (
                 <Label htmlFor={inputId}>
                     {label}
@@ -157,7 +156,7 @@ export const SelectMultiple = forwardRef<HTMLSelectElement, Props>(({label, note
                     {error}
                 </Note>
             )}
-        </Box>
+        </div>
     );
 });
 

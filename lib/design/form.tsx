@@ -13,8 +13,9 @@ const _Form = styled.form`
     grid-template-rows: auto 1fr auto;
     height: 100%;
 
-    @media (min-width: 480px) {
+    @media (min-width: 32rem) {
         height: auto;
+        width: var(--form-max-width);
     }
 `;
 

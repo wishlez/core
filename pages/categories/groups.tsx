@@ -7,6 +7,7 @@ import {GroupCreate} from '../../lib/components/categories/group-create';
 import {GroupItem} from '../../lib/components/categories/group-item';
 import {PageTitle} from '../../lib/components/shared/page-title';
 import {swrKeys} from '../../lib/components/swr-keys';
+import {Grid} from '../../lib/design/grid';
 import {doGet} from '../../lib/helpers/fetch';
 import {getGroups} from '../../lib/services/categories/groups';
 import {WithGroups} from '../../types/categories';
@@ -27,13 +28,17 @@ const Groups: FunctionComponent<Props> = ({fallback}) => {
             <PageTitle title={'Categories - Groups'}/>
             <GroupCreate onCreate={refresh}/>
             {error && 'Failed to load groups'}
-            {data && data.groups.map((group) => (
-                <GroupItem
-                    group={group}
-                    key={group.id}
-                    onUpdate={refresh}
-                />
-            ))}
+            <Grid
+                items={data?.groups}
+                keyFn={(group) => group.id}
+            >
+                {(group) => (
+                    <GroupItem
+                        group={group}
+                        onUpdate={refresh}
+                    />
+                )}
+            </Grid>
         </SWRConfig>
     );
 };

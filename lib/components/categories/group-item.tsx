@@ -2,7 +2,6 @@ import {FunctionComponent} from 'react';
 import styled from 'styled-components';
 import {Group} from '../../../types/categories';
 import {Badge} from '../../design/badge';
-import {Card} from '../../design/card';
 import {DetailsColumn} from '../shared/details-column';
 import {ItemDescription} from '../shared/item-description';
 import {TagsContainer} from '../shared/tags-container';
@@ -14,10 +13,9 @@ type Props = {
     onUpdate: () => void
 }
 
-const Item = styled(Card)`
+const Item = styled('div')`
     display: flex;
     justify-content: space-between;
-    margin: var(--grid-gap);
 `;
 
 export const GroupItem: FunctionComponent<Props> = (props) => (

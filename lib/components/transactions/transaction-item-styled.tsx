@@ -1,10 +1,7 @@
 import styled from 'styled-components';
-import {Card} from '../../design/card';
 
-export const Container = styled(Card)`
-    margin: var(--grid-gap);
-
-    @media (min-width: 960px) {
+export const Container = styled('div')`
+    @media (min-width: 60rem) {
         display: flex;
         justify-content: space-between;
     }
