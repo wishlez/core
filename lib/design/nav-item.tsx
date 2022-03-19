@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import {Icon} from './icon';
 import {NormalNav} from './nav-props';
 
-export const _NavItem = styled.a`
+const _NavItem = styled.a`
     display: grid;
     grid-auto-flow: column;
     grid-gap: var(--grid-gap);

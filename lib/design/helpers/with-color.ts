@@ -1,7 +1,7 @@
 import {css} from 'styled-components';
 import {AnyObject} from '../../../types/object';
 
-export type Color = 'primary' | 'secondary' | 'tertiary' | 'danger'
+type Color = 'primary' | 'secondary' | 'tertiary' | 'danger'
 
 export type WithColor<P = AnyObject> = P & {
     color?: Color

@@ -1,6 +1,6 @@
 import {createHash} from 'crypto';
 
-export const nHash = (data: string, algorithms: string[], n: number = 0): string => {
+const nHash = (data: string, algorithms: string[], n: number = 0): string => {
     if (!algorithms[n]) {
         return data;
     }

@@ -1,7 +1,7 @@
 import {css} from 'styled-components';
 import {AnyObject} from '../../../types/object';
 
-export type Size = 'comfortable' | 'compact' | 'cozy'
+type Size = 'comfortable' | 'compact' | 'cozy'
 
 export type WithSize<P = AnyObject> = P & {
     size?: Size

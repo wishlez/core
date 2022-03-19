@@ -31,8 +31,3 @@ export type GroupRequest = Omit<CategoryGroup, 'id' | 'budget' | 'userId'> & {
     budget?: number
     tags: number[]
 };
-
-export type AdjustedTags = {
-    added: number[]
-    deleted: number[]
-}

@@ -1,40 +1,24 @@
 import {useSession} from 'next-auth/react';
 import {useRouter} from 'next/router';
 import {FunctionComponent, useEffect} from 'react';
-import {User} from '../../types/user';
-import {UserProvider} from '../contexts/user';
-
-export type UseAuth = () => {
-    user: User,
-    status: 'loading' | 'authenticated' | 'unauthenticated'
-}
 
 export const CsAuth: FunctionComponent = ({children}) => {
-    const {user, status} = useAuth();
+    const {data: session, status} = useSession();
     const router = useRouter();
 
     useEffect(() => {
         if (status === 'unauthenticated') {
             router.push('/auth/sign-in');
         }
-    }, [user, status, router]);
+    }, [status, router]);
 
-    if (user) {
+    if (session?.user) {
         return (
-            <UserProvider value={user}>
+            <>
                 {children}
-            </UserProvider>
+            </>
         );
     }
 
     return null;
-};
-
-export const useAuth: UseAuth = () => {
-    const {data: session, status} = useSession();
-
-    return {
-        status,
-        user: session?.user as User
-    };
 };

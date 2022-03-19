@@ -1,7 +1,7 @@
 import {css} from 'styled-components';
 import {AnyObject} from '../../../types/object';
 
-export type Variant = 'text' | 'outlined' | 'filled'
+type Variant = 'text' | 'outlined' | 'filled'
 
 export type WithVariant<P = AnyObject> = P & {
     variant?: Variant

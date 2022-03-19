@@ -3,7 +3,7 @@ import {AnyObject} from '../../types/object';
 type LoadedMethod = 'POST' | 'PUT' | 'PATCH';
 type QueriedMethod = 'GET' | 'DELETE';
 
-export interface ResponseErrorType extends Error {
+interface ResponseErrorType extends Error {
     info: any,
     status: number,
 }
@@ -22,7 +22,7 @@ class ResponseError extends Error implements ResponseErrorType {
     }
 }
 
-export const toParams = (query: AnyObject<string>): string => {
+const toParams = (query: AnyObject<string>): string => {
     const params = new URLSearchParams(query).toString();
 
     return params ? `?${params}` : '';
