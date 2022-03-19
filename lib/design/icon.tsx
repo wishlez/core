@@ -15,6 +15,7 @@ export type IconType =
     | 'category'
     | 'receipt_long'
     | 'account_balance'
+    | 'clear'
     ;
 
 type Props = {

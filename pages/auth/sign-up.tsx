@@ -1,6 +1,5 @@
 import Link from 'next/link';
 import {FunctionComponent, useRef} from 'react';
-import {useAuthError} from '../../lib/auth/cs-auth-error';
 import {unauthenticated} from '../../lib/auth/ss-auth';
 import {AuthFormContainer} from '../../lib/components/shared/auth-form-container';
 import {PageTitle} from '../../lib/components/shared/page-title';
@@ -9,10 +8,10 @@ import {Form} from '../../lib/design/form';
 import {FormActions} from '../../lib/design/form-actions';
 import {FormFields} from '../../lib/design/form-fields';
 import {FormTitle} from '../../lib/design/form-title';
+import {Icon} from '../../lib/design/icon';
 import {Input} from '../../lib/design/input';
 
 const SignUp: FunctionComponent = () => {
-    const authError = useAuthError();
     const passwordRef = useRef<HTMLInputElement>();
     const confirmRef = useRef<HTMLInputElement>();
 
@@ -34,6 +33,16 @@ const SignUp: FunctionComponent = () => {
                 >
                     <FormTitle>
                         {'Sign Up'}
+                        <Link
+                            href={'/'}
+                            passHref
+                        >
+                            <Icon
+                                as={'a'}
+                                size={'root'}
+                                type={'clear'}
+                            />
+                        </Link>
                     </FormTitle>
                     <FormFields>
                         <Input
@@ -67,9 +76,6 @@ const SignUp: FunctionComponent = () => {
                         />
                     </FormFields>
                     <FormActions>
-                        <Button type={'submit'}>
-                            {'Sign Up'}
-                        </Button>
                         <Link
                             href={'/auth/sign-in'}
                             passHref
@@ -82,22 +88,10 @@ const SignUp: FunctionComponent = () => {
                                 {'Sign In'}
                             </Button>
                         </Link>
-                        <Link
-                            href={'/'}
-                            passHref
-                        >
-                            <Button
-                                as={'a'}
-                                color={'secondary'}
-                                variant={'text'}
-                            >
-                                {'Cancel'}
-                            </Button>
-                        </Link>
+                        <Button type={'submit'}>
+                            {'Sign Up'}
+                        </Button>
                     </FormActions>
-                    <div>
-                        {authError}
-                    </div>
                 </Form>
             </AuthFormContainer>
         </>
