@@ -2,7 +2,9 @@ import {FunctionComponent, useEffect, useRef, useState} from 'react';
 import styled, {css} from 'styled-components';
 import {Button} from './button';
 import {Icon} from './icon';
+import {usePageHeader} from './page-header-provider';
 import {WithPageLayoutState} from './page-layout-state';
+import {Title} from './title';
 
 type Props = WithPageLayoutState;
 
@@ -17,14 +19,13 @@ const HeaderContent = styled.section<WithPageLayoutState<{ isRaised: boolean }>>
     transition: var(--transition);
     line-height: var(--page-header-height);
     height: var(--page-header-height);
+    display: grid;
+    justify-items: start;
 
     ${(props) => props.isInDesktop ? css`
-        display: flex;
-        justify-content: end;
-    ` : css`
-        display: grid;
         grid-template-columns: 1fr auto;
-        justify-items: start;
+    ` : css`
+        grid-template-columns: auto 1fr auto;
     `}
 
     ${(props) => props.isRaised && css`
@@ -47,6 +48,7 @@ const getRaisedState = (ref: HTMLDivElement) => {
 export const PageHeader: FunctionComponent<Props> = (props) => {
     const ref = useRef<HTMLDivElement>();
     const [isRaised, setIsRaised] = useState<boolean>(getRaisedState(ref.current));
+    const {title} = usePageHeader();
 
     useEffect(() => {
         const handleScroll = () => setIsRaised(getRaisedState(ref.current));
@@ -73,6 +75,11 @@ export const PageHeader: FunctionComponent<Props> = (props) => {
                     >
                         <Icon type={'menu'}/>
                     </Button>
+                )}
+                {title && (
+                    <Title size={'h2'}>
+                        {title}
+                    </Title>
                 )}
                 {props.children}
             </HeaderContent>

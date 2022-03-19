@@ -10,6 +10,7 @@ import {NavItems} from '../design/nav-props';
 import {PageBody} from '../design/page-body';
 import {PageContent} from '../design/page-content';
 import {PageHeader} from '../design/page-header';
+import {PageHeaderProvider} from '../design/page-header-provider';
 import {usePageLayoutState} from '../design/page-layout-state';
 import {PageNavigation} from '../design/page-navigation';
 import {NavItem} from './shared/nav-item';
@@ -62,7 +63,7 @@ export const AppContainer: FunctionComponent = (props) => {
     }, [router, setIsNavOpen]);
 
     return (
-        <>
+        <PageHeaderProvider>
             <PageNavigation
                 {...pageLayoutState}
                 items={items}
@@ -92,6 +93,6 @@ export const AppContainer: FunctionComponent = (props) => {
                     {props.children}
                 </PageBody>
             </PageContent>
-        </>
+        </PageHeaderProvider>
     );
 };
