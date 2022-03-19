@@ -39,6 +39,8 @@
     --grid-gap: .75em;
     --grid-gap-large: calc(var(--grid-gap) * 2);
     --grid-gap-small: calc(var(--grid-gap) / 2);
+    --page-header-height: 2.5em;
+    --page-navigation-width: 15em;
     --control-padding: var(--control-padding-y) var(--control-padding-x);
     --uniform-padding: 1.25em;
     --control-padding-compact: .125em;
@@ -94,7 +96,7 @@ body {
     background-color: var(--core-900);
     color: var(--core-100);
     margin: 0;
-    min-width: 375px;
+    min-width: 22.5em;
     padding: 0;
 }
 

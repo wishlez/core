@@ -17,7 +17,7 @@ const App: FunctionComponent<AppProps> = ({Component, pageProps}) => {
         <SessionProvider>
             <PageTitle/>
             <AuthWrapper>
-                <AppContainer hideNav={!pageProps.auth}>
+                <AppContainer>
                     <Component {...pageProps}/>
                 </AppContainer>
             </AuthWrapper>

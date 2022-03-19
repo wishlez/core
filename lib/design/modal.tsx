@@ -36,7 +36,10 @@ const ModalContent = styled(Box)`
 export const Modal: FunctionComponent<Props> = (props) => props.isOpen && (
     <Portal>
         <ModalContainer>
-            <Backdrop onClick={props.onClose}/>
+            <Backdrop
+                isVisible={true}
+                onClick={props.onClose}
+            />
             <ModalContent>
                 {props.children}
             </ModalContent>

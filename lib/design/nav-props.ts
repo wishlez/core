@@ -1,7 +1,11 @@
+import {ReactComponentLike} from 'prop-types';
 import {ReactNode} from 'react';
+import {IconType} from './icon';
 
 export type NormalNav = {
+    component?: ReactComponentLike
     href: string
+    icon: IconType
     label: string
 }
 
@@ -10,6 +14,9 @@ type NestedNav = {
     items: NormalNav[]
 };
 
-export type Props = {
-    items: (NormalNav | NestedNav)[]
-}
+export type NavItems = (NormalNav | NestedNav)[];
+
+export type NavProps = {
+    navItemComponent?: ReactComponentLike
+    items: NavItems
+};
