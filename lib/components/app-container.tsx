@@ -1,5 +1,11 @@
+import Link from 'next/link';
 import {useRouter} from 'next/router';
 import {FunctionComponent, useEffect} from 'react';
+import {Button} from '../design/button';
+import {Icon} from '../design/icon';
+import {Menu} from '../design/menu';
+import {MenuItem} from '../design/menu-item';
+import {MenuText} from '../design/menu-text';
 import {NavItems} from '../design/nav-props';
 import {PageBody} from '../design/page-body';
 import {PageContent} from '../design/page-content';
@@ -63,7 +69,25 @@ export const AppContainer: FunctionComponent = (props) => {
                 navItemComponent={NavItem}
             />
             <PageContent {...pageLayoutState}>
-                <PageHeader {...pageLayoutState}/>
+                <PageHeader {...pageLayoutState}>
+                    <Menu>
+                        <MenuText>
+                            <Button
+                                color={'secondary'}
+                                size={'cozy'}
+                                type={'button'}
+                                variant={'text'}
+                            >
+                                <Icon type={'account_circle'}/>
+                            </Button>
+                        </MenuText>
+                        <MenuItem>
+                            <Link href={'/auth/sign-out'}>
+                                {'Sign Out'}
+                            </Link>
+                        </MenuItem>
+                    </Menu>
+                </PageHeader>
                 <PageBody>
                     {props.children}
                 </PageBody>

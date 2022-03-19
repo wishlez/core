@@ -1,4 +1,4 @@
-import {FunctionComponent} from 'react';
+import {FunctionComponent, useEffect, useRef, useState} from 'react';
 import styled, {css} from 'styled-components';
 import {Button} from './button';
 import {Icon} from './icon';
@@ -13,38 +13,69 @@ const _Header = styled('header')`
     left: 0;
 `;
 
-const HeaderContent = styled.section<WithPageLayoutState>`
+const HeaderContent = styled.section<WithPageLayoutState<{ isRaised: boolean }>>`
     transition: var(--transition);
     line-height: var(--page-header-height);
-    min-height: var(--page-header-height);
+    height: var(--page-header-height);
 
     ${(props) => props.isInDesktop ? css`
         display: flex;
         justify-content: end;
     ` : css`
-        background-color: var(--mono-999);
-        border-radius: var(--border-radius);
-        box-shadow: var(--box-shadow-2);
         display: grid;
         grid-template-columns: 1fr auto;
         justify-items: start;
     `}
+
+    ${(props) => props.isRaised && css`
+        background-color: var(--mono-999);
+        border-radius: var(--border-radius);
+        box-shadow: var(--box-shadow-3);
+    `}
 `;
 
-export const PageHeader: FunctionComponent<Props> = (props) => (
-    <_Header>
-        <HeaderContent {...props}>
-            {!props.isInDesktop && (
-                <Button
-                    color={'secondary'}
-                    onClick={() => props.setIsNavOpen(true)}
-                    size={'cozy'}
-                    type={'button'}
-                    variant={'text'}
-                >
-                    <Icon type={'menu'}/>
-                </Button>
-            )}
-        </HeaderContent>
-    </_Header>
-);
+const getRaisedState = (ref: HTMLDivElement) => {
+    if (ref) {
+        const threshold = parseFloat(getComputedStyle(ref).fontSize);
+
+        return window.scrollY > threshold;
+    }
+
+    return false;
+};
+
+export const PageHeader: FunctionComponent<Props> = (props) => {
+    const ref = useRef<HTMLDivElement>();
+    const [isRaised, setIsRaised] = useState<boolean>(getRaisedState(ref.current));
+
+    useEffect(() => {
+        const handleScroll = () => setIsRaised(getRaisedState(ref.current));
+
+        window.addEventListener('scroll', handleScroll);
+
+        return () => window.removeEventListener('scroll', handleScroll);
+    }, [ref]);
+
+    return (
+        <_Header>
+            <HeaderContent
+                {...props}
+                isRaised={isRaised}
+                ref={ref}
+            >
+                {!props.isInDesktop && (
+                    <Button
+                        color={'secondary'}
+                        onClick={() => props.setIsNavOpen(true)}
+                        size={'cozy'}
+                        type={'button'}
+                        variant={'text'}
+                    >
+                        <Icon type={'menu'}/>
+                    </Button>
+                )}
+                {props.children}
+            </HeaderContent>
+        </_Header>
+    );
+};
