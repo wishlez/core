@@ -13,8 +13,5 @@ const _MenuItem = styled.div`
     }
 `;
 
-export const MenuItem: FunctionComponent<StyledComponentProps<'div', any, any, any>> = ({children, ...props}) => (
-    <_MenuItem {...props}>
-        {children}
-    </_MenuItem>
-);
+export const MenuItem: FunctionComponent<StyledComponentProps<'div', any, any, any>> = (props) =>
+    <_MenuItem {...props}/>;

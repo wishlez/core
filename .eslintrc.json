@@ -8,6 +8,10 @@
         "SwitchCase": 1
       }
     ],
+    "object-shorthand": [
+      "error",
+      "always"
+    ],
     "quotes": [
       "error",
       "single"
