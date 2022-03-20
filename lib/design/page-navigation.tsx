@@ -1,5 +1,5 @@
 import {AnimatePresence, motion} from 'framer-motion';
-import {FunctionComponent} from 'react';
+import {FunctionComponent, useMemo} from 'react';
 import styled from 'styled-components';
 import {Backdrop} from './backdrop';
 import {Button} from './button';
@@ -16,7 +16,8 @@ const Aside = styled(Card.withComponent(motion.aside)).attrs({
     animate: {x: 0},
     exit: {x: '-100%'},
     initial: {x: '-100%'},
-    key: 'navigation'
+    key: 'navigation',
+    transition: {ease: 'backInOut'}
 })`
     position: fixed;
     top: 0;
@@ -28,12 +29,16 @@ const Aside = styled(Card.withComponent(motion.aside)).attrs({
 export const PageNavigation: FunctionComponent<Props> = (props) => {
     const closeNav = () => props.setIsNavOpen(false);
 
+    const nav = useMemo(() => (
+        <Nav
+            items={props.items}
+            navItemComponent={props.navItemComponent}
+        />
+    ), [props.items, props.navItemComponent]);
+
     return props.isInDesktop ? (
         <Aside>
-            <Nav
-                items={props.items}
-                navItemComponent={props.navItemComponent}
-            />
+            {nav}
         </Aside>
     ) : (
         <Portal>
@@ -55,10 +60,7 @@ export const PageNavigation: FunctionComponent<Props> = (props) => {
                                 type={'close'}
                             />
                         </Button>
-                        <Nav
-                            items={props.items}
-                            navItemComponent={props.navItemComponent}
-                        />
+                        {nav}
                     </Aside>
                 )}
             </AnimatePresence>
