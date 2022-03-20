@@ -76,11 +76,9 @@ export const PageHeader: FunctionComponent<Props> = (props) => {
                         <Icon type={'menu'}/>
                     </Button>
                 )}
-                {title && (
-                    <Title size={'h2'}>
-                        {title}
-                    </Title>
-                )}
+                <Title size={'h2'}>
+                    {title || ' '}
+                </Title>
                 {props.children}
             </HeaderContent>
         </_Header>

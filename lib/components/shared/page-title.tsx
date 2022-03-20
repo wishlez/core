@@ -11,6 +11,8 @@ export const PageTitle: FunctionComponent<Props> = (props) => {
 
     useEffect(() => {
         setTitle(props.title);
+
+        return () => setTitle(null);
     }, [setTitle, props.title]);
 
     return (
