@@ -1,4 +1,4 @@
-import Link from 'next/link';
+import {Navigate} from './shared/navigate';
 import {useRouter} from 'next/router';
 import {FunctionComponent, useEffect} from 'react';
 import {Button} from '../design/button';
@@ -82,10 +82,11 @@ export const AppContainer: FunctionComponent = (props) => {
                                 <Icon type={'account_circle'}/>
                             </Button>
                         </MenuText>
-                        <MenuItem>
-                            <Link href={'/auth/sign-out'}>
-                                {'Sign Out'}
-                            </Link>
+                        <MenuItem
+                            as={Navigate}
+                            to={'/auth/sign-out'}
+                        >
+                            {'Sign Out'}
                         </MenuItem>
                     </Menu>
                 </PageHeader>
