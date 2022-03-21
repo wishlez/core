@@ -39,7 +39,7 @@ export const TransactionEdit: FunctionComponent<Props> = (props) => {
                 size={'compact'}
                 variant={'text'}
             >
-                <Icon type={'create'}/>
+                <Icon type={'edit'}/>
             </Button>
             <Modal
                 isOpen={isOpen}

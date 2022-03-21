@@ -16,6 +16,10 @@
       "error",
       "single"
     ],
+    "quote-props": [
+      "error",
+      "consistent"
+    ],
     "sort-keys": "error",
     "react/jsx-curly-brace-presence": [
       "error",

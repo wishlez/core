@@ -35,7 +35,7 @@ export const TransactionItem: FunctionComponent<Props> = (props) => (
                 {props.transaction.fromAccount.name}
                 <Icon
                     size={'in-text'}
-                    type={'east'}
+                    type={'transferred-to'}
                 />
                 {props.transaction.toAccount.name}
             </CashFlow>

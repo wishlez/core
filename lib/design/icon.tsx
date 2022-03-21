@@ -1,22 +1,29 @@
 import styled from 'styled-components';
+import {AnyObject} from '../../types/object';
 
 export type IconType =
-    'add'
-    | 'create'
-    | 'delete'
-    | 'east'
-    | 'lock'
-    | 'expand_more'
-    | 'account_circle'
-    | 'menu'
+    | 'account'
+    | 'add'
+    | 'category'
     | 'close'
     | 'dashboard'
+    | 'delete'
+    | 'edit'
+    | 'locked'
+    | 'menu'
     | 'tag'
-    | 'category'
-    | 'receipt_long'
-    | 'account_balance'
-    | 'clear'
+    | 'transaction'
+    | 'transferred-to'
+    | 'user'
     ;
+
+const iconMap: Partial<AnyObject<IconType, string>> = {
+    'account': 'account_balance',
+    'locked': 'lock',
+    'transaction': 'receipt_long',
+    'transferred-to': 'east',
+    'user': 'account_circle'
+};
 
 type Props = {
     type: IconType
@@ -34,7 +41,9 @@ const withFontSize = (props: Props) => {
     }
 };
 
-export const Icon = styled.i<Props>`
+export const Icon = styled.i.attrs<Props>((props) => ({
+    type: iconMap[props.type] || props.type
+}))`
     font-family: 'Material Icons', serif;
     font-size: ${withFontSize};
     font-style: normal;

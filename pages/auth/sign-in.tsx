@@ -33,7 +33,7 @@ const SignIn: FunctionComponent<Props> = ({csrfToken}) => (
                         <Icon
                             as={'a'}
                             size={'root'}
-                            type={'clear'}
+                            type={'close'}
                         />
                     </Link>
                 </FormTitle>

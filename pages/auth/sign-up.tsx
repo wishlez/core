@@ -40,7 +40,7 @@ const SignUp: FunctionComponent = () => {
                             <Icon
                                 as={'a'}
                                 size={'root'}
-                                type={'clear'}
+                                type={'close'}
                             />
                         </Link>
                     </FormTitle>

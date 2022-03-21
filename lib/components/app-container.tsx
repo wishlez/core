@@ -23,12 +23,12 @@ const items: NavItems = [
     },
     {
         href: '/accounts',
-        icon: 'account_balance',
+        icon: 'account',
         label: 'Accounts'
     },
     {
         href: '/transactions',
-        icon: 'receipt_long',
+        icon: 'transaction',
         label: 'Transactions'
     },
     {
