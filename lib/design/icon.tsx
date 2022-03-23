@@ -27,7 +27,7 @@ const iconMap: Partial<AnyObject<IconType, string>> = {
 
 type Props = {
     type: IconType
-    size?: 'normal' | 'in-text' | 'root'
+    size?: 'normal' | 'in-text'
 }
 
 const withFontSize = (props: Props) => {
@@ -36,8 +36,6 @@ const withFontSize = (props: Props) => {
             return '1.5em';
         case 'in-text':
             return '1em';
-        case 'root':
-            return '1.5rem';
     }
 };
 

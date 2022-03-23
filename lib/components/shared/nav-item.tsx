@@ -6,10 +6,7 @@ type Props = {
 };
 
 export const NavItem: FunctionComponent<Props> = ({href, ...props}) => (
-    <Link
-        href={href}
-        passHref
-    >
+    <Link href={href}>
         <a {...props}>
             {props.children}
         </a>

@@ -26,15 +26,14 @@ const SignIn: FunctionComponent<Props> = ({csrfToken}) => (
             >
                 <FormTitle>
                     {'Sign In'}
-                    <Link
-                        href={'/'}
-                        passHref
-                    >
-                        <Icon
+                    <Link href={'/'}>
+                        <Button
                             as={'a'}
-                            size={'root'}
-                            type={'close'}
-                        />
+                            size={'compact'}
+                            variant={'text'}
+                        >
+                            <Icon type={'close'}/>
+                        </Button>
                     </Link>
                 </FormTitle>
                 <FormFields>
@@ -59,10 +58,7 @@ const SignIn: FunctionComponent<Props> = ({csrfToken}) => (
                     />
                 </FormFields>
                 <FormActions>
-                    <Link
-                        href={'/auth/sign-up'}
-                        passHref
-                    >
+                    <Link href={'/auth/sign-up'}>
                         <Button
                             as={'a'}
                             color={'secondary'}

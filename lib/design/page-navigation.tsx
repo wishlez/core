@@ -55,10 +55,7 @@ export const PageNavigation: FunctionComponent<Props> = (props) => {
                             size={'cozy'}
                             variant={'text'}
                         >
-                            <Icon
-                                size={'root'}
-                                type={'close'}
-                            />
+                            <Icon type={'close'}/>
                         </Button>
                         {nav}
                     </Aside>
