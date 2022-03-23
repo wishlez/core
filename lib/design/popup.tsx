@@ -11,6 +11,7 @@ type Props = WithDirection<{
 
 const _Popup = styled(motion.div)<Transient<WithDirection>>`
     position: absolute;
+    z-index: 1;
 
     ${withDirection}
 `;

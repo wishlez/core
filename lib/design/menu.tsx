@@ -6,14 +6,10 @@ import {findFirstOfType, findType} from './helpers/find-children';
 import {WithDirection} from './helpers/with-direction';
 import {MenuItem} from './menu-item';
 import {MenuText} from './menu-text';
+import {PopupContainer} from './popup-container';
 import {Popup} from './popup';
 
 type Props = WithDirection;
-
-const _Menu = styled.span`
-    display: inline-flex;
-    position: relative;
-`;
 
 const MenuItems = styled(Card)`
     display: flex;
@@ -27,7 +23,7 @@ export const Menu: FunctionComponent<Props> = (props) => {
     const menuItems = findType(props.children, MenuItem);
 
     return (
-        <_Menu>
+        <PopupContainer>
             <span onClick={() => setIsOpen(true)}>
                 {menuText}
             </span>
@@ -45,6 +41,6 @@ export const Menu: FunctionComponent<Props> = (props) => {
                     {menuItems}
                 </MenuItems>
             </Popup>
-        </_Menu>
+        </PopupContainer>
     );
 };
