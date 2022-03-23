@@ -8,6 +8,7 @@ import {GroupItem} from '../../lib/components/categories/group-item';
 import {PageTitle} from '../../lib/components/shared/page-title';
 import {swrKeys} from '../../lib/components/swr-keys';
 import {Grid} from '../../lib/design/grid';
+import { GridHeader } from '../../lib/design/grid-header';
 import {doGet} from '../../lib/helpers/fetch';
 import {getGroups} from '../../lib/services/categories/groups';
 import {WithGroups} from '../../types/categories';
@@ -29,6 +30,18 @@ const Groups: FunctionComponent<Props> = ({fallback}) => {
             <GroupCreate onCreate={refresh}/>
             {error && 'Failed to load groups'}
             <Grid
+                gridTemplateColumns={'auto 1fr auto'}
+                header={(
+                    <>
+                        <GridHeader>
+                            {'Name'}
+                        </GridHeader>
+                        <GridHeader>
+                            {'Tags'}
+                        </GridHeader>
+                        <GridHeader/>
+                    </>
+                )}
                 items={data?.groups}
                 keyFn={(group) => group.id}
             >

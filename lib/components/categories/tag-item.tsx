@@ -1,5 +1,4 @@
 import {FunctionComponent} from 'react';
-import styled from 'styled-components';
 import {Tag} from '../../../types/categories';
 import {TagDelete} from './tag-delete';
 import {TagEdit} from './tag-edit';
@@ -9,14 +8,8 @@ type Props = {
     onUpdate: () => void
 }
 
-const Item = styled('div')`
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-`;
-
 export const TagItem: FunctionComponent<Props> = (props) => (
-    <Item>
+    <>
         <div>
             {props.tag.name}
         </div>
@@ -30,5 +23,5 @@ export const TagItem: FunctionComponent<Props> = (props) => (
                 tag={props.tag}
             />
         </div>
-    </Item>
+    </>
 );

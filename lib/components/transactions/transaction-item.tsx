@@ -1,6 +1,5 @@
 import {FunctionComponent} from 'react';
 import {Transaction} from '../../../types/transactions';
-import {Badge} from '../../design/badge';
 import {FormattedAmount} from '../../design/formatted-amount';
 import {FormattedDate} from '../../design/formatted-date';
 import {Icon} from '../../design/icon';
@@ -16,8 +15,6 @@ type Props = {
     transaction: Transaction
     onUpdate: () => void
 }
-
-const maxTags = 3;
 
 export const TransactionItem: FunctionComponent<Props> = (props) => (
     <>
@@ -37,21 +34,10 @@ export const TransactionItem: FunctionComponent<Props> = (props) => (
                 {props.transaction.toAccount.name}
             </ToAccount>
         </CashFlow>
-        <TagsContainer>
-            {props.transaction.tags.slice(0, maxTags).map(({tag}) => (
-                <Badge
-                    key={tag.id}
-                    size={'compact'}
-                >
-                    {tag.name}
-                </Badge>
-            ))}
-            {props.transaction.tags.length > maxTags && (
-                <>
-                    {'...'}
-                </>
-            )}
-        </TagsContainer>
+        <TagsContainer
+            maxTags={3}
+            tags={props.transaction.tags}
+        />
         <BigAmount>
             <FormattedAmount number={props.transaction.amount}/>
         </BigAmount>

@@ -1,8 +1,5 @@
 import {FunctionComponent} from 'react';
-import styled from 'styled-components';
 import {Group} from '../../../types/categories';
-import {Badge} from '../../design/badge';
-import {DetailsColumn} from '../shared/details-column';
 import {ItemDescription} from '../shared/item-description';
 import {TagsContainer} from '../shared/tags-container';
 import {GroupDelete} from './group-delete';
@@ -13,27 +10,15 @@ type Props = {
     onUpdate: () => void
 }
 
-const Item = styled('div')`
-    display: flex;
-    justify-content: space-between;
-`;
-
 export const GroupItem: FunctionComponent<Props> = (props) => (
-    <Item>
-        <DetailsColumn>
-            <ItemDescription>
-                {props.group.name}
-            </ItemDescription>
-            {Boolean(props.group.tags.length) && (
-                <TagsContainer>
-                    {props.group.tags.map(({tag}) => (
-                        <Badge key={tag.id}>
-                            {tag.name}
-                        </Badge>
-                    ))}
-                </TagsContainer>
-            )}
-        </DetailsColumn>
+    <>
+        <ItemDescription>
+            {props.group.name}
+        </ItemDescription>
+        <TagsContainer
+            maxTags={5}
+            tags={props.group.tags}
+        />
         <section>
             <GroupEdit
                 group={props.group}
@@ -44,5 +29,5 @@ export const GroupItem: FunctionComponent<Props> = (props) => (
                 onDelete={props.onUpdate}
             />
         </section>
-    </Item>
+    </>
 );

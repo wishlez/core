@@ -8,6 +8,7 @@ import {TagItem} from '../../lib/components/categories/tag-item';
 import {PageTitle} from '../../lib/components/shared/page-title';
 import {swrKeys} from '../../lib/components/swr-keys';
 import {Grid} from '../../lib/design/grid';
+import {GridHeader} from '../../lib/design/grid-header';
 import {doGet} from '../../lib/helpers/fetch';
 import {getTags} from '../../lib/services/categories/tags';
 import {WithTags} from '../../types/categories';
@@ -29,6 +30,15 @@ const Tags: FunctionComponent<Props> = ({fallback}) => {
             <TagCreate onCreate={refresh}/>
             {error && 'Failed to load tags'}
             <Grid
+                gridTemplateColumns={'1fr auto'}
+                header={(
+                    <>
+                        <GridHeader>
+                            {'Name'}
+                        </GridHeader>
+                        <GridHeader/>
+                    </>
+                )}
                 items={data?.tags}
                 keyFn={(tag) => tag.id}
             >

@@ -14,7 +14,9 @@ type Props<T extends AnyObject> = {
 const _Grid = styled(Card)`
     align-items: baseline;
     display: grid;
+    overflow-x: auto;
     grid-gap: var(--grid-gap);
+    white-space: nowrap;
 `;
 
 const Separator = styled.div`
