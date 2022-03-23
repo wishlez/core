@@ -30,7 +30,7 @@ const Groups: FunctionComponent<Props> = ({fallback}) => {
             <GroupCreate onCreate={refresh}/>
             {error && 'Failed to load groups'}
             <Grid
-                gridTemplateColumns={'auto 1fr auto'}
+                gridTemplateColumns={'auto 1fr 8em auto'}
                 header={(
                     <>
                         <GridHeader>
@@ -38,6 +38,9 @@ const Groups: FunctionComponent<Props> = ({fallback}) => {
                         </GridHeader>
                         <GridHeader>
                             {'Tags'}
+                        </GridHeader>
+                        <GridHeader align={'end'}>
+                            {'Budget'}
                         </GridHeader>
                         <GridHeader/>
                     </>
