@@ -17,7 +17,7 @@ const _Menu = styled.span`
 
 const MenuItems = styled(Card)`
     display: flex;
-    flex-flow: column;
+    flex-direction: column;
     padding: 0;
 `;
 

@@ -12,7 +12,7 @@ const format = new Intl.NumberFormat('en', {
 
 export const Amount = styled.span`
     font-family: 'CutiveMono', sans-serif;
-    text-align: right;
+    text-align: end;
 `;
 
 export const FormattedAmount: FunctionComponent<Props> = (props) => (

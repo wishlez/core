@@ -8,6 +8,7 @@ import {swrKeys} from '../../lib/components/swr-keys';
 import {TransactionCreate} from '../../lib/components/transactions/transaction-create';
 import {TransactionItem} from '../../lib/components/transactions/transaction-item';
 import {Grid} from '../../lib/design/grid';
+import {GridHeader} from '../../lib/design/grid-header';
 import {doGet} from '../../lib/helpers/fetch';
 import {getTransactions} from '../../lib/services/transactions';
 import {AnyObject} from '../../types/object';
@@ -28,9 +29,31 @@ const Transactions: FunctionComponent<Props> = ({fallback}) => {
             <PageTitle title={'Transactions'}/>
             {error && 'Failed to load transactions'}
             <Grid
+                gridTemplateColumns={'1fr auto 1fr auto 8em auto'}
+                header={(
+                    <>
+                        <GridHeader>
+                            {'Description'}
+                        </GridHeader>
+                        <GridHeader>
+                            {'Date'}
+                        </GridHeader>
+                        <GridHeader align={'center'}>
+                            {'Cash flow'}
+                        </GridHeader>
+                        <GridHeader>
+                            {'Tags'}
+                        </GridHeader>
+                        <GridHeader align={'end'}>
+                            {'Amount'}
+                        </GridHeader>
+                        <GridHeader/>
+                    </>
+                )}
                 items={data?.transactions}
                 keyFn={(transaction) => transaction.id}
             >
+
                 {(transaction) => (
                     <TransactionItem
                         onUpdate={refresh}

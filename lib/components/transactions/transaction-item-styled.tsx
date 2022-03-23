@@ -1,28 +1,24 @@
 import styled from 'styled-components';
+import {Title} from '../../design/title';
 
-export const Container = styled('div')`
-    @media (min-width: 60rem) {
-        display: flex;
-        justify-content: space-between;
-    }
+export const FromAccount = styled.span`
+    text-align: end;
 `;
 
-export const TitleContainer = styled.div`
-    align-items: baseline;
-    display: grid;
-    grid-auto-flow: column;
-    grid-gap: var(--grid-gap-small);
-    margin-bottom: var(--grid-gap-small);
+export const ToAccount = styled.span`
+    text-align: start;
 `;
 
-export const OnDate = styled.div`
-    font-size: .85em;
+export const Description = styled(Title).attrs({
+    size: 'h3'
+})`
+    font-variant: initial;
 `;
 
 export const CashFlow = styled.span`
     align-items: center;
     display: inline-grid;
-    grid-auto-flow: column;
     grid-gap: calc(var(--grid-gap) / 2);
+    grid-template-columns: 1fr auto 1fr;
 `;
 

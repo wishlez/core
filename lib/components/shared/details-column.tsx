@@ -2,7 +2,7 @@ import styled from 'styled-components';
 
 export const DetailsColumn = styled.section`
     display: flex;
-    flex-flow: column;
+    flex-direction: column;
 `;
 
 export const Details1 = styled(DetailsColumn)`
