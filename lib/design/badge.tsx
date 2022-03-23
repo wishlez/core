@@ -10,7 +10,6 @@ export const Badge = styled.span<Props>`
     border-radius: var(--border-radius);
     background-color: var(--with-color);
     color: var(--with-text-color);
-    cursor: pointer;
     user-select: none;
     transition: var(--transition);
 

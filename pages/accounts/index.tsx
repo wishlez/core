@@ -8,6 +8,7 @@ import {AccountItem} from '../../lib/components/accounts/account-item';
 import {PageTitle} from '../../lib/components/shared/page-title';
 import {swrKeys} from '../../lib/components/swr-keys';
 import {Grid} from '../../lib/design/grid';
+import {GridHeader} from '../../lib/design/grid-header';
 import {doGet} from '../../lib/helpers/fetch';
 import {getAccounts} from '../../lib/services/accounts';
 import {WithAccounts} from '../../types/accounts';
@@ -29,6 +30,21 @@ const Accounts: FunctionComponent<Props> = ({fallback}) => {
             <AccountCreate onCreate={refresh}/>
             {error && 'Failed to load accounts'}
             <Grid
+                gridTemplateColumns={'auto 1fr 8em auto'}
+                header={(
+                    <>
+                        <GridHeader>
+                            {'Name'}
+                        </GridHeader>
+                        <GridHeader>
+                            {'Type'}
+                        </GridHeader>
+                        <GridHeader align={'end'}>
+                            {'Balance'}
+                        </GridHeader>
+                        <GridHeader/>
+                    </>
+                )}
                 items={data?.accounts}
                 keyFn={(account) => account.id}
             >

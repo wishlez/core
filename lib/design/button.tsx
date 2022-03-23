@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import {WithColor, withColor} from './helpers/with-color';
 import {withSize, WithSize} from './helpers/with-size';
-import {withVariant, WithVariant} from './helpers/with-variant';
+import {withVariant, WithVariant, withVariantHover} from './helpers/with-variant';
 
 type Props = WithColor & WithSize & WithVariant
 
@@ -23,6 +23,7 @@ export const Button = styled.button<Props>`
     ${withColor}
     ${withSize}
     ${withVariant}
+    ${withVariantHover}
 `;
 
 Button.defaultProps = {

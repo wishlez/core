@@ -1,5 +1,4 @@
 import styled from 'styled-components';
-import {Title} from '../../design/title';
 
 export const FromAccount = styled.span`
     text-align: end;
@@ -7,12 +6,6 @@ export const FromAccount = styled.span`
 
 export const ToAccount = styled.span`
     text-align: start;
-`;
-
-export const Description = styled(Title).attrs({
-    size: 'h3'
-})`
-    font-variant: initial;
 `;
 
 export const CashFlow = styled.span`

@@ -6,10 +6,11 @@ import {FormattedDate} from '../../design/formatted-date';
 import {Icon} from '../../design/icon';
 import {BigAmount} from '../shared/big-amount';
 import {ItemActions} from '../shared/item-actions';
+import {ItemDescription} from '../shared/item-description';
 import {TagsContainer} from '../shared/tags-container';
 import {TransactionDelete} from './transaction-delete';
 import {TransactionEdit} from './transaction-edit';
-import {CashFlow, Description, FromAccount, ToAccount} from './transaction-item-styled';
+import {CashFlow, FromAccount, ToAccount} from './transaction-item-styled';
 
 type Props = {
     transaction: Transaction
@@ -20,9 +21,9 @@ const maxTags = 3;
 
 export const TransactionItem: FunctionComponent<Props> = (props) => (
     <>
-        <Description>
+        <ItemDescription>
             {props.transaction.description}
-        </Description>
+        </ItemDescription>
         <FormattedDate dateTime={props.transaction.date}/>
         <CashFlow>
             <FromAccount>
