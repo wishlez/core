@@ -79,7 +79,7 @@ export const AppContainer: FunctionComponent = (props) => {
                                 type={'button'}
                                 variant={'text'}
                             >
-                                <Icon type={'account_circle'}/>
+                                <Icon type={'user'}/>
                             </Button>
                         </MenuText>
                         <MenuItem

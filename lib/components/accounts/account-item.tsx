@@ -39,7 +39,7 @@ export const AccountItem: FunctionComponent<Props> = (props) => (
                     >
                         <Icon
                             size={'in-text'}
-                            type={'lock'}
+                            type={'locked'}
                         />
                         {'Built-in'}
                     </Badge>
