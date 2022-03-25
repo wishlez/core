@@ -12,7 +12,7 @@ type Props<T extends AnyObject> = {
 }
 
 const _Grid = styled(Card)`
-    align-items: baseline;
+    align-items: center;
     display: grid;
     grid-gap: var(--grid-gap);
     white-space: nowrap;
@@ -21,10 +21,6 @@ const _Grid = styled(Card)`
 const Separator = styled.div`
     border-bottom: 1px solid var(--mono-800);
     grid-column: 1/-1;
-
-    &:last-of-type {
-        display: none;
-    }
 `;
 
 type Grid = <T extends AnyObject>(props: PropsWithChildren<Props<T>>) => ReactElement<any, any>
