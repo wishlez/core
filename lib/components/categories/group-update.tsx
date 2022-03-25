@@ -3,17 +3,17 @@ import {Group, GroupRequest} from '../../../types/categories';
 import {Button} from '../../design/button';
 import {Icon} from '../../design/icon';
 import {Modal} from '../../design/modal';
-import {doPut} from '../../helpers/fetch';
+import {doDelete, doPut} from '../../helpers/fetch';
 import {getAdjustedTags, toTagIds} from '../../helpers/tags';
 import {swrKeys} from '../swr-keys';
 import {GroupForm} from './group-form';
 
 type Props = {
     group: Group
-    onSave: () => void
+    onUpdate: () => void
 }
 
-export const GroupEdit: FunctionComponent<Props> = (props) => {
+export const GroupUpdate: FunctionComponent<Props> = (props) => {
     const [isOpen, setIsOpen] = useState<boolean>(false);
     const existingTags = toTagIds(props.group.tags);
 
@@ -28,18 +28,25 @@ export const GroupEdit: FunctionComponent<Props> = (props) => {
         });
 
         closeModal();
-        props.onSave();
+        props.onUpdate();
+    };
+
+    const deleteGroup = async () => {
+        await doDelete(swrKeys.categories.groups, {id: props.group.id});
+
+        closeModal();
+        props.onUpdate();
     };
 
     return (
         <>
             <Button
-                color={'secondary'}
+                color={'tertiary'}
                 onClick={openModal}
                 size={'compact'}
                 variant={'text'}
             >
-                <Icon type={'edit'}/>
+                <Icon type={'open'}/>
             </Button>
             <Modal
                 isOpen={isOpen}
@@ -48,6 +55,7 @@ export const GroupEdit: FunctionComponent<Props> = (props) => {
                 <GroupForm
                     group={props.group}
                     onCancel={closeModal}
+                    onDelete={deleteGroup}
                     onSubmit={saveGroup}
                     title={`Edit group #${props.group.id}`}
                 />

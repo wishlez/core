@@ -7,13 +7,15 @@ import {Form} from '../../design/form';
 import {FormActions} from '../../design/form-actions';
 import {FormFields} from '../../design/form-fields';
 import {FormTitle} from '../../design/form-title';
+import {Icon} from '../../design/icon';
 import {Input} from '../../design/input';
 import {SelectSingle} from '../../design/select-single';
 import {doGet} from '../../helpers/fetch';
 import {swrKeys} from '../swr-keys';
 
 type Props = {
-    onCancel?: () => void
+    onCancel: () => void
+    onDelete?: () => void
     onSubmit: (account: AccountRequest) => void
     account?: Account
     title: string
@@ -26,7 +28,7 @@ export const AccountForm: FunctionComponent<Props> = (props) => {
     const accountTypeRef = useRef<HTMLSelectElement>();
     const {data: {accountTypes} = {accountTypes: []}} = useSWR<WithAccountTypes>(swrKeys.accountTypes, doGet);
 
-    const createAccount = async (event: FormEvent) => {
+    const submitAccount = async (event: FormEvent) => {
         event.preventDefault();
 
         await props.onSubmit({
@@ -37,14 +39,18 @@ export const AccountForm: FunctionComponent<Props> = (props) => {
         });
     };
 
-    const cancel = () => {
-        props.onCancel?.();
-    };
-
     return (
-        <Form onSubmit={createAccount}>
+        <Form onSubmit={submitAccount}>
             <FormTitle>
                 {props.title}
+                <Button
+                    color={'secondary'}
+                    onClick={props.onCancel}
+                    size={'compact'}
+                    variant={'text'}
+                >
+                    <Icon type={'close'}/>
+                </Button>
             </FormTitle>
             <FormFields>
                 <Input
@@ -89,16 +95,18 @@ export const AccountForm: FunctionComponent<Props> = (props) => {
                 </SelectSingle>
             </FormFields>
             <FormActions>
+                {props.account && (
+                    <Button
+                        color={'danger'}
+                        onClick={props.onDelete}
+                        type={'reset'}
+                        variant={'outlined'}
+                    >
+                        {'Delete'}
+                    </Button>
+                )}
                 <Button>
-                    {'Save'}
-                </Button>
-                <Button
-                    color={'secondary'}
-                    onClick={cancel}
-                    type={'reset'}
-                    variant={'outlined'}
-                >
-                    {'Cancel'}
+                    {props.account ? 'Update' : 'Create'}
                 </Button>
             </FormActions>
         </Form>

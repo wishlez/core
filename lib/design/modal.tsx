@@ -1,3 +1,4 @@
+import {AnimatePresence, motion} from 'framer-motion';
 import {FunctionComponent} from 'react';
 import styled from 'styled-components';
 import {Backdrop} from './backdrop';
@@ -6,11 +7,12 @@ import {Portal} from './portal';
 
 type Props = {
     isOpen: boolean
-    onClose?: () => void
+    onClose: () => void
 }
 
 const ModalContainer = styled(FullScreen)`
     display: flex;
+    pointer-events: none;
 
     @media (min-width: 32rem) {
         align-items: center;
@@ -18,7 +20,7 @@ const ModalContainer = styled(FullScreen)`
     }
 `;
 
-const ModalContent = styled.div`
+const ModalContent = styled(motion.div)`
     background-color: var(--mono-999);
     height: 100vh;
     width: 100vw;
@@ -32,16 +34,24 @@ const ModalContent = styled.div`
     }
 `;
 
-export const Modal: FunctionComponent<Props> = (props) => props.isOpen && (
+export const Modal: FunctionComponent<Props> = (props) => (
     <Portal>
         <Backdrop
-            isVisible={true}
+            isVisible={props.isOpen}
             onClick={props.onClose}
         />
-        <ModalContainer>
-            <ModalContent>
-                {props.children}
-            </ModalContent>
-        </ModalContainer>
+        <AnimatePresence>
+            {props.isOpen && (
+                <ModalContainer>
+                    <ModalContent
+                        animate={{opacity: 1, scale: 1}}
+                        exit={{opacity: 0, scale: 0}}
+                        initial={{opacity: 0, scale: 0}}
+                    >
+                        {props.children}
+                    </ModalContent>
+                </ModalContainer>
+            )}
+        </AnimatePresence>
     </Portal>
 );

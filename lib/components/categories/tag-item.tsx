@@ -1,7 +1,7 @@
 import {FunctionComponent} from 'react';
 import {Tag} from '../../../types/categories';
-import {TagDelete} from './tag-delete';
-import {TagEdit} from './tag-edit';
+import {ItemDescription} from '../shared/item-description';
+import {TagUpdate} from './tag-update';
 
 type Props = {
     tag: Tag
@@ -10,18 +10,12 @@ type Props = {
 
 export const TagItem: FunctionComponent<Props> = (props) => (
     <>
-        <div>
+        <ItemDescription>
             {props.tag.name}
-        </div>
-        <div>
-            <TagEdit
-                onSave={props.onUpdate}
-                tag={props.tag}
-            />
-            <TagDelete
-                onDelete={props.onUpdate}
-                tag={props.tag}
-            />
-        </div>
+        </ItemDescription>
+        <TagUpdate
+            onUpdate={props.onUpdate}
+            tag={props.tag}
+        />
     </>
 );

@@ -4,8 +4,7 @@ import {FormattedAmount} from '../../design/formatted-amount';
 import {BigAmount} from '../shared/big-amount';
 import {ItemDescription} from '../shared/item-description';
 import {TagsContainer} from '../shared/tags-container';
-import {GroupDelete} from './group-delete';
-import {GroupEdit} from './group-edit';
+import {GroupUpdate} from './group-update';
 
 type Props = {
     group: Group
@@ -24,15 +23,9 @@ export const GroupItem: FunctionComponent<Props> = (props) => (
         <BigAmount>
             <FormattedAmount number={props.group.budget}/>
         </BigAmount>
-        <section>
-            <GroupEdit
-                group={props.group}
-                onSave={props.onUpdate}
-            />
-            <GroupDelete
-                group={props.group}
-                onDelete={props.onUpdate}
-            />
-        </section>
+        <GroupUpdate
+            group={props.group}
+            onUpdate={props.onUpdate}
+        />
     </>
 );

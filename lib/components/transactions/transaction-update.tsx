@@ -3,17 +3,17 @@ import {Transaction, TransactionRequest} from '../../../types/transactions';
 import {Button} from '../../design/button';
 import {Icon} from '../../design/icon';
 import {Modal} from '../../design/modal';
-import {doPut} from '../../helpers/fetch';
+import {doDelete, doPut} from '../../helpers/fetch';
 import {getAdjustedTags, toTagIds} from '../../helpers/tags';
 import {swrKeys} from '../swr-keys';
 import {TransactionForm} from './transaction-form';
 
 type Props = {
     transaction: Transaction
-    onSave: () => void
+    onUpdate: () => void
 }
 
-export const TransactionEdit: FunctionComponent<Props> = (props) => {
+export const TransactionUpdate: FunctionComponent<Props> = (props) => {
     const [isOpen, setIsOpen] = useState<boolean>(false);
     const existingTags = toTagIds(props.transaction.tags);
 
@@ -28,18 +28,25 @@ export const TransactionEdit: FunctionComponent<Props> = (props) => {
         });
 
         closeModal();
-        props.onSave();
+        props.onUpdate();
+    };
+
+    const deleteTransaction = async () => {
+        await doDelete(swrKeys.transactions, {id: props.transaction.id});
+
+        closeModal();
+        props.onUpdate();
     };
 
     return (
         <>
             <Button
-                color={'secondary'}
+                color={'tertiary'}
                 onClick={openModal}
                 size={'compact'}
                 variant={'text'}
             >
-                <Icon type={'edit'}/>
+                <Icon type={'open'}/>
             </Button>
             <Modal
                 isOpen={isOpen}
@@ -47,6 +54,7 @@ export const TransactionEdit: FunctionComponent<Props> = (props) => {
             >
                 <TransactionForm
                     onCancel={closeModal}
+                    onDelete={deleteTransaction}
                     onSubmit={saveTransaction}
                     title={`Edit transaction #${props.transaction.id}`}
                     transaction={props.transaction}

@@ -3,7 +3,11 @@ import {useRouter} from 'next/router';
 import {FunctionComponent} from 'react';
 import {authenticated} from '../../lib/auth/ss-auth';
 import {AuthFormContainer} from '../../lib/components/shared/auth-form-container';
-import {ConfirmationForm} from '../../lib/components/shared/confirmation-form';
+import {Button} from '../../lib/design/button';
+import {Form} from '../../lib/design/form';
+import {FormActions} from '../../lib/design/form-actions';
+import {FormFields} from '../../lib/design/form-fields';
+import {FormTitle} from '../../lib/design/form-title';
 
 type Props = {
     csrfToken: string
@@ -14,13 +18,35 @@ const SignOut: FunctionComponent<Props> = ({csrfToken}) => {
 
     return (
         <AuthFormContainer>
-            <ConfirmationForm
+            <Form
                 action={'/api/auth/signout'}
                 method={'post'}
                 onReset={() => router.back()}
-                title={'You are about to sign out'}
-                token={csrfToken}
-            />
+            >
+                <FormTitle>
+                    {'You are about to sign out.'}
+                </FormTitle>
+                <FormFields>
+                    <input
+                        name={'csrfToken'}
+                        required
+                        type={'hidden'}
+                        value={csrfToken}
+                    />
+                </FormFields>
+                <FormActions>
+                    <Button
+                        color={'secondary'}
+                        type={'reset'}
+                        variant={'text'}
+                    >
+                        {'Go back'}
+                    </Button>
+                    <Button>
+                        {'Continue'}
+                    </Button>
+                </FormActions>
+            </Form>
         </AuthFormContainer>
     );
 };

@@ -4,10 +4,8 @@ import {Badge} from '../../design/badge';
 import {FormattedAmount} from '../../design/formatted-amount';
 import {Icon} from '../../design/icon';
 import {BigAmount} from '../shared/big-amount';
-import {ItemActions} from '../shared/item-actions';
 import {ItemDescription} from '../shared/item-description';
-import {AccountDelete} from './account-delete';
-import {AccountEdit} from './account-edit';
+import {AccountUpdate} from './account-update';
 
 type Props = {
     account: Account
@@ -40,16 +38,10 @@ export const AccountItem: FunctionComponent<Props> = (props) => (
                 <BigAmount>
                     <FormattedAmount number={0}/>
                 </BigAmount>
-                <ItemActions>
-                    <AccountEdit
-                        account={props.account}
-                        onSave={props.onUpdate}
-                    />
-                    <AccountDelete
-                        account={props.account}
-                        onDelete={props.onUpdate}
-                    />
-                </ItemActions>
+                <AccountUpdate
+                    account={props.account}
+                    onUpdate={props.onUpdate}
+                />
             </>
         ) : (
             <>

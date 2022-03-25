@@ -7,13 +7,15 @@ import {FormActions} from '../../design/form-actions';
 import {FormFields} from '../../design/form-fields';
 import {FormTitle} from '../../design/form-title';
 import {toSelectedIds} from '../../design/helpers/selected-ids';
+import {Icon} from '../../design/icon';
 import {Input} from '../../design/input';
 import {SelectMultiple} from '../../design/select-multiple';
 import {doGet} from '../../helpers/fetch';
 import {swrKeys} from '../swr-keys';
 
 type Props = {
-    onCancel?: () => void
+    onCancel: () => void
+    onDelete?: () => void
     onSubmit: (group: GroupRequest) => void
     group?: Group
     title: string
@@ -27,7 +29,7 @@ export const GroupForm: FunctionComponent<Props> = (props) => {
 
     const existingTags = props.group?.tags.map((transactionTag) => transactionTag.tagId.toString());
 
-    const createGroup = async (event: FormEvent) => {
+    const submitGroup = async (event: FormEvent) => {
         event.preventDefault();
 
         await props.onSubmit({
@@ -37,14 +39,18 @@ export const GroupForm: FunctionComponent<Props> = (props) => {
         });
     };
 
-    const cancel = () => {
-        props.onCancel?.();
-    };
-
     return (
-        <Form onSubmit={createGroup}>
+        <Form onSubmit={submitGroup}>
             <FormTitle>
                 {props.title}
+                <Button
+                    color={'secondary'}
+                    onClick={props.onCancel}
+                    size={'compact'}
+                    variant={'text'}
+                >
+                    <Icon type={'close'}/>
+                </Button>
             </FormTitle>
             <FormFields>
                 <Input
@@ -82,16 +88,18 @@ export const GroupForm: FunctionComponent<Props> = (props) => {
                 </SelectMultiple>
             </FormFields>
             <FormActions>
+                {props.group && (
+                    <Button
+                        color={'danger'}
+                        onClick={props.onDelete}
+                        type={'reset'}
+                        variant={'outlined'}
+                    >
+                        {'Delete'}
+                    </Button>
+                )}
                 <Button>
-                    {'Save'}
-                </Button>
-                <Button
-                    color={'secondary'}
-                    onClick={cancel}
-                    type={'reset'}
-                    variant={'outlined'}
-                >
-                    {'Cancel'}
+                    {props.group ? 'Update' : 'Create'}
                 </Button>
             </FormActions>
         </Form>

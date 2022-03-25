@@ -9,6 +9,7 @@ import {FormActions} from '../../design/form-actions';
 import {FormFields} from '../../design/form-fields';
 import {FormTitle} from '../../design/form-title';
 import {toSelectedIds} from '../../design/helpers/selected-ids';
+import {Icon} from '../../design/icon';
 import {Input} from '../../design/input';
 import {SelectMultiple} from '../../design/select-multiple';
 import {SelectSingle} from '../../design/select-single';
@@ -16,7 +17,8 @@ import {doGet} from '../../helpers/fetch';
 import {swrKeys} from '../swr-keys';
 
 type Props = {
-    onCancel?: () => void
+    onCancel: () => void
+    onDelete?: () => void
     onSubmit: (transaction: TransactionRequest) => void
     transaction?: Transaction
     title: string
@@ -34,7 +36,7 @@ export const TransactionForm: FunctionComponent<Props> = (props) => {
 
     const existingTags = props.transaction?.tags.map((transactionTag) => transactionTag.tagId.toString());
 
-    const createTransaction = async (event: FormEvent) => {
+    const submitTransaction = async (event: FormEvent) => {
         event.preventDefault();
 
         await props.onSubmit({
@@ -47,14 +49,18 @@ export const TransactionForm: FunctionComponent<Props> = (props) => {
         });
     };
 
-    const cancel = () => {
-        props.onCancel?.();
-    };
-
     return (
-        <Form onSubmit={createTransaction}>
+        <Form onSubmit={submitTransaction}>
             <FormTitle>
                 {props.title}
+                <Button
+                    color={'secondary'}
+                    onClick={props.onCancel}
+                    size={'compact'}
+                    variant={'text'}
+                >
+                    <Icon type={'close'}/>
+                </Button>
             </FormTitle>
             <FormFields>
                 <Input
@@ -128,16 +134,18 @@ export const TransactionForm: FunctionComponent<Props> = (props) => {
                 </SelectMultiple>
             </FormFields>
             <FormActions>
+                {props.transaction && (
+                    <Button
+                        color={'danger'}
+                        onClick={props.onDelete}
+                        type={'reset'}
+                        variant={'outlined'}
+                    >
+                        {'Delete'}
+                    </Button>
+                )}
                 <Button>
-                    {'Save'}
-                </Button>
-                <Button
-                    color={'secondary'}
-                    onClick={cancel}
-                    type={'reset'}
-                    variant={'outlined'}
-                >
-                    {'Cancel'}
+                    {props.transaction ? 'Update' : 'Create'}
                 </Button>
             </FormActions>
         </Form>

@@ -3,16 +3,16 @@ import {Tag, TagRequest} from '../../../types/categories';
 import {Button} from '../../design/button';
 import {Icon} from '../../design/icon';
 import {Modal} from '../../design/modal';
-import {doPut} from '../../helpers/fetch';
+import {doDelete, doPut} from '../../helpers/fetch';
 import {swrKeys} from '../swr-keys';
 import {TagForm} from './tag-form';
 
 type Props = {
     tag: Tag
-    onSave: () => void
+    onUpdate: () => void
 }
 
-export const TagEdit: FunctionComponent<Props> = (props) => {
+export const TagUpdate: FunctionComponent<Props> = (props) => {
     const [isOpen, setIsOpen] = useState<boolean>(false);
 
     const openModal = () => setIsOpen(true);
@@ -25,18 +25,25 @@ export const TagEdit: FunctionComponent<Props> = (props) => {
         });
 
         closeModal();
-        props.onSave();
+        props.onUpdate();
+    };
+
+    const deleteTag = async () => {
+        await doDelete(swrKeys.categories.tags, {id: props.tag.id});
+
+        closeModal();
+        props.onUpdate();
     };
 
     return (
         <>
             <Button
-                color={'secondary'}
+                color={'tertiary'}
                 onClick={openModal}
                 size={'compact'}
                 variant={'text'}
             >
-                <Icon type={'edit'}/>
+                <Icon type={'open'}/>
             </Button>
             <Modal
                 isOpen={isOpen}
@@ -44,6 +51,7 @@ export const TagEdit: FunctionComponent<Props> = (props) => {
             >
                 <TagForm
                     onCancel={closeModal}
+                    onDelete={deleteTag}
                     onSubmit={saveTag}
                     tag={props.tag}
                     title={`Edit tag #${props.tag.id}`}

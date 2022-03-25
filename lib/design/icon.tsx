@@ -15,11 +15,13 @@ export type IconType =
     | 'transaction'
     | 'transferred-to'
     | 'user'
+    | 'open'
     ;
 
 const iconMap: Partial<AnyObject<IconType, string>> = {
     'account': 'account_balance',
     'locked': 'lock',
+    'open': 'launch',
     'transaction': 'receipt_long',
     'transferred-to': 'east',
     'user': 'account_circle'

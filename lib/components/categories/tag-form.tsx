@@ -5,10 +5,12 @@ import {Form} from '../../design/form';
 import {FormActions} from '../../design/form-actions';
 import {FormFields} from '../../design/form-fields';
 import {FormTitle} from '../../design/form-title';
+import {Icon} from '../../design/icon';
 import {Input} from '../../design/input';
 
 type Props = {
-    onCancel?: () => void
+    onCancel: () => void
+    onDelete?: () => void
     onSubmit: (tag: TagRequest) => void
     tag?: Tag
     title: string
@@ -17,7 +19,7 @@ type Props = {
 export const TagForm: FunctionComponent<Props> = (props) => {
     const nameRef = useRef<HTMLInputElement>();
 
-    const createTag = async (event: FormEvent) => {
+    const submitTag = async (event: FormEvent) => {
         event.preventDefault();
 
         await props.onSubmit({
@@ -25,14 +27,18 @@ export const TagForm: FunctionComponent<Props> = (props) => {
         });
     };
 
-    const cancel = () => {
-        props.onCancel?.();
-    };
-
     return (
-        <Form onSubmit={createTag}>
+        <Form onSubmit={submitTag}>
             <FormTitle>
                 {props.title}
+                <Button
+                    color={'secondary'}
+                    onClick={props.onCancel}
+                    size={'compact'}
+                    variant={'text'}
+                >
+                    <Icon type={'close'}/>
+                </Button>
             </FormTitle>
             <FormFields>
                 <Input
@@ -45,16 +51,18 @@ export const TagForm: FunctionComponent<Props> = (props) => {
                 />
             </FormFields>
             <FormActions>
+                {props.tag && (
+                    <Button
+                        color={'danger'}
+                        onClick={props.onDelete}
+                        type={'reset'}
+                        variant={'outlined'}
+                    >
+                        {'Delete'}
+                    </Button>
+                )}
                 <Button>
-                    {'Save'}
-                </Button>
-                <Button
-                    color={'secondary'}
-                    onClick={cancel}
-                    type={'reset'}
-                    variant={'outlined'}
-                >
-                    {'Cancel'}
+                    {props.tag ? 'Update' : 'Create'}
                 </Button>
             </FormActions>
         </Form>

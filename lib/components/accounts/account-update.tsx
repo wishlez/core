@@ -3,16 +3,16 @@ import {Account, AccountRequest} from '../../../types/accounts';
 import {Button} from '../../design/button';
 import {Icon} from '../../design/icon';
 import {Modal} from '../../design/modal';
-import {doPut} from '../../helpers/fetch';
+import {doDelete, doPut} from '../../helpers/fetch';
 import {swrKeys} from '../swr-keys';
 import {AccountForm} from './account-form';
 
 type Props = {
     account: Account
-    onSave: () => void
+    onUpdate: () => void
 }
 
-export const AccountEdit: FunctionComponent<Props> = (props) => {
+export const AccountUpdate: FunctionComponent<Props> = (props) => {
     const [isOpen, setIsOpen] = useState<boolean>(false);
 
     const openModal = () => setIsOpen(true);
@@ -25,18 +25,25 @@ export const AccountEdit: FunctionComponent<Props> = (props) => {
         });
 
         closeModal();
-        props.onSave();
+        props.onUpdate();
+    };
+
+    const deleteAccount = async () => {
+        await doDelete(swrKeys.accounts, {id: props.account.id});
+
+        closeModal();
+        props.onUpdate();
     };
 
     return (
         <>
             <Button
-                color={'secondary'}
+                color={'tertiary'}
                 onClick={openModal}
                 size={'compact'}
                 variant={'text'}
             >
-                <Icon type={'edit'}/>
+                <Icon type={'open'}/>
             </Button>
             <Modal
                 isOpen={isOpen}
@@ -45,6 +52,7 @@ export const AccountEdit: FunctionComponent<Props> = (props) => {
                 <AccountForm
                     account={props.account}
                     onCancel={closeModal}
+                    onDelete={deleteAccount}
                     onSubmit={saveAccount}
                     title={`Edit account #${props.account.id}`}
                 />
