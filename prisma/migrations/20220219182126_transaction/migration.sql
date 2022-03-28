@@ -8,7 +8,6 @@ CREATE TABLE `Transaction` (
     `toAccountId` INTEGER NOT NULL,
     `userId` INTEGER NOT NULL,
 
-    UNIQUE INDEX `Transaction_description_key`(`description`),
     PRIMARY KEY (`id`)
 ) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 

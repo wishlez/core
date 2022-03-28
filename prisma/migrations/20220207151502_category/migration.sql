@@ -4,7 +4,7 @@ CREATE TABLE `CategoryTag` (
     `name` VARCHAR(256) NOT NULL,
     `userId` INTEGER NOT NULL,
 
-    UNIQUE INDEX `CategoryTag_name_key`(`name`),
+    UNIQUE INDEX `CategoryTag_name_userId_key`(`name`, `userId`),
     PRIMARY KEY (`id`)
 ) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 
@@ -15,7 +15,7 @@ CREATE TABLE `CategoryGroup` (
     `budget` DECIMAL(10, 2) NOT NULL DEFAULT 0,
     `userId` INTEGER NOT NULL,
 
-    UNIQUE INDEX `CategoryGroup_name_key`(`name`),
+    UNIQUE INDEX `CategoryGroup_name_userId_key`(`name`, `userId`),
     PRIMARY KEY (`id`)
 ) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 

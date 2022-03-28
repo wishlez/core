@@ -42,26 +42,30 @@ model Account {
 
 model CategoryTag {
     id           Int                @id @default(autoincrement())
-    name         String             @unique @db.VarChar(256)
+    name         String             @db.VarChar(256)
     user         User               @relation(fields: [userId], references: [id], onDelete: Cascade, onUpdate: Cascade)
     groups       CategoryTagGroup[]
     transactions TransactionTag[]
     userId       Int
+
+    @@unique([name, userId])
 }
 
 model CategoryGroup {
     id     Int                @id @default(autoincrement())
-    name   String             @unique @db.VarChar(256)
+    name   String             @db.VarChar(256)
     budget Decimal            @default(0) @db.Decimal(10, 2)
     user   User               @relation(fields: [userId], references: [id], onDelete: Cascade, onUpdate: Cascade)
     tags   CategoryTagGroup[]
     userId Int
+
+    @@unique([name, userId])
 }
 
 model CategoryTagGroup {
     id      Int           @id @default(autoincrement())
-    tag     CategoryTag   @relation(references: [id], fields: [tagId], onDelete: Cascade, onUpdate: Cascade)
-    group   CategoryGroup @relation(references: [id], fields: [groupId], onDelete: Cascade, onUpdate: Cascade)
+    tag     CategoryTag   @relation(fields: [tagId], references: [id], onDelete: Cascade, onUpdate: Cascade)
+    group   CategoryGroup @relation(fields: [groupId], references: [id], onDelete: Cascade, onUpdate: Cascade)
     tagId   Int
     groupId Int
 
@@ -70,7 +74,7 @@ model CategoryTagGroup {
 
 model Transaction {
     id            Int              @id @default(autoincrement())
-    description   String           @unique @db.VarChar(256)
+    description   String           @db.VarChar(256)
     amount        Decimal          @db.Decimal(10, 2)
     date          DateTime         @db.Date
     fromAccount   Account          @relation(name: "fromAccount", fields: [fromAccountId], references: [id], onDelete: Cascade, onUpdate: Cascade)
@@ -84,8 +88,8 @@ model Transaction {
 
 model TransactionTag {
     id            Int         @id @default(autoincrement())
-    tag           CategoryTag @relation(references: [id], fields: [tagId], onDelete: Cascade, onUpdate: Cascade)
-    transaction   Transaction @relation(references: [id], fields: [transactionId], onDelete: Cascade, onUpdate: Cascade)
+    tag           CategoryTag @relation(fields: [tagId], references: [id], onDelete: Cascade, onUpdate: Cascade)
+    transaction   Transaction @relation(fields: [transactionId], references: [id], onDelete: Cascade, onUpdate: Cascade)
     tagId         Int
     transactionId Int
 
