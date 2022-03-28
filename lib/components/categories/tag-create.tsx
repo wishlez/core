@@ -4,6 +4,7 @@ import {Fab} from '../../design/fab';
 import {Icon} from '../../design/icon';
 import {Modal} from '../../design/modal';
 import {doPost} from '../../helpers/fetch';
+import {swrKeys} from '../swr-keys';
 import {TagForm} from './tag-form';
 
 type Props = {
@@ -17,7 +18,7 @@ export const TagCreate: FunctionComponent<Props> = (props) => {
     const closeModal = () => setIsOpen(false);
 
     const createTag = async (tag: TagRequest) => {
-        await doPost('/api/categories/tags', tag);
+        await doPost(swrKeys.categories.tags, tag);
 
         closeModal();
         props.onCreate();

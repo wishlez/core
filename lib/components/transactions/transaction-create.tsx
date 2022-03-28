@@ -4,6 +4,7 @@ import {Fab} from '../../design/fab';
 import {Icon} from '../../design/icon';
 import {Modal} from '../../design/modal';
 import {doPost} from '../../helpers/fetch';
+import {swrKeys} from '../swr-keys';
 import {TransactionForm} from './transaction-form';
 
 type Props = {
@@ -17,7 +18,7 @@ export const TransactionCreate: FunctionComponent<Props> = (props) => {
     const closeModal = () => setIsOpen(false);
 
     const createTransaction = async (transaction: TransactionRequest) => {
-        await doPost('/api/transactions', transaction);
+        await doPost(swrKeys.transactions, transaction);
 
         closeModal();
         props.onCreate();

@@ -4,6 +4,7 @@ import {Fab} from '../../design/fab';
 import {Icon} from '../../design/icon';
 import {Modal} from '../../design/modal';
 import {doPost} from '../../helpers/fetch';
+import {swrKeys} from '../swr-keys';
 import {AccountForm} from './account-form';
 
 type Props = {
@@ -17,7 +18,7 @@ export const AccountCreate: FunctionComponent<Props> = (props) => {
     const closeModal = () => setIsOpen(false);
 
     const createAccount = async (account: AccountRequest) => {
-        await doPost('/api/accounts', account);
+        await doPost(swrKeys.accounts, account);
 
         closeModal();
         props.onCreate();

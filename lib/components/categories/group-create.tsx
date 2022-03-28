@@ -4,6 +4,7 @@ import {Fab} from '../../design/fab';
 import {Icon} from '../../design/icon';
 import {Modal} from '../../design/modal';
 import {doPost} from '../../helpers/fetch';
+import {swrKeys} from '../swr-keys';
 import {GroupForm} from './group-form';
 
 type Props = {
@@ -17,7 +18,7 @@ export const GroupCreate: FunctionComponent<Props> = (props) => {
     const closeModal = () => setIsOpen(false);
 
     const createGroup = async (group: GroupRequest) => {
-        await doPost('/api/categories/groups', group);
+        await doPost(swrKeys.categories.groups, group);
 
         closeModal();
         props.onCreate();
