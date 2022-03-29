@@ -5,6 +5,7 @@ import {authenticated} from '../../lib/auth/ss-auth';
 import {getUser} from '../../lib/auth/ss-user';
 import {TagCreate} from '../../lib/components/categories/tag-create';
 import {TagItem} from '../../lib/components/categories/tag-item';
+import {EmptyDataMessage} from '../../lib/components/shared/empty-data-message';
 import {PageTitle} from '../../lib/components/shared/page-title';
 import {swrKeys} from '../../lib/components/swr-keys';
 import {Grid} from '../../lib/design/grid';
@@ -29,26 +30,28 @@ const Tags: FunctionComponent<Props> = ({fallback}) => {
             <PageTitle title={'Categories: Tags'}/>
             <TagCreate onCreate={refresh}/>
             {error && 'Failed to load tags'}
-            <Grid
-                gridTemplateColumns={'1fr auto'}
-                header={(
-                    <>
-                        <GridHeader>
-                            {'Name'}
-                        </GridHeader>
-                        <GridHeader/>
-                    </>
-                )}
-                items={data?.tags}
-                keyFn={(tag) => tag.id}
-            >
-                {(tag) => (
-                    <TagItem
-                        onUpdate={refresh}
-                        tag={tag}
-                    />
-                )}
-            </Grid>
+            <EmptyDataMessage length={data?.groups?.length}>
+                <Grid
+                    gridTemplateColumns={'1fr auto'}
+                    header={(
+                        <>
+                            <GridHeader>
+                                {'Name'}
+                            </GridHeader>
+                            <GridHeader/>
+                        </>
+                    )}
+                    items={data?.tags}
+                    keyFn={(tag) => tag.id}
+                >
+                    {(tag) => (
+                        <TagItem
+                            onUpdate={refresh}
+                            tag={tag}
+                        />
+                    )}
+                </Grid>
+            </EmptyDataMessage>
         </SWRConfig>
     );
 };

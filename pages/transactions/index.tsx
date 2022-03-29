@@ -3,6 +3,7 @@ import {FunctionComponent} from 'react';
 import useSWR, {SWRConfig, useSWRConfig} from 'swr';
 import {authenticated} from '../../lib/auth/ss-auth';
 import {getUser} from '../../lib/auth/ss-user';
+import {EmptyDataMessage} from '../../lib/components/shared/empty-data-message';
 import {PageTitle} from '../../lib/components/shared/page-title';
 import {swrKeys} from '../../lib/components/swr-keys';
 import {TransactionCreate} from '../../lib/components/transactions/transaction-create';
@@ -28,39 +29,41 @@ const Transactions: FunctionComponent<Props> = ({fallback}) => {
         <SWRConfig value={{fallback}}>
             <PageTitle title={'Transactions'}/>
             {error && 'Failed to load transactions'}
-            <Grid
-                gridTemplateColumns={'1fr auto 1fr auto 8em auto'}
-                header={(
-                    <>
-                        <GridHeader>
-                            {'Description'}
-                        </GridHeader>
-                        <GridHeader>
-                            {'Date'}
-                        </GridHeader>
-                        <GridHeader align={'center'}>
-                            {'Cash flow'}
-                        </GridHeader>
-                        <GridHeader>
-                            {'Tags'}
-                        </GridHeader>
-                        <GridHeader align={'end'}>
-                            {'Amount'}
-                        </GridHeader>
-                        <GridHeader/>
-                    </>
-                )}
-                items={data?.transactions}
-                keyFn={(transaction) => transaction.id}
-            >
+            <EmptyDataMessage length={data?.groups?.length}>
+                <Grid
+                    gridTemplateColumns={'1fr auto 1fr auto 8em auto'}
+                    header={(
+                        <>
+                            <GridHeader>
+                                {'Description'}
+                            </GridHeader>
+                            <GridHeader>
+                                {'Date'}
+                            </GridHeader>
+                            <GridHeader align={'center'}>
+                                {'Cash flow'}
+                            </GridHeader>
+                            <GridHeader>
+                                {'Tags'}
+                            </GridHeader>
+                            <GridHeader align={'end'}>
+                                {'Amount'}
+                            </GridHeader>
+                            <GridHeader/>
+                        </>
+                    )}
+                    items={data?.transactions}
+                    keyFn={(transaction) => transaction.id}
+                >
 
-                {(transaction) => (
-                    <TransactionItem
-                        onUpdate={refresh}
-                        transaction={transaction}
-                    />
-                )}
-            </Grid>
+                    {(transaction) => (
+                        <TransactionItem
+                            onUpdate={refresh}
+                            transaction={transaction}
+                        />
+                    )}
+                </Grid>
+            </EmptyDataMessage>
             <TransactionCreate onCreate={refresh}/>
         </SWRConfig>
     );
