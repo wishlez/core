@@ -49,7 +49,7 @@ const Input = styled.input<WithInputError>`
 export const Switch = forwardRef<HTMLInputElement, Props>(({label, note, error, ...props}, ref) => {
     const [invalid, setInvalid] = useState<boolean>(false);
     const id = props.id || getRandomId('select');
-    const [isOn, setIsOn] = useState(props.checked);
+    const [isOn, setIsOn] = useState(props.defaultChecked);
 
     const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
         setIsOn(event.target.checked);

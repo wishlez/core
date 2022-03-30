@@ -4,6 +4,7 @@ import {AnyObject} from '../../types/object';
 export type IconType =
     | 'account'
     | 'add'
+    | 'automate'
     | 'category'
     | 'close'
     | 'dashboard'
@@ -20,6 +21,7 @@ export type IconType =
 
 const iconMap: Partial<AnyObject<IconType, string>> = {
     'account': 'account_balance',
+    'automate': 'architecture',
     'locked': 'lock',
     'open': 'launch',
     'transaction': 'receipt_long',

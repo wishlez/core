@@ -1,20 +1,14 @@
 import {getPrismaClient} from '../lib/helpers/prisma';
-import {AccountTypes} from '../types/account-types';
+import {seedAccountTypes} from './seed-account-types';
+import {seedActionOperators} from './seed-action-operators';
+import {seedConditionOperators} from './seed-condition-operators';
 
 const prisma = getPrismaClient();
 
-const data: { type: AccountTypes }[] = [
-    {type: 'Asset'},
-    {type: 'Expense'},
-    {type: 'Revenue'},
-    {type: 'Equity'},
-    {type: 'Liabilities'}
-];
-
 const seed = async () => {
-    await prisma.accountType.createMany({
-        data
-    });
+    await seedAccountTypes(prisma, true);
+    await seedConditionOperators(prisma, true);
+    await seedActionOperators(prisma, true);
 };
 
 seed()

@@ -45,6 +45,16 @@ const items: NavItems = [
             }
         ],
         label: 'Categories'
+    },
+    {
+        items: [
+            {
+                href: '/rules',
+                icon: 'automate',
+                label: 'Rules'
+            }
+        ],
+        label: 'Rule Engine'
     }
 ];
 

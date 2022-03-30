@@ -16,6 +16,7 @@ model User {
     categoryTags   CategoryTag[]
     categoryGroups CategoryGroup[]
     transactions   Transaction[]
+    Rule           Rule[]
 }
 
 model AccountType {
@@ -94,4 +95,49 @@ model TransactionTag {
     transactionId Int
 
     @@unique([tagId, transactionId])
+}
+
+model ConditionOperator {
+    id          Int         @id @default(autoincrement())
+    operator    String      @unique @db.VarChar(8)
+    description String      @db.VarChar(32)
+    conditions  Condition[]
+}
+
+model Condition {
+    id         Int               @id @default(autoincrement())
+    field      String            @db.VarChar(256)
+    value      String            @db.VarChar(256)
+    operator   ConditionOperator @relation(fields: [operatorId], references: [id], onDelete: Cascade, onUpdate: Cascade)
+    rule       Rule              @relation(fields: [ruleId], references: [id], onDelete: Cascade, onUpdate: Cascade)
+    operatorId Int
+    ruleId     Int
+}
+
+model ActionOperator {
+    id          Int      @id @default(autoincrement())
+    operator    String   @unique @db.VarChar(8)
+    description String   @db.VarChar(32)
+    actions     Action[]
+}
+
+model Action {
+    id         Int            @id @default(autoincrement())
+    field      String         @db.VarChar(256)
+    value      String         @db.VarChar(256)
+    operator   ActionOperator @relation(fields: [operatorId], references: [id], onDelete: Cascade, onUpdate: Cascade)
+    rule       Rule           @relation(fields: [ruleId], references: [id], onDelete: Cascade, onUpdate: Cascade)
+    operatorId Int
+    ruleId     Int
+}
+
+model Rule {
+    id          Int         @id @default(autoincrement())
+    name        String      @db.VarChar(256)
+    runOnCreate Boolean
+    runOnUpdate Boolean
+    user        User        @relation(fields: [userId], references: [id], onDelete: Cascade, onUpdate: Cascade)
+    actions     Action[]
+    conditions  Condition[]
+    userId      Int
 }
