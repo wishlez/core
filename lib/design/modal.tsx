@@ -25,6 +25,7 @@ const ModalContent = styled(motion.div)`
     height: 100vh;
     width: 100vw;
     padding: var(--uniform-padding);
+    pointer-events: auto;
     position: relative;
 
     @media (min-width: 32rem) {
