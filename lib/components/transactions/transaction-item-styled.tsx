@@ -14,4 +14,3 @@ export const CashFlow = styled.span`
     grid-gap: calc(var(--grid-gap) / 2);
     grid-template-columns: 1fr auto 1fr;
 `;
-

@@ -33,7 +33,10 @@ const SignUp: FunctionComponent = () => {
                 >
                     <FormTitle>
                         {'Sign Up'}
-                        <Link href={'/'}>
+                        <Link
+                            href={'/'}
+                            passHref
+                        >
                             <Button
                                 as={'a'}
                                 size={'compact'}
@@ -75,7 +78,10 @@ const SignUp: FunctionComponent = () => {
                         />
                     </FormFields>
                     <FormActions>
-                        <Link href={'/auth/sign-in'}>
+                        <Link
+                            href={'/auth/sign-in'}
+                            passHref
+                        >
                             <Button
                                 as={'a'}
                                 color={'secondary'}
