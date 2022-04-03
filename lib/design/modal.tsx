@@ -33,6 +33,10 @@ const ModalContent = styled(motion.div)`
         height: auto;
         width: auto;
     }
+
+    & form {
+        max-height: calc(100vh - (var(--uniform-padding) * 2));
+    }
 `;
 
 export const Modal: FunctionComponent<Props> = (props) => (

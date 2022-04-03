@@ -5,4 +5,5 @@ export const FormFields = styled.div`
     align-content: start;
     grid-area: fields;
     grid-gap: var(--grid-gap);
+    overflow: auto;
 `;
