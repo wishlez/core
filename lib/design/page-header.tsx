@@ -13,6 +13,15 @@ const _Header = styled('header')`
     position: sticky;
     top: 0;
     left: 0;
+    z-index: 1;
+`;
+
+const _Title = styled(Title).attrs({
+    size: 'h2'
+})<{ isInDesktop: boolean }>`
+    ${(props) => props.isInDesktop && css`
+        padding-left: var(--grid-gap);
+    `}
 `;
 
 const HeaderContent = styled.section<WithPageLayoutState<{ isRaised: boolean }>>`
@@ -76,9 +85,9 @@ export const PageHeader: FunctionComponent<Props> = (props) => {
                         <Icon type={'menu'}/>
                     </Button>
                 )}
-                <Title size={'h2'}>
+                <_Title isInDesktop={props.isInDesktop}>
                     {title || ' '}
-                </Title>
+                </_Title>
                 {props.children}
             </HeaderContent>
         </_Header>
