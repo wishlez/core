@@ -1,6 +1,7 @@
-import {FunctionComponent} from 'react';
+import {FunctionComponent, useEffect} from 'react';
 import styled, {css} from 'styled-components';
 import {useAccordion} from './accordion-context';
+import {useAccordionGroup} from './accordion-group';
 import {Button} from './button';
 import {Icon} from './icon';
 
@@ -24,9 +25,21 @@ const Header = styled.header<Props>`
 `;
 
 export const AccordionHeader: FunctionComponent = (props) => {
-    const {isOpen, setIsOpen} = useAccordion();
+    const {id, isOpen, setIsOpen} = useAccordion();
+    const group = useAccordionGroup();
 
-    const toggleAccordion = () => setIsOpen(isOpen => !isOpen);
+    const toggleAccordion = () => {
+        setIsOpen(isOpen => !isOpen);
+        group?.toggleActive(id);
+    };
+
+    useEffect(() => {
+        if (group?.active.includes(id)) {
+            setIsOpen(true);
+        } else {
+            setIsOpen(false);
+        }
+    }, [group?.active, id, setIsOpen]);
 
     return (
         <Header isExpanded={isOpen}>
