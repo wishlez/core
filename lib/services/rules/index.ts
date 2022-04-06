@@ -14,8 +14,24 @@ export const getRules = async (user: Prisma.UserWhereInput): Promise<Rule[]> => 
     }
 });
 
-export const createRule = async (data: Prisma.RuleUncheckedCreateInput) => await prisma.rule.create({
-    data
+export const createRule = async (
+    data: Prisma.RuleUncheckedCreateInput,
+    actions: Prisma.ActionUncheckedCreateInput[],
+    conditions: Prisma.ConditionUncheckedCreateInput[]
+) => await prisma.rule.create({
+    data: {
+        ...data,
+        actions: {
+            createMany: {
+                data: actions
+            }
+        },
+        conditions: {
+            createMany: {
+                data: conditions
+            }
+        }
+    }
 });
 
 export const deleteRule = async (id: number) => await prisma.rule.delete({

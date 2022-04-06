@@ -20,7 +20,7 @@ export const RuleCreate: FunctionComponent<Props> = (props) => {
     const createRule = async (rule: RuleRequest) => {
         await doPost(swrKeys.rules, rule);
 
-        closeModal();
+        // closeModal();
         props.onCreate();
     };
 

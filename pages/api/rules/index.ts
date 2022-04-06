@@ -3,6 +3,7 @@ import {authenticatedApi, authorizedApi} from '../../../lib/auth/ss-auth';
 import {buildApiHandler} from '../../../lib/helpers/build-api-handler';
 import {badRequest, forbidden, internalServerError} from '../../../lib/helpers/handle-error';
 import {createRule, deleteRule, getRules, getRuleUserId, updateRule} from '../../../lib/services/rules';
+import {ActionRequest, ConditionRequest} from '../../../types/rule-steps';
 import {Rule, WithRules} from '../../../types/rules';
 
 export default authenticatedApi((user) => buildApiHandler({
@@ -38,12 +39,24 @@ export default authenticatedApi((user) => buildApiHandler({
     },
     async post(req, res: NextApiResponse<Rule>) {
         try {
-            const rule = await createRule({
-                name: req.body.name,
-                runOnCreate: req.body.runOnCreate,
-                runOnUpdate: req.body.runOnUpdate,
-                userId: user.id
-            });
+            const rule = await createRule(
+                {
+                    name: req.body.name,
+                    runOnCreate: req.body.runOnCreate,
+                    runOnUpdate: req.body.runOnUpdate,
+                    userId: user.id
+                },
+                [].concat(req.body.actions).map((action) => ({
+                    field: action.field,
+                    operatorId: action.operatorId,
+                    value: action.value
+                }) as ActionRequest),
+                [].concat(req.body.conditions).map((condition) => ({
+                    field: condition.field,
+                    operatorId: condition.operatorId,
+                    value: condition.value
+                }) as ConditionRequest)
+            );
 
             return res.send(rule);
         } catch (err) {

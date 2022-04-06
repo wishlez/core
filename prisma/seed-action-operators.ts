@@ -1,15 +1,9 @@
 import {PrismaClient} from '@prisma/client';
-import {ActionOperators, OperatorData} from '../types/operators';
+import {ActionOperators} from '../types/operators';
 
-const data: OperatorData<ActionOperators>[] = [
-    {
-        description: 'to value of',
-        operator: 'value-of'
-    },
-    {
-        description: 'to value',
-        operator: 'value'
-    }
+const data: { type: ActionOperators }[] = [
+    {type: 'value'},
+    {type: 'value-of'}
 ];
 
 export const seedActionOperators = (prisma: PrismaClient, enabled: boolean): Promise<any> => {

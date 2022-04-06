@@ -51,8 +51,6 @@ export const Icon = styled.i.attrs<Props>((props) => ({
     font-style: normal;
     font-variant: none;
     text-transform: none;
-    height: 1em;
-    width: 1em;
     vertical-align: -.125em;
 
     &:after {

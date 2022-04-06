@@ -86,7 +86,6 @@ export const AppContainer: FunctionComponent = (props) => {
                             <Button
                                 color={'secondary'}
                                 size={'cozy'}
-                                type={'button'}
                                 variant={'text'}
                             >
                                 <Icon type={'user'}/>

@@ -10,7 +10,7 @@ const handler: NextApiHandler = async (req, res) => {
         });
         res.redirect('/auth/sign-in');
     } catch (err) {
-        console.error(err.message);
+        console.error(err.message); // eslint-disable-line no-console
         res.redirect('/auth/sign-up?error=CreateAccount');
     }
 };

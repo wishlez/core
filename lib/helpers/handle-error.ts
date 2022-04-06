@@ -4,7 +4,7 @@ type StatusHandler = (res: NextApiResponse, err?: Error, responseMessage?: strin
 
 const handleError = (res: NextApiResponse, responseMessage: string, err: Error, status: number = 500) => {
     if (err) {
-        console.error(err.message);
+        console.error(err.message); // eslint-disable-line no-console
     }
 
     return res.status(status).send({error: responseMessage});

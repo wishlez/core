@@ -12,7 +12,9 @@ export const Button = styled.button.attrs({
     background-color: unset;
     border-radius: var(--border-radius);
     cursor: pointer;
-    display: inline-flex;
+    display: inline-grid;
+    grid-auto-flow: column;
+    grid-gap: calc(var(--grid-gap) / 2);
     font-variant: small-caps;
     justify-content: center;
     align-items: center;

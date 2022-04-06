@@ -1,10 +1,9 @@
 -- CreateTable
 CREATE TABLE `ConditionOperator` (
     `id` INTEGER NOT NULL AUTO_INCREMENT,
-    `operator` VARCHAR(8) NOT NULL,
-    `description` VARCHAR(32) NOT NULL,
+    `type` VARCHAR(16) NOT NULL,
 
-    UNIQUE INDEX `ConditionOperator_operator_key`(`operator`),
+    UNIQUE INDEX `ConditionOperator_type_key`(`type`),
     PRIMARY KEY (`id`)
 ) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 
@@ -22,10 +21,9 @@ CREATE TABLE `Condition` (
 -- CreateTable
 CREATE TABLE `ActionOperator` (
     `id` INTEGER NOT NULL AUTO_INCREMENT,
-    `operator` VARCHAR(8) NOT NULL,
-    `description` VARCHAR(32) NOT NULL,
+    `type` VARCHAR(16) NOT NULL,
 
-    UNIQUE INDEX `ActionOperator_operator_key`(`operator`),
+    UNIQUE INDEX `ActionOperator_type_key`(`type`),
     PRIMARY KEY (`id`)
 ) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 

@@ -1,19 +1,33 @@
-export type ConditionOperators = {
-    '=': 'equal to'
-    '!=': 'not equal to'
-    '>': 'greater than'
-    '<': 'less than'
-    '>=': 'greater than or equal to'
-    '<=': 'less than or equal to'
-    'reg': 'matches pattern'
-}
+import {ActionOperator as PrismaActionOperator, ConditionOperator as PrismaConditionOperator} from '@prisma/client';
+import {AnyObject} from './object';
 
-export type ActionOperators = {
-    'value': 'to value'
-    'value-of': 'to value of'
-}
+export type ConditionOperators =
+    | 'e'
+    | 'ne'
+    | 'gt'
+    | 'lt'
+    | 'gte'
+    | 'lte'
+    | 'reg'
+    ;
 
-export type OperatorData<O, K = keyof O> = {
-    description: O[K]
-    operator: K
-}
+export type ActionOperators =
+    | 'value'
+    | 'value-of'
+    ;
+
+export type ConditionOperator = Omit<PrismaConditionOperator, 'type'> & {
+    type: ConditionOperators
+};
+
+export type ActionOperator = Omit<PrismaActionOperator, 'type'> & {
+    type: ActionOperators
+};
+
+export type WithConditionOperators<P = AnyObject> = P & {
+    conditionOperators: ConditionOperator[]
+};
+
+export type WithActionOperators<P = AnyObject> = P & {
+    actionOperators: ActionOperator[]
+};

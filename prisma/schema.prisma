@@ -98,10 +98,9 @@ model TransactionTag {
 }
 
 model ConditionOperator {
-    id          Int         @id @default(autoincrement())
-    operator    String      @unique @db.VarChar(8)
-    description String      @db.VarChar(32)
-    conditions  Condition[]
+    id         Int         @id @default(autoincrement())
+    type       String      @unique @db.VarChar(16)
+    conditions Condition[]
 }
 
 model Condition {
@@ -115,10 +114,9 @@ model Condition {
 }
 
 model ActionOperator {
-    id          Int      @id @default(autoincrement())
-    operator    String   @unique @db.VarChar(8)
-    description String   @db.VarChar(32)
-    actions     Action[]
+    id      Int      @id @default(autoincrement())
+    type    String   @unique @db.VarChar(16)
+    actions Action[]
 }
 
 model Action {

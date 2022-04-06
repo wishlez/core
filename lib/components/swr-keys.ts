@@ -5,6 +5,10 @@ export const swrKeys = {
         groups: '/api/categories/groups',
         tags: '/api/categories/tags'
     },
+    operators: {
+        actions: '/api/rules/operators/actions',
+        conditions: '/api/rules/operators/conditions'
+    },
     rules: '/api/rules',
     transactions: '/api/transactions'
 };

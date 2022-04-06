@@ -8,6 +8,7 @@
         "SwitchCase": 1
       }
     ],
+    "no-console": "error",
     "no-multiple-empty-lines": [
       "error",
       {
@@ -48,7 +49,12 @@
         "allowExpressions": true
       }
     ],
-    "react/jsx-one-expression-per-line": "error",
+    "react/jsx-one-expression-per-line": [
+      "error",
+      {
+        "allow": "single-child"
+      }
+    ],
     "react/jsx-props-no-multi-spaces": "error",
     "react/jsx-sort-props": "error",
     "react/jsx-wrap-multilines": [
