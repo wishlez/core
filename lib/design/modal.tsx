@@ -49,9 +49,9 @@ export const Modal: FunctionComponent<Props> = (props) => (
             {props.isOpen && (
                 <ModalContainer>
                     <ModalContent
-                        animate={{opacity: 1, scale: 1}}
+                        animate={{opacity: 1, scale: 1, x: 0, y: 0}}
                         exit={{opacity: 0, scale: 0}}
-                        initial={{opacity: 0, scale: 0}}
+                        initial={{opacity: 0, scale: 0, x: '100%', y: '100%'}}
                     >
                         {props.children}
                     </ModalContent>

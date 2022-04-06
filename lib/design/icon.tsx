@@ -10,6 +10,7 @@ export type IconType =
     | 'dashboard'
     | 'delete'
     | 'edit'
+    | 'expand_more'
     | 'locked'
     | 'menu'
     | 'tag'
