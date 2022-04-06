@@ -5,9 +5,7 @@ import {withVariant, WithVariant, withVariantHover} from './helpers/with-variant
 
 type Props = WithColor & WithSize & WithVariant
 
-export const Button = styled.button.attrs({
-    type: 'button'
-})<Props>`
+export const Button = styled.button<Props>`
     border: none;
     background-color: unset;
     border-radius: var(--border-radius);
@@ -33,5 +31,6 @@ export const Button = styled.button.attrs({
 Button.defaultProps = {
     color: 'primary',
     size: 'comfortable',
+    type: 'button',
     variant: 'filled'
 };
