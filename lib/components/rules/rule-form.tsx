@@ -70,13 +70,12 @@ export const RuleForm: FunctionComponent<Props> = (props) => {
                     <Button
                         color={'danger'}
                         onClick={props.onDelete}
-                        type={'reset'}
                         variant={'outlined'}
                     >
                         {'Delete'}
                     </Button>
                 )}
-                <Button>
+                <Button type={'submit'}>
                     {props.rule ? 'Update' : 'Create'}
                 </Button>
             </FormActions>

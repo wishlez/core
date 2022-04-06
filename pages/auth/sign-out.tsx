@@ -21,7 +21,6 @@ const SignOut: FunctionComponent<Props> = ({csrfToken}) => {
             <Form
                 action={'/api/auth/signout'}
                 method={'post'}
-                onReset={() => router.back()}
             >
                 <FormTitle>
                     {'You are about to sign out.'}
@@ -37,7 +36,7 @@ const SignOut: FunctionComponent<Props> = ({csrfToken}) => {
                 <FormActions>
                     <Button
                         color={'secondary'}
-                        type={'reset'}
+                        onClick={() => router.back()}
                         variant={'text'}
                     >
                         {'Go back'}

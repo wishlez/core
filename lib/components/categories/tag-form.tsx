@@ -55,13 +55,12 @@ export const TagForm: FunctionComponent<Props> = (props) => {
                     <Button
                         color={'danger'}
                         onClick={props.onDelete}
-                        type={'reset'}
                         variant={'outlined'}
                     >
                         {'Delete'}
                     </Button>
                 )}
-                <Button>
+                <Button type={'submit'}>
                     {props.tag ? 'Update' : 'Create'}
                 </Button>
             </FormActions>

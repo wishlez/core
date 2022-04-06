@@ -99,13 +99,12 @@ export const AccountForm: FunctionComponent<Props> = (props) => {
                     <Button
                         color={'danger'}
                         onClick={props.onDelete}
-                        type={'reset'}
                         variant={'outlined'}
                     >
                         {'Delete'}
                     </Button>
                 )}
-                <Button>
+                <Button type={'submit'}>
                     {props.account ? 'Update' : 'Create'}
                 </Button>
             </FormActions>
