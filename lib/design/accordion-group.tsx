@@ -7,7 +7,7 @@ type Props = {
 
 type AccordionGroupContext = {
     active: string[]
-    toggleActive: (id: string) => void
+    toggleActive: (id: string, state: boolean) => void
 };
 
 const AccordionGroupContext = createContext<AccordionGroupContext>(null);
@@ -17,9 +17,9 @@ export const useAccordionGroup = () => useContext(AccordionGroupContext);
 export const AccordionGroup: FunctionComponent<Props> = (props) => {
     const [active, setActive] = useState<string[]>([]);
 
-    const toggleActive = (id: string) => {
+    const toggleActive = (id: string, state: boolean) => {
         setActive((ids) => ToggleSet.fromArray(ids)
-            .toggle(id)
+            .toggle(id, state)
             .toArray()
             .slice(-props.maxOpen));
     };

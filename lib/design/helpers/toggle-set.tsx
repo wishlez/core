@@ -1,13 +1,13 @@
 export class ToggleSet<T> extends Set<T> {
     static fromArray<A>(items: A[]): ToggleSet<A> {
-        return new ToggleSet<A>(items)
+        return new ToggleSet<A>(items);
     }
 
-    toggle(item: T): ToggleSet<T> {
-        if (this.has(item)) {
-            this.delete(item);
-        } else {
+    toggle(item: T, state: boolean): ToggleSet<T> {
+        if (state) {
             this.add(item);
+        } else {
+            this.delete(item);
         }
 
         return this;

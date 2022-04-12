@@ -1,4 +1,4 @@
-import {FunctionComponent, useEffect} from 'react';
+import {ChangeEvent, FunctionComponent, useEffect} from 'react';
 import styled, {css} from 'styled-components';
 import {useAccordion} from './accordion-context';
 import {useAccordionGroup} from './accordion-group';
@@ -24,28 +24,36 @@ const Header = styled.header<Props>`
     `}
 `;
 
+const Input = styled.input.attrs({
+    type: 'checkbox'
+})`
+    display: none;
+`;
+
 export const AccordionHeader: FunctionComponent = (props) => {
     const {id, isOpen, setIsOpen} = useAccordion();
     const group = useAccordionGroup();
 
-    const toggleAccordion = () => {
-        setIsOpen(isOpen => !isOpen);
-        group?.toggleActive(id);
+    const toggleAccordion = (event: ChangeEvent<HTMLInputElement>) => {
+        setIsOpen(event.target.checked);
+        group?.toggleActive(id, event.target.checked);
     };
 
     useEffect(() => {
-        if (group?.active.includes(id)) {
-            setIsOpen(true);
-        } else {
-            setIsOpen(false);
-        }
-    }, [group?.active, id, setIsOpen]);
+        setIsOpen(group?.active.includes(id));
+    }, [setIsOpen, group?.active, id]);
 
     return (
         <Header isExpanded={isOpen}>
+            <Input
+                checked={isOpen}
+                id={id}
+                onChange={toggleAccordion}
+            />
             <Button
+                as={'label'}
                 color={'tertiary'}
-                onClick={toggleAccordion}
+                htmlFor={id}
                 size={'compact'}
                 variant={'text'}
             >

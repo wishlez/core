@@ -5,12 +5,16 @@ import {AccordionHeader} from './accordion-header';
 import {findFirstOfType} from './helpers/find-children';
 import {getRandomId} from './helpers/randomizer';
 
-export const Accordion: FunctionComponent = (props) => {
+type Props = {
+    id?: string
+};
+
+export const Accordion: FunctionComponent<Props> = (props) => {
     const header = findFirstOfType(props.children, AccordionHeader);
     const body = findFirstOfType(props.children, AccordionBody);
 
     return (
-        <AccordionProvider id={getRandomId('accordion')}>
+        <AccordionProvider id={props.id || getRandomId('accordion')}>
             <section>
                 {header}
                 {body}
