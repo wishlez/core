@@ -8,6 +8,7 @@ import {RuleItem} from '../../lib/components/rules/rule-item';
 import {EmptyDataMessage} from '../../lib/components/shared/empty-data-message';
 import {PageTitle} from '../../lib/components/shared/page-title';
 import {swrKeys} from '../../lib/components/swr-keys';
+import {AccordionGroup} from '../../lib/design/accordion-group';
 import {Grid} from '../../lib/design/grid';
 import {doGet} from '../../lib/helpers/fetch';
 import {getRules} from '../../lib/services/rules';
@@ -30,17 +31,19 @@ const Rules: FunctionComponent<Props> = ({fallback}) => {
             <RuleCreate onCreate={refresh}/>
             {error && 'Failed to load rules'}
             <EmptyDataMessage length={data?.rules?.length}>
-                <Grid
-                    items={data?.rules}
-                    keyFn={(rule) => rule.id}
-                >
-                    {(rule) => (
-                        <RuleItem
-                            onUpdate={refresh}
-                            rule={rule}
-                        />
-                    )}
-                </Grid>
+                <AccordionGroup>
+                    <Grid
+                        items={data?.rules}
+                        keyFn={(rule) => rule.id}
+                    >
+                        {(rule) => (
+                            <RuleItem
+                                onUpdate={refresh}
+                                rule={rule}
+                            />
+                        )}
+                    </Grid>
+                </AccordionGroup>
             </EmptyDataMessage>
         </SWRConfig>
     );

@@ -33,6 +33,7 @@
       "error",
       "consistent"
     ],
+    "semi": "error",
     "sort-keys": "error",
     "react/jsx-curly-brace-presence": [
       "error",

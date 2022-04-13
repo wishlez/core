@@ -59,14 +59,14 @@
 /* Core */
 :root {
     --core-100: #111111;
-    --core-200: #330D11;
+    --core-200: #330d11;
     --core-300: #550911;
     --core-400: #770411;
     --core-500: #990011;
-    --core-600: #B23E4A;
-    --core-700: #CB7B83;
-    --core-800: #E3B9BC;
-    --core-900: #FCF6F5;
+    --core-600: #b23e4a;
+    --core-700: #cb7b83;
+    --core-800: #e3b9bc;
+    --core-900: #fcf6f5;
 }
 
 /* Gray */

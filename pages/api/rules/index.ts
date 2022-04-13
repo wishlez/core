@@ -4,7 +4,7 @@ import {buildApiHandler} from '../../../lib/helpers/build-api-handler';
 import {badRequest, forbidden, internalServerError} from '../../../lib/helpers/handle-error';
 import {createRule, deleteRule, getRules, getRuleUserId, updateRule} from '../../../lib/services/rules';
 import {ActionRequest, ConditionRequest} from '../../../types/rule-steps';
-import {Rule, WithRules} from '../../../types/rules';
+import {RuleResponse, WithRules} from '../../../types/rules';
 
 export default authenticatedApi((user) => buildApiHandler({
     async delete(req, res: NextApiResponse<{}>) {
@@ -37,7 +37,7 @@ export default authenticatedApi((user) => buildApiHandler({
             return internalServerError(res, err, 'Failed to retrieve rules');
         }
     },
-    async post(req, res: NextApiResponse<Rule>) {
+    async post(req, res: NextApiResponse<RuleResponse>) {
         try {
             const rule = await createRule(
                 {
@@ -63,7 +63,7 @@ export default authenticatedApi((user) => buildApiHandler({
             return internalServerError(res, err, 'Failed to create rule');
         }
     },
-    async put(req, res: NextApiResponse<Rule>) {
+    async put(req, res: NextApiResponse<RuleResponse>) {
         if (!await authorizedApi(req, await getRuleUserId(req.body.id))) {
             return forbidden(res);
         }

@@ -11,11 +11,11 @@ export type Condition = Omit<PrismaCondition> & {
 };
 
 export type WithActions<P = AnyObject> = P & {
-    accounts: Action[]
+    actions: Action[]
 }
 
 export type WithConditions<P = AnyObject> = P & {
-    accounts: Condition[]
+    conditions: Condition[]
 }
 
 export type ActionRequest = Omit<Action, 'id', 'ruleId'> & {

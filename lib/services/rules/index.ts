@@ -4,10 +4,23 @@ import {getPrismaClient} from '../../helpers/prisma';
 
 const prisma = getPrismaClient();
 
+const step: Prisma.ActionFindManyArgs | Prisma.ConditionFindManyArgs = {
+    select: {
+        field: true,
+        id: true,
+        operator: {
+            select: {
+                type: true
+            }
+        },
+        value: true
+    }
+};
+
 export const getRules = async (user: Prisma.UserWhereInput): Promise<Rule[]> => await prisma.rule.findMany({
     include: {
-        actions: true,
-        conditions: true
+        actions: <Prisma.ActionFindManyArgs>step,
+        conditions: <Prisma.ConditionFindManyArgs>step
     },
     where: {
         user
