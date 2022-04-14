@@ -12,4 +12,4 @@ export const GridHeader = styled.div<Props>`
 
 GridHeader.defaultProps = {
     align: 'start'
-}
+};

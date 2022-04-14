@@ -10,6 +10,7 @@ import {Icon} from '../../design/icon';
 import {Input} from '../../design/input';
 import {Switch} from '../../design/switch';
 import {useActionOptions, useConditionOptions} from '../../helpers/operators';
+import {getAdjustedSteps} from '../../helpers/steps';
 import {RuleStepsForm} from './rule-steps-form';
 
 type Props = {
@@ -34,20 +35,12 @@ export const RuleForm: FunctionComponent<Props> = (props) => {
     const actionOptions = useActionOptions();
     const conditionOptions = useConditionOptions();
 
-    const submitRule = async (event: FormEvent) => {
+    const submitRule = (event: FormEvent) => {
         event.preventDefault();
 
-        await props.onSubmit({
-            actions: actionsRef.current.map((ref) => ({
-                field: ref.field.current.value,
-                operatorId: Number(ref.operator.current.value),
-                value: ref.value.current.value
-            })),
-            conditions: conditionsRef.current.map((ref) => ({
-                field: ref.field.current.value,
-                operatorId: Number(ref.operator.current.value),
-                value: ref.value.current.value
-            })),
+        props.onSubmit({
+            actions: getAdjustedSteps(actionsRef.current, props.rule?.actions),
+            conditions: getAdjustedSteps(conditionsRef.current, props.rule?.conditions),
             name: nameRef.current.value,
             runOnCreate: runOnCreateRef.current.checked,
             runOnUpdate: runOnUpdateRef.current.checked
@@ -87,12 +80,14 @@ export const RuleForm: FunctionComponent<Props> = (props) => {
                     ref={runOnUpdateRef}
                 />
                 <RuleStepsForm
+                    defaultSteps={props.rule?.conditions}
                     fields={fieldOptions}
                     operators={conditionOptions}
                     ref={conditionsRef}
                     title={'Conditions'}
                 />
                 <RuleStepsForm
+                    defaultSteps={props.rule?.actions}
                     fields={fieldOptions}
                     operators={actionOptions}
                     ref={actionsRef}

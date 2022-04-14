@@ -3,7 +3,6 @@ import {authenticatedApi, authorizedApi} from '../../../lib/auth/ss-auth';
 import {buildApiHandler} from '../../../lib/helpers/build-api-handler';
 import {badRequest, forbidden, internalServerError} from '../../../lib/helpers/handle-error';
 import {createRule, deleteRule, getRules, getRuleUserId, updateRule} from '../../../lib/services/rules';
-import {ActionRequest, ConditionRequest} from '../../../types/rule-steps';
 import {RuleResponse, WithRules} from '../../../types/rules';
 
 export default authenticatedApi((user) => buildApiHandler({
@@ -46,16 +45,16 @@ export default authenticatedApi((user) => buildApiHandler({
                     runOnUpdate: req.body.runOnUpdate,
                     userId: user.id
                 },
-                [].concat(req.body.actions).map((action) => ({
+                [].concat(req.body.actions.added).map((action) => ({
                     field: action.field,
                     operatorId: action.operatorId,
                     value: action.value
-                }) as ActionRequest),
-                [].concat(req.body.conditions).map((condition) => ({
+                })),
+                [].concat(req.body.conditions.added).map((condition) => ({
                     field: condition.field,
                     operatorId: condition.operatorId,
                     value: condition.value
-                }) as ConditionRequest)
+                }))
             );
 
             return res.send(rule);
@@ -69,12 +68,16 @@ export default authenticatedApi((user) => buildApiHandler({
         }
 
         try {
-            const rule = await updateRule({
-                id: req.body.id,
-                name: req.body.name,
-                runOnCreate: req.body.runOnCreate,
-                runOnUpdate: req.body.runOnUpdate
-            });
+            const rule = await updateRule(
+                {
+                    id: req.body.id,
+                    name: req.body.name,
+                    runOnCreate: req.body.runOnCreate,
+                    runOnUpdate: req.body.runOnUpdate
+                },
+                req.body.actions,
+                req.body.conditions
+            );
 
             return res.send(rule);
         } catch (err) {

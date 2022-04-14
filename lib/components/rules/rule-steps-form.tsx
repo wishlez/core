@@ -1,6 +1,7 @@
 import {forwardRef, useEffect, useRef, useState} from 'react';
 import {Option} from '../../../types/input';
 import {AnyObject} from '../../../types/object';
+import {Action, Condition} from '../../../types/rule-steps';
 import {RuleStepRef} from '../../../types/rules';
 import {Button} from '../../design/button';
 import {FormSubtitle} from '../../design/form-subtitle';
@@ -9,13 +10,14 @@ import {Icon} from '../../design/icon';
 import {RuleStepForm} from './rule-step-form';
 
 type Props = {
+    defaultSteps?: Action[] | Condition[]
     fields: Option[]
     operators: Option[]
     title: string
 }
 
 export const RuleStepsForm = forwardRef<RuleStepRef[], Props>((props, ref) => {
-    const [steps, setSteps] = useState<string[]>([]);
+    const [steps, setSteps] = useState<string[]>(props.defaultSteps.map(() => getRandomId('step')));
     const stepRefs = useRef<AnyObject<string, RuleStepRef>>({});
 
     const addStep = () => {
@@ -60,14 +62,15 @@ export const RuleStepsForm = forwardRef<RuleStepRef[], Props>((props, ref) => {
                     {'Add new'}
                 </Button>
             </FormSubtitle>
-            {steps.map((step) => (
+            {steps.map((step, index) => (
                 <RuleStepForm
                     canDelete={steps.length !== 1}
                     fields={props.fields}
                     key={step}
                     onDelete={() => removeStep(step)}
                     operators={props.operators}
-                    ref={(ref) => stepRefs.current[step] = ref}
+                    ref={(stepRef) => stepRefs.current[step] = stepRef}
+                    step={props.defaultSteps[index]}
                 >
                     {step}
                 </RuleStepForm>
@@ -77,3 +80,7 @@ export const RuleStepsForm = forwardRef<RuleStepRef[], Props>((props, ref) => {
 });
 
 RuleStepsForm.displayName = 'RuleStepsForm';
+
+RuleStepsForm.defaultProps = {
+    defaultSteps: []
+};

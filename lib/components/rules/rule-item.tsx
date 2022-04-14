@@ -21,7 +21,7 @@ const Header = styled.div`
 `;
 
 export const RuleItem: FunctionComponent<Props> = (props) => (
-    <Accordion>
+    <Accordion id={`rule-${props.rule.id}`}>
         <AccordionHeader>
             <Header>
                 <ItemDescription>

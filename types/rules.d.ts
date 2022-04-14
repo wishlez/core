@@ -9,15 +9,16 @@ export type WithRules<P = AnyObject> = P & {
     rules: Rule[]
 }
 
-export type RuleRequest = Omit<Rule, 'id' | 'userId'> & {
+export type RuleRequest = Omit<PrismaRule, 'id' | 'userId'> & {
     id?: number
-    actions: ActionRequest[]
-    conditions: ConditionRequest[]
+    actions: ActionRequest
+    conditions: ConditionRequest
 }
 
 export type RuleResponse = PrismaRule
 
 export type RuleStepRef = {
+    id: number,
     field: MutableRefObject<HTMLSelectElement>
     operator: MutableRefObject<HTMLSelectElement>
     value: MutableRefObject<HTMLInputElement>

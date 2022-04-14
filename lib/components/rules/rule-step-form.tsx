@@ -1,5 +1,6 @@
 import {forwardRef, PropsWithChildren, useEffect, useRef} from 'react';
 import {Option} from '../../../types/input';
+import {Action, Condition} from '../../../types/rule-steps';
 import {RuleStepRef} from '../../../types/rules';
 import {Button} from '../../design/button';
 import {Icon} from '../../design/icon';
@@ -12,6 +13,7 @@ type Props = PropsWithChildren<{
     fields: Option[]
     onDelete: () => void
     operators: Option[]
+    step: Action | Condition
 }>
 
 export const RuleStepForm = forwardRef<RuleStepRef, Props>((props, ref) => {
@@ -22,6 +24,7 @@ export const RuleStepForm = forwardRef<RuleStepRef, Props>((props, ref) => {
     useEffect(() => {
         const refs: RuleStepRef = {
             field: fieldRef,
+            id: props.step?.id,
             operator: operatorRef,
             value: valueRef
         };
@@ -31,11 +34,12 @@ export const RuleStepForm = forwardRef<RuleStepRef, Props>((props, ref) => {
         } else if (ref) {
             ref.current = refs;
         }
-    }, [ref]);
+    }, [props.step?.id, ref]);
 
     return (
         <RuleStepActions>
             <SelectSingle
+                defaultValue={props.step?.field}
                 ref={fieldRef}
                 required
             >
@@ -49,6 +53,7 @@ export const RuleStepForm = forwardRef<RuleStepRef, Props>((props, ref) => {
                 ))}
             </SelectSingle>
             <SelectSingle
+                defaultValue={props.step?.operatorId}
                 ref={operatorRef}
                 required
             >
@@ -62,6 +67,7 @@ export const RuleStepForm = forwardRef<RuleStepRef, Props>((props, ref) => {
                 ))}
             </SelectSingle>
             <Input
+                defaultValue={props.step?.value}
                 ref={valueRef}
                 required
                 type={'text'}
