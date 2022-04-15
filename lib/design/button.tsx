@@ -6,8 +6,6 @@ import {withVariant, WithVariant, withVariantHover} from './helpers/with-variant
 type Props = WithColor & WithSize & WithVariant
 
 export const Button = styled.button<Props>`
-    border: none;
-    background-color: unset;
     border-radius: var(--border-radius);
     cursor: pointer;
     display: inline-grid;
