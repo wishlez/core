@@ -56,34 +56,6 @@
     --box-shadow-3: 0 10px 20px rgba(0, 0, 0, .19), 0 6px 6px rgba(0, 0, 0, .23);
 }
 
-/* Core */
-:root {
-    --core-100: #111111;
-    --core-200: #330d11;
-    --core-300: #550911;
-    --core-400: #770411;
-    --core-500: #990011;
-    --core-600: #b23e4a;
-    --core-700: #cb7b83;
-    --core-800: #e3b9bc;
-    --core-900: #fcf6f5;
-}
-
-/* Gray */
-:root {
-    --mono-000: #000000;
-    --mono-100: var(--core-100);
-    --mono-200: #2e2e2d;
-    --mono-300: #4b4b49;
-    --mono-400: #686865;
-    --mono-500: #858581;
-    --mono-600: #a1a29c;
-    --mono-700: #bebfb8;
-    --mono-800: #dbdcd4;
-    --mono-900: var(--core-900);
-    --mono-999: #ffffff;
-}
-
 /* Alert */
 :root {
     --alert-error-400: #a4171e;
@@ -91,6 +63,66 @@
     --alert-info-500: #fddc69;
     --alert-success-500: #198038;
     --alert-warning-500: #ff832b;
+}
+
+@media (prefers-color-scheme: light) {
+    /* Core */
+    :root {
+        --core-100: #111111;
+        --core-200: #330d11;
+        --core-300: #550911;
+        --core-400: #770411;
+        --core-500: #990011;
+        --core-600: #b23e4a;
+        --core-700: #cb7b83;
+        --core-800: #e3b9bc;
+        --core-900: #fcf6f5;
+    }
+
+    /* Gray */
+    :root {
+        --mono-000: #000000;
+        --mono-100: var(--core-100);
+        --mono-200: #2e2e2d;
+        --mono-300: #4b4b49;
+        --mono-400: #686865;
+        --mono-500: #858581;
+        --mono-600: #a1a29c;
+        --mono-700: #bebfb8;
+        --mono-800: #dbdcd4;
+        --mono-900: var(--core-900);
+        --mono-999: #ffffff;
+    }
+}
+
+@media (prefers-color-scheme: dark) {
+    /* Core */
+    :root {
+        --core-100: #fcf6f5;
+        --core-200: #e3b9bc;
+        --core-300: #cb7b83;
+        --core-400: #b23e4a;
+        --core-500: #990011;
+        --core-600: #770411;
+        --core-700: #550911;
+        --core-800: #330d11;
+        --core-900: #111111;
+    }
+
+    /* Gray */
+    :root {
+        --mono-000: #ffffff;
+        --mono-100: var(--core-100);
+        --mono-200: #dbdcd4;
+        --mono-300: #bebfb8;
+        --mono-400: #a1a29c;
+        --mono-500: #858581;
+        --mono-600: #686865;
+        --mono-700: #4b4b49;
+        --mono-800: #2e2e2d;
+        --mono-900: var(--core-900);
+        --mono-999: #000000;
+    }
 }
 
 body {
@@ -133,4 +165,9 @@ a:active {
 
 * {
     box-sizing: border-box;
+}
+
+#portal {
+    position: relative;
+    z-index: 1;
 }

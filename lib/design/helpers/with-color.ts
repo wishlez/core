@@ -13,7 +13,13 @@ export const withColor = (props: WithColor) => {
             return css`
                 --with-color: var(--core-500);
                 --with-active-color: var(--core-400);
-                --with-text-color: var(--core-900);
+
+                @media (prefers-color-scheme: dark) {
+                    --with-text-color: var(--core-100);
+                }
+                @media (prefers-color-scheme: light) {
+                    --with-text-color: var(--core-900);
+                }
             `;
         case 'secondary' :
             return css`

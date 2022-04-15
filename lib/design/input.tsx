@@ -17,7 +17,7 @@ export const inputFocusStyles = css`
 export const InputInteractive = styled.input<WithInputError>`
     background-color: var(--mono-900);
     border: none;
-    border-bottom: 2px solid var(--mono-100);
+    border-bottom: 2px solid var(--mono-500);
     display: block;
     padding: var(--control-padding);
     width: 100%;
