@@ -41,7 +41,7 @@ const SignOut: FunctionComponent<Props> = ({csrfToken}) => {
                     >
                         {'Go back'}
                     </Button>
-                    <Button>
+                    <Button type={'submit'}>
                         {'Continue'}
                     </Button>
                 </FormActions>
