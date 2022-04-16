@@ -1,3 +1,5 @@
+name: Test and Release
+
 on:
   push:
     branches:
@@ -5,7 +7,7 @@ on:
 
 jobs:
   run:
-    name: Build and Release
+    name: Test and Release
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
