@@ -1,6 +1,7 @@
 {
   "name": "@wishlez/core",
   "version": "0.0.0",
+  "private": true,
   "description": "Cash flow analyzer and budgeteer",
   "main": "index.js",
   "scripts": {
@@ -41,6 +42,7 @@
     "@semantic-release/commit-analyzer": "^9.0.2",
     "@semantic-release/git": "^10.0.1",
     "@semantic-release/github": "^8.0.4",
+    "@semantic-release/npm": "^9.0.1",
     "@semantic-release/release-notes-generator": "^10.0.3",
     "@types/luxon": "^2.0.9",
     "@types/node": "^17.0.15",
