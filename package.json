@@ -16,14 +16,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/wishlez/wishlez.git"
+    "url": "git+https://github.com/wishlez/core.git"
   },
   "author": "Gopikrishna Sathyamurthy",
   "license": "AGPL-3.0-or-later",
   "bugs": {
-    "url": "https://github.com/wishlez/wishlez/issues"
+    "url": "https://github.com/wishlez/core/issues"
   },
-  "homepage": "https://github.com/wishlez/wishlez#readme",
+  "homepage": "https://github.com/wishlez/core#readme",
   "dependencies": {
     "@prisma/client": "^3.11.1",
     "framer-motion": "^6.2.8",
