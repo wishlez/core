@@ -1,3 +1,10 @@
+## [1.0.1](https://github.com/wishlez/core/compare/v1.0.0...v1.0.1) (2022-04-16)
+
+
+### Performance Improvements
+
+* setup a private npm release ([ef9c3b3](https://github.com/wishlez/core/commit/ef9c3b301e7edd57d41baf1ee544d555fd751e22))
+
 # 1.0.0 (2022-04-16)
 
 
