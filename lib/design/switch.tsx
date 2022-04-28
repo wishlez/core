@@ -14,6 +14,7 @@ const Container = styled.div`
     display: grid;
     grid-auto-flow: column;
     grid-gap: var(--grid-gap);
+    justify-content: start;
 `;
 
 const _Switch = styled.label<{ isOn: boolean }>`
