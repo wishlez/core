@@ -1,3 +1,10 @@
+## [1.0.2](https://github.com/wishlez/core/compare/v1.0.1...v1.0.2) (2022-04-29)
+
+
+### Bug Fixes
+
+* align switch control to start ([4c783e1](https://github.com/wishlez/core/commit/4c783e19a645c9e80e4f97e419d1650d88b0c167))
+
 ## [1.0.1](https://github.com/wishlez/core/compare/v1.0.0...v1.0.1) (2022-04-16)
 
 
