@@ -46,13 +46,12 @@ export default authenticatedApi((user) => buildApiHandler({
                     userId: user.id
                 },
                 [].concat(req.body.actions.added).map((action) => ({
-                    field: action.field,
-                    operatorId: action.operatorId,
+                    fieldType: action.fieldType,
                     value: action.value
                 })),
                 [].concat(req.body.conditions.added).map((condition) => ({
                     field: condition.field,
-                    operatorId: condition.operatorId,
+                    operatorType: condition.operatorType,
                     value: condition.value
                 }))
             );

@@ -1,6 +1,8 @@
 import {FormEvent, FunctionComponent, useRef} from 'react';
 import {Option} from '../../../types/input';
-import {Rule, RuleRequest, RuleStepRef} from '../../../types/rules';
+import {RuleActionRef} from '../../../types/rule-actions';
+import {RuleConditionRef} from '../../../types/rule-conditions';
+import {Rule, RuleRequest} from '../../../types/rules';
 import {Button} from '../../design/button';
 import {Form} from '../../design/form';
 import {FormActions} from '../../design/form-actions';
@@ -9,9 +11,11 @@ import {FormTitle} from '../../design/form-title';
 import {Icon} from '../../design/icon';
 import {Input} from '../../design/input';
 import {Switch} from '../../design/switch';
-import {useActionOptions, useConditionOptions} from '../../helpers/operators';
-import {getAdjustedSteps} from '../../helpers/steps';
-import {RuleStepsForm} from './rule-steps-form';
+import {getAdjustedActions} from '../../helpers/rule-actions';
+import {getAdjustedConditions, useConditionOptions} from '../../helpers/rule-conditions';
+import {useFieldTypeOptions} from '../../helpers/rule-field-types';
+import {RuleActionsForm} from './rule-actions-form';
+import {RuleConditionsForm} from './rule-conditions-form';
 
 type Props = {
     onCancel: () => void
@@ -30,17 +34,17 @@ export const RuleForm: FunctionComponent<Props> = (props) => {
     const nameRef = useRef<HTMLInputElement>();
     const runOnCreateRef = useRef<HTMLInputElement>();
     const runOnUpdateRef = useRef<HTMLInputElement>();
-    const actionsRef = useRef<RuleStepRef[]>();
-    const conditionsRef = useRef<RuleStepRef[]>();
-    const actionOptions = useActionOptions();
+    const actionsRef = useRef<RuleActionRef[]>();
+    const conditionsRef = useRef<RuleConditionRef[]>();
+    const actionFieldTypeOptions = useFieldTypeOptions();
     const conditionOptions = useConditionOptions();
 
     const submitRule = (event: FormEvent) => {
         event.preventDefault();
 
         props.onSubmit({
-            actions: getAdjustedSteps(actionsRef.current, props.rule?.actions),
-            conditions: getAdjustedSteps(conditionsRef.current, props.rule?.conditions),
+            actions: getAdjustedActions(actionsRef.current, props.rule?.actions),
+            conditions: getAdjustedConditions(conditionsRef.current, props.rule?.conditions),
             name: nameRef.current.value,
             runOnCreate: runOnCreateRef.current.checked,
             runOnUpdate: runOnUpdateRef.current.checked
@@ -79,17 +83,16 @@ export const RuleForm: FunctionComponent<Props> = (props) => {
                     label={'Run on updating a transaction'}
                     ref={runOnUpdateRef}
                 />
-                <RuleStepsForm
-                    defaultSteps={props.rule?.conditions}
+                <RuleConditionsForm
+                    defaultConditions={props.rule?.conditions}
                     fields={fieldOptions}
                     operators={conditionOptions}
                     ref={conditionsRef}
                     title={'Conditions'}
                 />
-                <RuleStepsForm
-                    defaultSteps={props.rule?.actions}
-                    fields={fieldOptions}
-                    operators={actionOptions}
+                <RuleActionsForm
+                    defaultActions={props.rule?.actions}
+                    fields={actionFieldTypeOptions}
                     ref={actionsRef}
                     title={'Actions'}
                 />

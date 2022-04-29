@@ -1,8 +1,8 @@
 import {NextApiResponse} from 'next';
-import {buildApiHandler} from '../../../../lib/helpers/build-api-handler';
-import {internalServerError} from '../../../../lib/helpers/handle-error';
-import {getConditionOperators} from '../../../../lib/services/rules/operators';
-import {WithConditionOperators} from '../../../../types/operators';
+import {buildApiHandler} from '../../../lib/helpers/build-api-handler';
+import {internalServerError} from '../../../lib/helpers/handle-error';
+import {getConditionOperators} from '../../../lib/services/rules/operators';
+import {WithConditionOperators} from '../../../types/rule-conditions';
 
 export default buildApiHandler({
     async get(req, res: NextApiResponse<WithConditionOperators>) {

@@ -47,6 +47,7 @@ model CategoryTag {
     user         User               @relation(fields: [userId], references: [id], onDelete: Cascade, onUpdate: Cascade)
     groups       CategoryTagGroup[]
     transactions TransactionTag[]
+    actions      ActionTag[]
     userId       Int
 
     @@unique([name, userId])
@@ -104,29 +105,41 @@ model ConditionOperator {
 }
 
 model Condition {
-    id         Int               @id @default(autoincrement())
-    field      String            @db.VarChar(256)
-    value      String            @db.VarChar(256)
-    operator   ConditionOperator @relation(fields: [operatorId], references: [id], onDelete: Cascade, onUpdate: Cascade)
-    rule       Rule              @relation(fields: [ruleId], references: [id], onDelete: Cascade, onUpdate: Cascade)
-    operatorId Int
-    ruleId     Int
+    id           Int               @id @default(autoincrement())
+    field        String            @db.VarChar(256)
+    value        String            @db.VarChar(256)
+    operator     ConditionOperator @relation(fields: [operatorType], references: [type], onDelete: Cascade, onUpdate: Cascade)
+    rule         Rule              @relation(fields: [ruleId], references: [id], onDelete: Cascade, onUpdate: Cascade)
+    operatorType String
+    ruleId       Int
 }
 
-model ActionOperator {
-    id      Int      @id @default(autoincrement())
-    type    String   @unique @db.VarChar(16)
-    actions Action[]
+enum FieldType {
+    amount
+    description
+    date
+    fromAccount
+    toAccount
+    tags
 }
 
 model Action {
-    id         Int            @id @default(autoincrement())
-    field      String         @db.VarChar(256)
-    value      String         @db.VarChar(256)
-    operator   ActionOperator @relation(fields: [operatorId], references: [id], onDelete: Cascade, onUpdate: Cascade)
-    rule       Rule           @relation(fields: [ruleId], references: [id], onDelete: Cascade, onUpdate: Cascade)
-    operatorId Int
-    ruleId     Int
+    id        Int         @id @default(autoincrement())
+    value     String      @db.VarChar(256)
+    rule      Rule        @relation(fields: [ruleId], references: [id], onDelete: Cascade, onUpdate: Cascade)
+    fieldType FieldType
+    tags      ActionTag[]
+    ruleId    Int
+}
+
+model ActionTag {
+    id       Int         @id @default(autoincrement())
+    tag      CategoryTag @relation(fields: [tagId], references: [id], onDelete: Cascade, onUpdate: Cascade)
+    action   Action      @relation(fields: [actionId], references: [id], onDelete: Cascade, onUpdate: Cascade)
+    tagId    Int
+    actionId Int
+
+    @@unique([tagId, actionId])
 }
 
 model Rule {

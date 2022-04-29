@@ -8,7 +8,7 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint && tsc --noEmit",
+    "lint": "eslint . --ignore-path .gitignore && tsc --noEmit",
     "prepare": "npm run prisma:generate",
     "prisma:generate": "prisma generate",
     "prisma:migrate": "prisma migrate dev",
@@ -26,11 +26,10 @@
   },
   "homepage": "https://github.com/wishlez/core#readme",
   "dependencies": {
-    "@prisma/client": "^3.11.1",
     "framer-motion": "^6.2.8",
     "luxon": "^2.3.1",
     "next": "^12.0.10",
-    "next-auth": "^4.2.1",
+    "next-auth": "^4.3.4",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "react-responsive": "^9.0.0-beta.6",
@@ -38,6 +37,7 @@
     "swr": "^1.2.1"
   },
   "devDependencies": {
+    "@prisma/client": "^3.13.0",
     "@semantic-release/changelog": "^6.0.1",
     "@semantic-release/commit-analyzer": "^9.0.2",
     "@semantic-release/git": "^10.0.1",
@@ -52,7 +52,7 @@
     "conventional-changelog-conventionalcommits": "^4.6.3",
     "eslint": "8.8.0",
     "eslint-config-next": "12.0.10",
-    "prisma": "^3.11.1",
+    "prisma": "^3.13.0",
     "semantic-release": "^19.0.2",
     "ts-node": "^10.5.0",
     "typescript": "^4.5.5"

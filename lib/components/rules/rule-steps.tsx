@@ -1,6 +1,7 @@
 import {FunctionComponent} from 'react';
 import styled from 'styled-components';
-import {WithActions, WithConditions} from '../../../types/rule-steps';
+import {WithConditions} from '../../../types/rule-conditions';
+import {WithActions} from '../../../types/rule-actions';
 import {Title} from '../../design/title';
 import {ActionItem} from './action-item';
 import {ConditionItem} from './condition-item';

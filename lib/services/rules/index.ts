@@ -1,35 +1,28 @@
 import {Prisma} from '@prisma/client';
-import {ActionRequest, ActionRequestInput, ConditionRequest, ConditionRequestInput} from '../../../types/rule-steps';
+import {ConditionRequest, ConditionRequestInput} from '../../../types/rule-conditions';
+import {ActionRequest, ActionRequestInput} from '../../../types/rule-actions';
 import {Rule, RuleResponse} from '../../../types/rules';
 import {getPrismaClient} from '../../helpers/prisma';
 
 const prisma = getPrismaClient();
 
-const step: Prisma.ActionFindManyArgs | Prisma.ConditionFindManyArgs = {
-    select: {
-        field: true,
-        id: true,
-        operator: {
-            select: {
-                type: true
-            }
-        },
-        operatorId: true,
-        value: true
-    }
-};
+const cleanUpActionsInput = (actions: ActionRequestInput[]): ActionRequestInput[] => actions.map((action) => ({
+    fieldType: action.fieldType,
+    id: action.id,
+    value: action.value
+}));
 
-const cleanUpStepsInput = <T extends ActionRequestInput | ConditionRequestInput>(steps: T[]): T[] => steps.map((step) => <T>({
-    field: step.field,
-    id: step.id,
-    operatorId: step.operatorId,
-    value: step.value
+const cleanUpConditionsInput = (conditions: ConditionRequestInput[]): ConditionRequestInput[] => conditions.map((condition) => ({
+    field: condition.field,
+    id: condition.id,
+    operatorType: condition.operatorType,
+    value: condition.value
 }));
 
 export const getRules = async (user: Prisma.UserWhereInput): Promise<Rule[]> => await prisma.rule.findMany({
     include: {
-        actions: <Prisma.ActionFindManyArgs>step,
-        conditions: <Prisma.ConditionFindManyArgs>step
+        actions: true,
+        conditions: true
     },
     where: {
         user
@@ -45,12 +38,12 @@ export const createRule = async (
         ...data,
         actions: {
             createMany: {
-                data: cleanUpStepsInput(actions)
+                data: cleanUpActionsInput(actions)
             }
         },
         conditions: {
             createMany: {
-                data: cleanUpStepsInput(conditions)
+                data: cleanUpConditionsInput(conditions)
             }
         }
     }
@@ -63,13 +56,13 @@ export const deleteRule = async (id: number) => await prisma.rule.delete({
 });
 
 export const updateRule = async (data: Prisma.RuleUncheckedUpdateInput, actions: ActionRequest, conditions: ConditionRequest): Promise<RuleResponse> => (await prisma.$transaction([
-    ...cleanUpStepsInput(actions.updated).map(action => prisma.action.update({
+    ...cleanUpActionsInput(actions.updated).map(action => prisma.action.update({
         data: action,
         where: {
             id: action.id as number
         }
     })),
-    ...cleanUpStepsInput(conditions.updated).map(condition => prisma.condition.update({
+    ...cleanUpConditionsInput(conditions.updated).map(condition => prisma.condition.update({
         data: condition,
         where: {
             id: condition.id as number
@@ -80,7 +73,7 @@ export const updateRule = async (data: Prisma.RuleUncheckedUpdateInput, actions:
             ...data,
             actions: {
                 createMany: {
-                    data: cleanUpStepsInput(actions.added)
+                    data: cleanUpActionsInput(actions.added)
                 },
                 deleteMany: {
                     id: {
@@ -90,7 +83,7 @@ export const updateRule = async (data: Prisma.RuleUncheckedUpdateInput, actions:
             },
             conditions: {
                 createMany: {
-                    data: cleanUpStepsInput(conditions.added)
+                    data: cleanUpConditionsInput(conditions.added)
                 },
                 deleteMany: {
                     id: {

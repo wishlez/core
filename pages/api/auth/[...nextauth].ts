@@ -1,8 +1,8 @@
-import NextAuth from 'next-auth';
+import NextAuth, {NextAuthOptions} from 'next-auth';
 import Credentials from 'next-auth/providers/credentials';
 import {getUser} from '../../../lib/services/users';
 
-export default NextAuth({
+const options: NextAuthOptions = {
     callbacks: {
         jwt({token, user}) {
             if (user) {
@@ -44,4 +44,6 @@ export default NextAuth({
         })
     ],
     secret: process.env.JWT_SECRET
-});
+};
+
+export default NextAuth(options);

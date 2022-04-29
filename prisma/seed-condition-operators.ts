@@ -1,5 +1,5 @@
 import {PrismaClient} from '@prisma/client';
-import {ConditionOperators} from '../types/operators';
+import {ConditionOperators} from '../types/rule-conditions';
 
 const data: { type: ConditionOperators }[] = [
     {type: 'e'},

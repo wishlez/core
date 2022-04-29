@@ -1,7 +1,7 @@
 import {Rule as PrismaRule} from '@prisma/client';
-import {MutableRefObject} from 'react';
 import {AnyObject} from './object';
-import {ActionRequest, ConditionRequest, WithActions, WithConditions} from './rule-steps';
+import {ActionRequest, WithActions} from './rule-actions';
+import {ConditionRequest, WithConditions} from './rule-conditions';
 
 export type Rule = WithActions<WithConditions<PrismaRule>>
 
@@ -16,10 +16,3 @@ export type RuleRequest = Omit<PrismaRule, 'id' | 'userId'> & {
 }
 
 export type RuleResponse = PrismaRule
-
-export type RuleStepRef = {
-    id: number,
-    field: MutableRefObject<HTMLSelectElement>
-    operator: MutableRefObject<HTMLSelectElement>
-    value: MutableRefObject<HTMLInputElement>
-}
