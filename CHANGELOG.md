@@ -1,3 +1,10 @@
+## [1.0.3](https://github.com/wishlez/core/compare/v1.0.2...v1.0.3) (2022-06-19)
+
+
+### Bug Fixes
+
+* use correct dataset for rendering ([5571be6](https://github.com/wishlez/core/commit/5571be6732e5e9a5ccdf52a08aa67046d3c8431a))
+
 ## [1.0.2](https://github.com/wishlez/core/compare/v1.0.1...v1.0.2) (2022-04-29)
 
 
