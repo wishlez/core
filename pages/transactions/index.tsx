@@ -29,7 +29,7 @@ const Transactions: FunctionComponent<Props> = ({fallback}) => {
         <SWRConfig value={{fallback}}>
             <PageTitle title={'Transactions'}/>
             {error && 'Failed to load transactions'}
-            <EmptyDataMessage length={data?.groups?.length}>
+            <EmptyDataMessage length={data?.transactions?.length}>
                 <Grid
                     gridTemplateColumns={'1fr auto 1fr auto 8em auto'}
                     header={(

@@ -30,7 +30,7 @@ const Tags: FunctionComponent<Props> = ({fallback}) => {
             <PageTitle title={'Categories: Tags'}/>
             <TagCreate onCreate={refresh}/>
             {error && 'Failed to load tags'}
-            <EmptyDataMessage length={data?.groups?.length}>
+            <EmptyDataMessage length={data?.tags?.length}>
                 <Grid
                     gridTemplateColumns={'1fr auto'}
                     header={(
